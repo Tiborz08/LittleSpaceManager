@@ -172,6 +172,14 @@ public abstract class Evenement implements Comparable<Evenement> {
     }
 
     /**
+     * Permet de savoir les gains que l'événement a rapporté.
+     * @return Le bénéfice de l'événement.
+     */
+    public float getBenefices(){
+        return prixTickets * tickets.size() - coutInitial;
+    }
+
+    /**
      * Trie dans l'odre : dateDebut, dateFin, nom, idEvent
      * @param evenement L'évenement à comparer.
      * @return
