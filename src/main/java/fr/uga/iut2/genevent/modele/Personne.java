@@ -29,7 +29,7 @@ public abstract class Personne {
      * @param nom chaine de caractère formant le nom.
      */
     public void setNom(String nom){
-        this.nom=LittleSpaceManager_Utilitaire.capitalize(nom);
+        this.nom = nom.toUpperCase();
     }
 
     /**
