@@ -70,14 +70,26 @@ public abstract class Evenement {
         return tickets.size();
     }
 
+    /**
+     *Ajoute un participant à la liste des participants de l'événement, en vérifiant s'il n'est pas déjà présent, et informe le participant qu'il est inscrit en tant que participant à cet événement.
+     * @param participant Un participant qui participe à l'événement.
+     */
     public void addParticipant(Participant participant){
         if (!participants.contains(participant)){
             participants.add(participant);
+            participant.addEvenement(this);
         }
     }
 
     public void setSalle(Salle salle) {
         salle.addEvenement(this);
         this.salle = salle;
+    }
+
+    public void removeParticipant(Participant participant){
+        if (participants.contains(participant)){
+            participants.remove(participant);
+            participant.removeEvenement(this);
+        }
     }
 }
