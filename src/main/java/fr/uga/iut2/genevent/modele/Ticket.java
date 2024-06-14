@@ -3,8 +3,8 @@ package fr.uga.iut2.genevent.modele;
 public class Ticket {
     private int reference;
     private Evenement evenement;
-    private Spectateurs spectateur;
-    public Ticket(int reference, Evenement evenement, Spectateurs spectateur) {
+    private Spectateur spectateur;
+    public Ticket(int reference, Evenement evenement, Spectateur spectateur) {
         setReference(reference);
         setEvenement(evenement);
         setSpectateur(spectateur);
@@ -26,11 +26,11 @@ public class Ticket {
         this.evenement = evenement;
     }
 
-    public Spectateurs getSpectateur() {
+    public Spectateur getSpectateur() {
         return this.spectateur;
     }
 
-    public void setSpectateur(Spectateurs spectateur) {
+    public void setSpectateur(Spectateur spectateur) {
         this.spectateur = spectateur;
     }
 }
