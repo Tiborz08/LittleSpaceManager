@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Button>
-                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="125.0" style="-fx-background-color: #4b5c6b;" text="Ajouter" textFill="WHITE">
+                <Button styleClass="btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="125.0" style="-fx-background-color: #4b5c6b;" text="Ajouter" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
