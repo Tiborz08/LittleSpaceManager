@@ -80,4 +80,11 @@ public abstract class Evenement {
         salle.addEvenement(this);
         this.salle = salle;
     }
+
+    public void removeParticipant(Participant participant){
+        if (participants.contains(participant)){
+            participants.remove(participant);
+            participant.removeEvenement(this);
+        }
+    }
 }

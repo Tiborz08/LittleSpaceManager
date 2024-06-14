@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Participant extends Personne {
 
-    private ArrayList<Evenement> evenements=new ArrayList<>();
+    private ArrayList<Evenement> evenements = new ArrayList<>();
     private float salaire;
 
     //CONSTRUCTEUR
@@ -36,6 +36,12 @@ public abstract class Participant extends Personne {
         if (!evenements.contains(evenement)) {
             this.evenements.add(evenement);
             evenement.addParticipant(this);
+        }
+    }
+
+    public void removeEvenement(Evenement evenement){
+        if (evenements.contains(evenement)){
+            evenement.removeParticipant(this);
         }
     }
 }
