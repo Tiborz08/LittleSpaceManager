@@ -108,7 +108,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
     @Override
     public int compareTo(Evenement evenement){
-        if(this.getDebut().compareTo(evenement.getDebut()) > 1 || this.getDebut().equals(evenement.getDebut()) && this.getFin().compareTo(evenement.getFin()) > 1 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().compareTo(evenement.getNom()) > 1 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().equals(evenement.getNom()) && this.getIdEvent() > evenement.getIdEvent()){
+        if(this.getDebut().compareTo(evenement.getDebut()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().compareTo(evenement.getFin()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().compareTo(evenement.getNom()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().equals(evenement.getNom()) && this.getIdEvent() > evenement.getIdEvent()){
             return 1;
         }
         else if(this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().equals(evenement.getNom()) && this.getIdEvent() == evenement.getIdEvent()){
