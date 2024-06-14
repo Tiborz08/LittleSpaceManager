@@ -166,4 +166,36 @@ public abstract class Evenement {
             this.fin = fin;
         }
     }
+
+    /**
+     * Cette fonction renvoie une liste des membres du personnel de l'événement.
+     * @return
+     */
+
+    public ArrayList<Participant> getPersonnels(){
+        ArrayList<Participant> personnels = new ArrayList<>();
+        for (Participant participant: participants) {
+            if (participant.getClass().getSimpleName().equals("Personnel")){
+                personnels.add(participant);
+            }
+        }
+        return personnels;
+    }
+
+    /**
+     * Cette fonction renvoie une liste de tous les artistes présents dans l'événement.
+     * @return
+     */
+
+    public ArrayList<Participant> getArtistes(){
+        ArrayList<Participant> artistes = new ArrayList<>();
+        for (Participant participant: participants) {
+            if (participant.getClass().getSimpleName().equals("Artiste")){
+                artistes.add(participant);
+            }
+        }
+        return artistes;
+    }
+
+
 }
