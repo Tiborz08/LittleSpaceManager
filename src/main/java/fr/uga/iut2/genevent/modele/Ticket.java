@@ -1,11 +1,13 @@
 package fr.uga.iut2.genevent.modele;
 
+import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.newId;
+
 public class Ticket {
     private int reference;
     private Evenement evenement;
     private Spectateur spectateur;
-    public Ticket(int reference, Evenement evenement, Spectateur spectateur) {
-        setReference(reference);
+    public Ticket(Evenement evenement, Spectateur spectateur) {
+        setReference(newId());
         setEvenement(evenement);
         setSpectateur(spectateur);
     }
