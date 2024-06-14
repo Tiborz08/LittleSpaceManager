@@ -34,8 +34,8 @@ public abstract class Evenement {
         this.prixTickets = prixTickets;
         this.debut = debut;
         this.fin = fin;
-        this.tickets = new ArrayList<Spectateur>();
-        this.participants = new ArrayList<Participant>();
+        this.tickets = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
     public Date getDebut() {
