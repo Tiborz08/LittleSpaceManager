@@ -16,8 +16,8 @@ public class Artiste extends Participant{
     }
 
     /**
-     *
-     * @param popularite
+     * La popularité d'un artiste est définie par la valeur 'popularite'. Si 'popularite' est négatif, alors la popularité est mise à 0.
+     * @param popularite Popularité rattachée à l'artiste.
      */
     public void setPopularite(float popularite) {
         if (popularite<0){
