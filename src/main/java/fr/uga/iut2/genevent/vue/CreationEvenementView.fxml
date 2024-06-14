@@ -31,17 +31,17 @@
             <Label text="Nom salle" />
             <Label text="Adresse" GridPane.rowIndex="1" />
             <Label text="Capacité Maximale" GridPane.columnIndex="2" />
-            <TextField GridPane.columnIndex="1">
+            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField GridPane.columnIndex="3">
+            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
