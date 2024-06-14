@@ -14,6 +14,7 @@ public abstract class Evenement {
     private int capaciteSpectateur;
     private float coutInitial;
     private float prixTickets;
+    private Salle salle;
     private Date debut;
     private Date fin;
 
@@ -36,5 +37,10 @@ public abstract class Evenement {
 
     public Date getFin() {
         return fin;
+    }
+
+    public void setSalle(Salle salle) {
+        salle.addEvenement(this);
+        this.salle = salle;
     }
 }
