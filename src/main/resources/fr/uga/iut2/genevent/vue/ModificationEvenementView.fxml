@@ -124,7 +124,7 @@
                   </ComboBox>
                </children>
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </VBox.margin>
             </GridPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="136.0" prefWidth="269.0">
