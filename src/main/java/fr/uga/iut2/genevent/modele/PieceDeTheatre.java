@@ -6,7 +6,7 @@ import java.util.Date;
 public class PieceDeTheatre extends Evenement{
 
     //ATTRIBUTIONS
-    private ArrayList<Accessoire> accessoires = new ArrayList<>();
+    private ArrayList<Accessoire> accessoires;
 
     //CONSTRUCTEUR
     public PieceDeTheatre(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
