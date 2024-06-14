@@ -185,7 +185,11 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @return Le bénéfice de l'événement.
      */
     public float getBenefices() {
-        return prixTickets * tickets.size() - coutInitial;
+        float totalSalaires = 0;
+        for (Participant participant : participants) {
+            totalSalaires += participant.getSalaire();
+        }
+        return prixTickets * tickets.size() - coutInitial - totalSalaires;
     }
 
     /**
