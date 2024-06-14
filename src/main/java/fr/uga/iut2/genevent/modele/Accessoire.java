@@ -7,11 +7,13 @@ public class Accessoire {
     //ATTRIBUTION
     private String nom;
     private int id;
+    private PieceDeTheatre pieceDeTheatre;
 
     //CONSTRUCTEUR
 
-    public Accessoire(String nom) {
+    public Accessoire(String nom, PieceDeTheatre pieceDeTheatre) {
         this.nom = nom;
+        this.pieceDeTheatre = pieceDeTheatre;
         this.id = LittleSpaceManager_Utilitaire.newId();
     }
 

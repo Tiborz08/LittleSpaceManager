@@ -23,13 +23,14 @@ public class PieceDeTheatre extends Evenement{
     //METHODES
 
     /**
-     * Permet d'ajouter un accessoire à une pièce de théatre. Si l'accessoire est null ou est déjà dans l'évenement, rien ne se passe.
-     * @param a accessoire à ajouté.
+     * Permet de créer et d'ajouter un accessoire à une pièce de théatre.
+     * @param nom nom de l'accessorie à crée et ajouté.
+     * @return l'accessorie crée
      */
-    public void addAccessoire(Accessoire a){
-        if(!accessoires.contains(a) && a!=null){
-            accessoires.add(a);
-        }
+    public Accessoire addAccessoire(String nom){
+        Accessoire a = new Accessoire(nom, this);
+        accessoires.add(a);
+        return a;
     }
 
     /**
