@@ -30,4 +30,11 @@ public abstract class Evenement {
         this.fin = fin;
     }
 
+    public Date getDebut() {
+        return debut;
+    }
+
+    public Date getFin() {
+        return fin;
+    }
 }
