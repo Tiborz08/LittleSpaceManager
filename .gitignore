@@ -125,6 +125,7 @@ flycheck_*.el
 
 # User-specific stuff
 .idea/**/workspace.xml
+.idea/**/misc.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
@@ -279,7 +280,8 @@ replay_pid*
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

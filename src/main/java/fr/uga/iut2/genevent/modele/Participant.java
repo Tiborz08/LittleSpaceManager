@@ -1,6 +1,5 @@
 package fr.uga.iut2.genevent.modele;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Participant extends Personne {
