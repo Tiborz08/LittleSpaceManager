@@ -3,7 +3,7 @@ package fr.uga.iut2.genevent.modele;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PieceDeTheatre extends Evenement{
+public class PieceDeTheatre extends Evenement {
 
     //ATTRIBUTIONS
     private ArrayList<Accessoire> accessoires;
@@ -11,7 +11,7 @@ public class PieceDeTheatre extends Evenement{
     //CONSTRUCTEUR
     public PieceDeTheatre(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
         super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin);
-        this.accessoires=new ArrayList<>();
+        this.accessoires = new ArrayList<>();
     }
 
     //GETTER
@@ -24,10 +24,11 @@ public class PieceDeTheatre extends Evenement{
 
     /**
      * Permet de créer et d'ajouter un accessoire à une pièce de théatre.
+     *
      * @param nom nom de l'accessorie à crée et ajouté.
      * @return l'accessorie crée
      */
-    public Accessoire addAccessoire(String nom){
+    public Accessoire addAccessoire(String nom) {
         Accessoire a = new Accessoire(nom, this);
         accessoires.add(a);
         return a;
@@ -35,9 +36,10 @@ public class PieceDeTheatre extends Evenement{
 
     /**
      * Permet de retirer un accessoire d'une de théatre, si l'accessoire n'était pas dans l'évenement, rien ne se passe.
+     *
      * @param a accessorie à retiré.
      */
-    public void removeAccessoire(Accessoire a){
+    public void removeAccessoire(Accessoire a) {
         accessoires.remove(a);
     }
 }

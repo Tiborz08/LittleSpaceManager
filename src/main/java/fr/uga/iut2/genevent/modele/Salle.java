@@ -43,10 +43,9 @@ public class Salle {
     }
 
     public void setCapacite_max(int capacite_max) {
-        if(capacite_max < 0) {
+        if (capacite_max < 0) {
             this.capacite_max = 0;
-        }
-        else {
+        } else {
             this.capacite_max = capacite_max;
         }
     }
@@ -60,12 +59,12 @@ public class Salle {
     }
 
     public void addEvenement(Evenement evenement) {
-        if(!evenements.contains(evenement) && verifierDisponibilite(evenement.getDebut(), evenement.getFin())){
+        if (!evenements.contains(evenement) && verifierDisponibilite(evenement.getDebut(), evenement.getFin())) {
             evenements.add(evenement);
             evenement.setSalle(this);
         }
     }
-    
+
     public void enleverDeLHistorique(Evenement evenement) {
         this.evenements.remove(evenement);
         evenement.setSalle(null);

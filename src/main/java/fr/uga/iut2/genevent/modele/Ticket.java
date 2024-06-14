@@ -6,6 +6,7 @@ public class Ticket {
     private int reference;
     private Evenement evenement;
     private Spectateur spectateur;
+
     public Ticket(Evenement evenement, Spectateur spectateur) {
         setReference(newId());
         setEvenement(evenement);
