@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Evenement implements Serializable {
+public class OldEvenement implements Serializable {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final GenEvent genevent;
@@ -19,13 +19,13 @@ public class Evenement implements Serializable {
     //     On utilise la négation ici pour exprimer (dateDebut <= dateFin), ce
     //     qui est équivalent à !(dateDebut > dateFin).
 
-    public static Evenement initialiseEvenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin, Utilisateur admin) {
-        Evenement evt = new Evenement(genevent, nom, dateDebut, dateFin);
+    public static OldEvenement initialiseEvenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin, Utilisateur admin) {
+        OldEvenement evt = new OldEvenement(genevent, nom, dateDebut, dateFin);
         evt.ajouteAdministrateur(admin);
         return evt;
     }
 
-    public Evenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin) {
+    public OldEvenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin) {
         assert !dateDebut.isAfter(dateFin);
         this.genevent = genevent;
         this.nom = nom;
