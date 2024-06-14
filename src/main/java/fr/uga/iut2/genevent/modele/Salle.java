@@ -60,8 +60,7 @@ public class Salle {
     }
 
     public void addEvenement(Evenement evenement) {
-        //Disponibilité de la salle à verifier /!\
-        if(!evenements.contains(evenement)){
+        if(!evenements.contains(evenement) && verifierDisponibilite(evenement.getDebut(), evenement.getFin())){
             evenements.add(evenement);
             evenement.setSalle(this);
         }
@@ -72,9 +71,11 @@ public class Salle {
         evenement.setSalle(null);
     }
 
-    public boolean verifierDisponibilite(Date dateDebut, Date dateFin){
-        for(Evenement evenement : this.evenements){
-            if(evenement.getDebut().before(dateFin) && evenement.getFin().after(dateDebut)){
+    public boolean verifierDisponibilite(Date debut, Date fin) {
+        for (Evenement evenement : evenements) {
+            if ((debut.compareTo(evenement.getDebut()) >= 0 && debut.compareTo(evenement.getFin()) <= 0)
+                    || (fin.compareTo(evenement.getDebut()) >= 0 && fin.compareTo(evenement.getFin()) <= 0)
+                    || (debut.compareTo(evenement.getDebut()) <= 0 && fin.compareTo(evenement.getFin()) >= 0)) {
                 return false;
             }
         }
