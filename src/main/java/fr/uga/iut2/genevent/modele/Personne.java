@@ -29,7 +29,7 @@ public abstract class Personne {
      * @param nom
      */
     public void setNom(String nom){
-        nom=LittleSpaceManager_Utilitaire.capitalize(nom);
+        this.nom=LittleSpaceManager_Utilitaire.capitalize(nom);
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class Personne {
      * @param prenom
      */
     public void setPrenom(String prenom){
-        prenom=LittleSpaceManager_Utilitaire.capitalize(prenom);
+        this.prenom=LittleSpaceManager_Utilitaire.capitalize(prenom);
     }
 
     //GUETTER
