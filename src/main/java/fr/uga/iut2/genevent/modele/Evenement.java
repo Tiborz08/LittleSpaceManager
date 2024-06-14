@@ -166,4 +166,26 @@ public abstract class Evenement {
             this.fin = fin;
         }
     }
+
+    public ArrayList<Participant> getPersonnels(){
+        ArrayList<Participant> personnels = new ArrayList<>();
+        for (Participant participant: participants) {
+            if (participant.getClass().getSimpleName().equals("Personnel")){
+                personnels.add(participant);
+            }
+
+        }
+        return personnels;
+    }
+
+    public ArrayList<Participant> getArtistes(){
+        ArrayList<Participant> artistes = new ArrayList<>();
+        for (Participant participant: participants) {
+            if (participant.getClass().getSimpleName().equals("Artiste")){
+                artistes.add(participant);
+            }
+
+        }
+        return artistes;
+    }
 }
