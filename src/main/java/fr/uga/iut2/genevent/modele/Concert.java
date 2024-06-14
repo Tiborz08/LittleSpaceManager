@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Evénement possèdant un genre musical. Et peut avoir plusieurs artistes.
  */
-public class Concert extends Evenement{
+public class Concert extends Evenement {
 
     //ATTRIBUTION
     private String genre;
@@ -13,7 +13,7 @@ public class Concert extends Evenement{
     //CONSTRUCTEUR
     public Concert(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
         super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin);
-        this.genre=null;
+        this.genre = null;
     }
 
     //GETTER
@@ -26,6 +26,7 @@ public class Concert extends Evenement{
 
     /**
      * Met le genre du concert en MAJUSCULE.
+     *
      * @param genre
      */
     public void setGenre(String genre) {
