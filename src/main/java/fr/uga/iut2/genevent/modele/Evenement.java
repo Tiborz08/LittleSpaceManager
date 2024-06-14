@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Evenement {
@@ -68,9 +69,6 @@ public abstract class Evenement {
     public int getNombreSpectateurs(){
         return spectateurs.size();
     }
-
-
-
 
     public void setSalle(Salle salle) {
         salle.addEvenement(this);
