@@ -26,7 +26,7 @@ public abstract class Personne {
 
     /**
      * Uniformiser le nom pour qu'il soit en minuscule, sauf la première lettre qui sera en majuscule.
-     * @param nom
+     * @param nom chaine de caractère formant le nom.
      */
     public void setNom(String nom){
         this.nom=LittleSpaceManager_Utilitaire.capitalize(nom);
@@ -34,7 +34,7 @@ public abstract class Personne {
 
     /**
      * Uniformiser le prénom pour qu'il soit en minuscule, sauf la première lettre qui sera en majuscule.
-     * @param prenom
+     * @param prenom chaine de caractère formant le prénom.
      */
     public void setPrenom(String prenom){
         this.prenom=LittleSpaceManager_Utilitaire.capitalize(prenom);
