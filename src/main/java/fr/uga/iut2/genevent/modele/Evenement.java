@@ -70,6 +70,12 @@ public abstract class Evenement {
         return spectateurs.size();
     }
 
+    public void addParticipant(Participant participant){
+        if (!participants.contains(participant)){
+            participants.add(participant);
+        }
+    }
+
     public void setSalle(Salle salle) {
         salle.addEvenement(this);
         this.salle = salle;
