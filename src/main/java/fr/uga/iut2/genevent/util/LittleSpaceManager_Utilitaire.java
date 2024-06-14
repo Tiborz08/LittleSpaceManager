@@ -4,9 +4,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class LittleSpaceManager_Utilitaire {
 
-    private AtomicInteger id = new AtomicInteger(0);
+    private static AtomicInteger id = new AtomicInteger(0);
 
-    public int newId() {
+    public static int newId() {
         return id.incrementAndGet();
     }
 
