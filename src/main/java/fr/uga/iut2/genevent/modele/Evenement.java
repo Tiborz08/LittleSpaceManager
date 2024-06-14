@@ -70,6 +70,8 @@ public abstract class Evenement {
         return spectateurs.size();
     }
 
-
-
+    public void setSalle(Salle salle) {
+        salle.addEvenement(this);
+        this.salle = salle;
+    }
 }
