@@ -1,5 +1,7 @@
 package fr.uga.iut2.genevent.vue;
 
+import fr.uga.iut2.genevent.modele.OldEvenement;
+
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -28,7 +30,7 @@ public abstract class IHM {
 
     /**
      * Classe conteneur pour les informations saisies pour un nouvel
-     * {@link fr.uga.iut2.genevent.modele.Evenement}.
+     * {@link OldEvenement}.
      *
      * <ul>
      * <li>Tous les attributs sont `public` par commodité d'accès.</li>
@@ -78,7 +80,7 @@ public abstract class IHM {
 
     /**
      * Récupère les informations nécessaires à la création d'un nouvel
-     * {@link fr.uga.iut2.genevent.modele.Evenement}.
+     * {@link OldEvenement}.
      *
      * @param nomsExistants L'ensemble des noms d'évenements qui ne sont plus
      *     disponibles.

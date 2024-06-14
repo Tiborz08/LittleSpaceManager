@@ -12,7 +12,7 @@ public class Utilisateur implements Serializable {
     private final String email;
     private String nom;
     private String prenom;
-    private final Map<String, Evenement> evenementsAdministres;  // association qualifiée par le nom
+    private final Map<String, OldEvenement> evenementsAdministres;  // association qualifiée par le nom
 
     public Utilisateur(String email, String nom, String prenom) {
         assert EmailValidator.getInstance(false, false).isValid(email);
@@ -42,7 +42,7 @@ public class Utilisateur implements Serializable {
         this.prenom = prenom;
     }
 
-    public void ajouteEvenementAdministre(Evenement evt) {
+    public void ajouteEvenementAdministre(OldEvenement evt) {
         assert !this.evenementsAdministres.containsKey(evt.getNom());
         this.evenementsAdministres.put(evt.getNom(), evt);
     }

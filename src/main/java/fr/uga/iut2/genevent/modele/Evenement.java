@@ -1,64 +1,40 @@
 package fr.uga.iut2.genevent.modele;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
+import java.util.Date;
 
-public class Evenement implements Serializable {
+public abstract class Evenement {
 
-    private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
-    private final GenEvent genevent;
-    private final String nom;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-    private final Map<String, Utilisateur> administrateurs;  // association qualifiée par l'email
+    //ATTRIBUTIONS
 
-    // Invariant de classe : !dateDebut.isAfter(dateFin)
-    //     On utilise la négation ici pour exprimer (dateDebut <= dateFin), ce
-    //     qui est équivalent à !(dateDebut > dateFin).
+    private int idEvent;
+    private String nom;
+    private int capaciteParticipants;
+    private int capaciteSpectateur;
+    private float coutInitial;
+    private float prixTickets;
+    private Date debut;
+    private Date fin;
 
-    public static Evenement initialiseEvenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin, Utilisateur admin) {
-        Evenement evt = new Evenement(genevent, nom, dateDebut, dateFin);
-        evt.ajouteAdministrateur(admin);
-        return evt;
-    }
+    //CONSTRUCTEUR(S)
 
-    public Evenement(GenEvent genevent, String nom, LocalDate dateDebut, LocalDate dateFin) {
-        assert !dateDebut.isAfter(dateFin);
-        this.genevent = genevent;
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
+        this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.administrateurs = new HashMap<>();
+        this.capaciteParticipants = capaciteParticipants;
+        this.capaciteSpectateur = capaciteSpectateur;
+        this.coutInitial = coutInitial;
+        this.prixTickets = prixTickets;
+        this.debut = debut;
+        this.fin = fin;
     }
 
-    public String getNom() {
-        return this.nom;
+    public Date getDebut() {
+        return debut;
     }
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
-    }
-
-    public void setDateDebut(LocalDate dateDebut) {
-        assert !dateDebut.isAfter(this.dateFin);
-        this.dateDebut = dateDebut;
-    }
-
-    public LocalDate getDateFin() {
-        return dateFin;
-    }
-
-    public void setDateFin(LocalDate dateFin) {
-        assert !this.dateDebut.isAfter(dateFin);
-        this.dateFin = dateFin;
-    }
-
-    public void ajouteAdministrateur(Utilisateur admin) {
-        assert !this.administrateurs.containsKey(admin.getEmail());
-        this.administrateurs.put(admin.getEmail(), admin);
-        admin.ajouteEvenementAdministre(this);
+    public Date getFin() {
+        return fin;
     }
 }
