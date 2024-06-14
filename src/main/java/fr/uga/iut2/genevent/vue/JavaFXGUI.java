@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.vue;
 
 import fr.uga.iut2.genevent.controleur.Controleur;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import javafx.application.Platform;
@@ -62,7 +63,7 @@ public class JavaFXGUI extends IHM {
         FXMLLoader mainViewLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         mainViewLoader.setController(this);
         Scene mainScene = new Scene(mainViewLoader.load());
-
+        mainScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/main.css")).toExternalForm());
         primaryStage.setTitle("GenEvent");
         primaryStage.setScene(mainScene);
         primaryStage.show();

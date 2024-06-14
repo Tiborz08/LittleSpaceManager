@@ -21,7 +21,7 @@ public abstract class Evenement {
     private Salle salle;
 
     private ArrayList<Participant> participants;
-    private ArrayList<Spectateur> spectateurs;
+    private ArrayList<Ticket> tickets;
 
     //CONSTRUCTEUR(S)
 
@@ -34,8 +34,8 @@ public abstract class Evenement {
         this.prixTickets = prixTickets;
         this.debut = debut;
         this.fin = fin;
-        this.spectateurs = new ArrayList<Spectateur>();
-        this.participants = new ArrayList<Participant>();
+        this.tickets = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
     public Date getDebut() {
@@ -50,8 +50,8 @@ public abstract class Evenement {
         return participants;
     }
 
-    public ArrayList<Spectateur> getSpectateurs() {
-        return spectateurs;
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 
     public float getPrixTickets() {
@@ -63,11 +63,11 @@ public abstract class Evenement {
     }
 
     public int getNombreParticipants(){
-        return spectateurs.size();
+        return participants.size();
     }
 
-    public int getNombreSpectateurs(){
-        return spectateurs.size();
+    public int getNombreTickets(){
+        return tickets.size();
     }
 
     public void addParticipant(Participant participant){
