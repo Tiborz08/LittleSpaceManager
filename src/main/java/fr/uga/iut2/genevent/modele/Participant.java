@@ -33,6 +33,11 @@ public abstract class Participant extends Personne {
         return evenements;
     }
     //METHODE
+
+    /**
+     * Ajoute un événement à la liste des événements auxquels participe le participant, en vérifiant s'il n'est pas déjà présent, et informe l'événement qu'il fait partie de ses participants.
+     * @param evenement Un événement auquel les participants participent.
+     */
     public void addEvenement(Evenement evenement){
         if (!evenements.contains(evenement)) {
             this.evenements.add(evenement);
