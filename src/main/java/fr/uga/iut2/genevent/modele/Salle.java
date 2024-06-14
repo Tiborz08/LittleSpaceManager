@@ -60,8 +60,11 @@ public class Salle {
     }
 
     public void addEvenement(Evenement evenement) {
-        this.evenements.add(evenement);
-        evenement.setSalle(this);
+        //Disponibilité de la salle à verifier /!\
+        if(!evenements.contains(evenement)){
+            evenements.add(evenement);
+            evenement.setSalle(this);
+        }
     }
     
     public void enleverDeLHistorique(Evenement evenement) {
