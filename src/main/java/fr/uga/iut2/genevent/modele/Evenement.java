@@ -5,7 +5,7 @@ import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Evenement {
+public abstract class Evenement implements Comparable<Evenement> {
 
     //ATTRIBUTIONS
 
@@ -36,6 +36,10 @@ public abstract class Evenement {
         this.fin = fin;
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
+    }
+
+    public int getIdEvent() {
+        return idEvent;
     }
 
     public Date getDebut() {
@@ -167,6 +171,10 @@ public abstract class Evenement {
         }
     }
 
+    /**
+     * Cette fonction renvoie la liste des membres du personnel qui participent à l'événement.
+     * @return
+     */
     public ArrayList<Participant> getPersonnels(){
         ArrayList<Participant> personnels = new ArrayList<>();
         for (Participant participant: participants) {
@@ -178,6 +186,10 @@ public abstract class Evenement {
         return personnels;
     }
 
+    /**
+     * Cette fonction renvoie la liste des artistes qui participent à l'événement
+     * @return
+     */
     public ArrayList<Participant> getArtistes(){
         ArrayList<Participant> artistes = new ArrayList<>();
         for (Participant participant: participants) {
@@ -187,5 +199,31 @@ public abstract class Evenement {
 
         }
         return artistes;
+    }
+
+    /**
+     * Permet de savoir les gains que l'événement a rapporté.
+     * @return Le bénéfice de l'événement.
+     */
+    public float getBenefices(){
+        return prixTickets * tickets.size() - coutInitial;
+    }
+
+    /**
+     * Trie dans l'odre : dateDebut, dateFin, nom, idEvent
+     * @param evenement L'évenement à comparer.
+     * @return
+     */
+    @Override
+    public int compareTo(Evenement evenement){
+        if(this.getDebut().compareTo(evenement.getDebut()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().compareTo(evenement.getFin()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().compareTo(evenement.getNom()) > 0 || this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().equals(evenement.getNom()) && this.getIdEvent() > evenement.getIdEvent()){
+            return 1;
+        }
+        else if(this.getDebut().equals(evenement.getDebut()) && this.getFin().equals(evenement.getFin()) && this.getNom().equals(evenement.getNom()) && this.getIdEvent() == evenement.getIdEvent()){
+            return 0;
+        }
+        else{
+            return -1;
+        }
     }
 }
