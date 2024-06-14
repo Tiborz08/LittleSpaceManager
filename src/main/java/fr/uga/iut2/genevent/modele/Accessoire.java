@@ -2,7 +2,7 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
-public class Accessorie {
+public class Accessoire {
 
     //ATTRIBUTION
     private String nom;
@@ -10,7 +10,7 @@ public class Accessorie {
 
     //CONSTRUCTEUR
 
-    public Accessorie(String nom) {
+    public Accessoire(String nom) {
         this.nom = nom;
         this.id = LittleSpaceManager_Utilitaire.newId();
     }
