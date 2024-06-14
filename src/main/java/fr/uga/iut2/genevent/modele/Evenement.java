@@ -86,6 +86,10 @@ public abstract class Evenement {
         this.salle = salle;
     }
 
+    public Salle getSalle() {
+        return salle;
+    }
+
     public void removeParticipant(Participant participant){
         if (participants.contains(participant)){
             participants.remove(participant);
