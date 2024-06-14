@@ -10,7 +10,7 @@ public abstract class Participant extends Personne {
     //CONSTRUCTEUR
     public Participant(String nom,String prenom,float salaire){
         super(nom,prenom);
-        this.setSalaire(salaire);
+        setSalaire(salaire);
     }
     //SETTER
     /**

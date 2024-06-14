@@ -10,9 +10,9 @@ public abstract class Personne {
 
     //CONSTRUCTEUR
     public Personne(String nom,String prenom){
-        this.setIdentifiant();
-        this.setNom(nom);
-        this.setPrenom(prenom);
+        setIdentifiant();
+        setNom(nom);
+        setPrenom(prenom);
     }
 
     //SETTER
