@@ -10,7 +10,7 @@ public class GenEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final Map<String, Utilisateur> utilisateurs;  // association qualifiée par l'email
-    private final Map<String, Evenement> evenements;  // association qualifiée par le nom
+    private final Map<String, OldEvenement> evenements;  // association qualifiée par le nom
 
     public GenEvent() {
         this.utilisateurs = new HashMap<>();
@@ -26,7 +26,7 @@ public class GenEvent implements Serializable {
         }
     }
 
-    public Map<String, Evenement> getEvenements() {
+    public Map<String, OldEvenement> getEvenements() {
         return this.evenements;
     }
 
@@ -34,7 +34,7 @@ public class GenEvent implements Serializable {
         assert !this.evenements.containsKey(nom);
         assert this.utilisateurs.containsKey(adminEmail);
         Utilisateur admin = this.utilisateurs.get(adminEmail);
-        Evenement evt = Evenement.initialiseEvenement(this, nom, dateDebut, dateFin, admin);
+        OldEvenement evt = OldEvenement.initialiseEvenement(this, nom, dateDebut, dateFin, admin);
         this.evenements.put(nom, evt);
     }
 
