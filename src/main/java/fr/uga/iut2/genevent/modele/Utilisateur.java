@@ -3,6 +3,7 @@ package fr.uga.iut2.genevent.modele;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 
