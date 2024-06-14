@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="650.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Création de Salle">
@@ -43,17 +42,17 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="1">
+            <TextField style="-fx-border-color: #9eadba;" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="3">
+            <TextField style="-fx-border-color: #9eadba;" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
