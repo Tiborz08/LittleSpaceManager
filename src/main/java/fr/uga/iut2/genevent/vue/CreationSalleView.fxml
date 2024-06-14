@@ -18,9 +18,9 @@
       </Label>
       <GridPane prefHeight="171.0" prefWidth="610.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="56.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="56.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="167.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="123.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="185.0" />
         </columnConstraints>
         <rowConstraints>
@@ -28,9 +28,21 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nom salle" />
-            <Label text="Adresse" GridPane.rowIndex="1" />
-            <Label text="Capacité Maximale" GridPane.columnIndex="2" />
+            <Label text="Nom salle">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Adresse" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Capacité Maximale" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
             <TextField style="-fx-border-color: #bcc8d2;" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
