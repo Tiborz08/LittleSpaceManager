@@ -1,5 +1,7 @@
 package fr.uga.iut2.genevent.modele;
 
+import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
+
 import java.util.Date;
 
 public abstract class Evenement {
@@ -18,7 +20,7 @@ public abstract class Evenement {
     //CONSTRUCTEUR(S)
 
     public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
-        this.idEvent=newId();
+        this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         this.capaciteParticipants = capaciteParticipants;
         this.capaciteSpectateur = capaciteSpectateur;
