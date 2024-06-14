@@ -75,7 +75,7 @@ public abstract class Evenement {
      * @param participant Un participant qui participe à l'événement.
      */
     public void addParticipant(Participant participant){
-        if (!participants.contains(participant)){
+        if (!participants.contains(participant) && salle.getCapacite_max() > participants.size() + tickets.size() + 1){
             participants.add(participant);
             participant.addEvenement(this);
         }
@@ -84,6 +84,10 @@ public abstract class Evenement {
     public void setSalle(Salle salle) {
         salle.addEvenement(this);
         this.salle = salle;
+    }
+
+    public Salle getSalle() {
+        return salle;
     }
 
     public void removeParticipant(Participant participant){
