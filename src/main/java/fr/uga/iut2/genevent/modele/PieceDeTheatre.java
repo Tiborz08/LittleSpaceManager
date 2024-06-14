@@ -37,7 +37,7 @@ public class PieceDeTheatre extends Evenement{
      * Permet de retirer un accessoire d'une de théatre, si l'accessoire n'était pas dans l'évenement, rien ne se passe.
      * @param a accessorie à retiré.
      */
-    public void removeAccessorie(Accessoire a){
+    public void removeAccessoire(Accessoire a){
         accessoires.remove(a);
     }
 }
