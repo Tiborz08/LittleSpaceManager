@@ -63,7 +63,7 @@ public abstract class Evenement {
     }
 
     public int getNombreParticipants(){
-        return spectateurs.size();
+        return participants.size();
     }
 
     public int getNombreTickets(){
