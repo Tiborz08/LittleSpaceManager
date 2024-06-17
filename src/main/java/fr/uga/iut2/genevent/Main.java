@@ -18,7 +18,7 @@ public class Main extends Application {
 
         @Override
         public void start(Stage stage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AccueilView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("vue/AccueilView.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("LittleSpaceManager");
             stage.setScene(scene);
