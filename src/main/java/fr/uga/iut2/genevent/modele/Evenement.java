@@ -27,6 +27,8 @@ public abstract class Evenement implements Comparable<Evenement> {
     //CONSTRUCTEUR(S)
 
     public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) {
+        this.nom = nom;
+        definirDates(salle, debut, fin);
         setSalle(salle);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
@@ -34,7 +36,6 @@ public abstract class Evenement implements Comparable<Evenement> {
         setCapaciteSpectateur(capaciteSpectateur);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
-        definirDates(debut, fin);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
@@ -175,7 +176,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public void setCapaciteSpectateur(int capacite) {
         if (capaciteParticipants + capacite <= salle.getCapacite_max()) {
-            this.capaciteParticipants = capacite;
+            this.capaciteSpectateur = capacite;
         }
     }
 
@@ -185,7 +186,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @param debut Le début de l'événement
      * @param fin La fin de l'événement
      */
-    public void definirDates(Date debut, Date fin){
+    public void definirDates(Salle salle, Date debut, Date fin){
         if (debut.before(fin) && salle.verifierDisponibilite(debut, fin)) {
             this.debut = debut;
             this.fin = fin;
