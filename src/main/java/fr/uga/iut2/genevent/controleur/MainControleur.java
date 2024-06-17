@@ -54,7 +54,9 @@ public class MainControleur {
         stage.setTitle("Création de " + typeCreation);
         stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.setAlwaysOnTop(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 
     @FXML
