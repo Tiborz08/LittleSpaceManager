@@ -24,6 +24,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     private ArrayList<Participant> participants;
     private ArrayList<Ticket> tickets;
 
+
     //CONSTRUCTEUR(S)
 
     public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, Salle salle) {
@@ -33,8 +34,8 @@ public abstract class Evenement implements Comparable<Evenement> {
         setCapaciteSpectateur(capaciteSpectateur);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
-        this.debut = debut;
-        this.fin = fin;
+        setDebut(debut);
+        setFin(fin);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
