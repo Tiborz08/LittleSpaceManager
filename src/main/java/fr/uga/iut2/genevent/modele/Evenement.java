@@ -187,7 +187,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @param fin La fin de l'événement
      */
     public void definirDates(Salle salle, Date debut, Date fin){
-        if (debut.before(fin) && salle.verifierDisponibilite(debut, fin)) {
+        if ((debut.before(fin) || debut.equals(fin)) && salle.verifierDisponibilite(debut, fin)) {
             this.debut = debut;
             this.fin = fin;
         }
@@ -200,7 +200,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
 
     public void setDebut(Date debutEv) {
-        if (salle.verifierDisponibilite(debutEv, this.fin) && debutEv.before(this.fin)) {
+        if (salle.verifierDisponibilite(debutEv, this.fin) && (debutEv.before(this.fin) || debutEv.equals(this.fin))) {
             this.debut = debut;
         }
     }
@@ -212,7 +212,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
 
     public void setFin(Date finEv) {
-        if (salle.verifierDisponibilite(this.debut, finEv) && this.debut.before(finEv)) {
+        if (salle.verifierDisponibilite(this.debut, finEv) && (this.debut.before(finEv) || this.debut.equals(finEv) )) {
             this.fin = fin;
         }
     }
