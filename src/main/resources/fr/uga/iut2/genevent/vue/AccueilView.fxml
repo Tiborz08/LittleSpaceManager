@@ -17,7 +17,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="95.0" prefWidth="696.0" spacing="40.0">
          <children>
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
+            <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spéctateur" textFill="WHITE">
+            <Button fx:id="btAjoutSpectateur" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spéctateur" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
+            <Button fx:id="btAjoutArtiste" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -45,7 +45,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="78.0" prefWidth="732.0" spacing="300.0">
          <children>
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer une salle" textFill="WHITE">
+            <Button fx:id="btCreerSalle" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSalle" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer une salle" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer un événement" textFill="WHITE">
+            <Button fx:id="btCreerEvenement" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer un événement" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
