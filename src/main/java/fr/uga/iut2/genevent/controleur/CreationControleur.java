@@ -45,6 +45,10 @@ public class CreationControleur {
         this.mainControleur = mainControleur;
     }
 
+    public void setTypeCreation(String typeCreation){
+        this.typeCreation = typeCreation;
+    }
+
     @FXML
     public void onAnnulerClick(ActionEvent event){
         Stage stage = (Stage) btAnnuler.getScene().getWindow();
