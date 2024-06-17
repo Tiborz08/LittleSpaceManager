@@ -26,7 +26,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, Salle salle) {
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) {
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
