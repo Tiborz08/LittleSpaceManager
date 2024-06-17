@@ -42,6 +42,7 @@ public class MainControleur {
 
         CreationControleur creationController = loader.getController();
         creationController.setMainController(this);
+        creationController.setTypeCreation(typeCreation);
 
         Stage stage = new Stage();
         stage.setTitle("Création de " + typeCreation);
