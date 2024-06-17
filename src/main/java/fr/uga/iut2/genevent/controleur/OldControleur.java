@@ -2,16 +2,15 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.modele.GenEvent;
 import fr.uga.iut2.genevent.vue.IHM;
-import fr.uga.iut2.genevent.vue.CLI;
 import fr.uga.iut2.genevent.vue.JavaFXGUI;
 
 
-public class Controleur {
+public class OldControleur {
 
     private final GenEvent genevent;
     private final IHM ihm;
 
-    public Controleur(GenEvent genevent) {
+    public OldControleur(GenEvent genevent) {
         this.genevent = genevent;
 
         // choisir la classe CLI ou JavaFXGUI

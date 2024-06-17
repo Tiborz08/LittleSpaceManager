@@ -1,10 +1,11 @@
 package fr.uga.iut2.genevent.vue;
 
-import fr.uga.iut2.genevent.controleur.Controleur;
+import fr.uga.iut2.genevent.controleur.OldControleur;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,17 +24,17 @@ import org.apache.commons.validator.routines.EmailValidator;
  * l'utilisa·teur/trice en mode graphique.
  * <p>
  * Attention, pour pouvoir faire le lien avec le
- * {@link fr.uga.iut2.genevent.controleur.Controleur}, JavaFXGUI n'est pas une
+ * {@link OldControleur}, JavaFXGUI n'est pas une
  * sous-classe de {@link javafx.application.Application} !
  * <p>
  * Le démarrage de l'application diffère des exemples classiques trouvés dans
  * la documentation de JavaFX : l'interface est démarrée à l'initiative du
- * {@link fr.uga.iut2.genevent.controleur.Controleur} via l'appel de la méthode
+ * {@link OldControleur} via l'appel de la méthode
  * {@link #demarrerInteraction()}.
  */
 public class JavaFXGUI extends IHM {
 
-    private final Controleur controleur;
+    private final OldControleur oldControleur;
     private final CountDownLatch eolBarrier;  // /!\ ne pas supprimer /!\ : suivi de la durée de vie de l'interface
 
     // éléments vue nouvel·le utilisa·teur/trice
@@ -43,8 +44,8 @@ public class JavaFXGUI extends IHM {
     @FXML private Button newUserOkButton;
     @FXML private Button newUserCancelButton;
 
-    public JavaFXGUI(Controleur controleur) {
-        this.controleur = controleur;
+    public JavaFXGUI(OldControleur oldControleur) {
+        this.oldControleur = oldControleur;
 
         this.eolBarrier = new CountDownLatch(1);  // /!\ ne pas supprimer /!\
     }
@@ -80,7 +81,7 @@ public class JavaFXGUI extends IHM {
 
     @FXML
     private void newUserMenuItemAction() {
-        this.controleur.saisirUtilisateur();
+        this.oldControleur.saisirUtilisateur();
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class JavaFXGUI extends IHM {
                 this.newUserSurnameTextField.getText().strip(),
                 this.newUserForenameTextField.getText().strip()
         );
-        this.controleur.creerUtilisateur(data);
+        this.oldControleur.creerUtilisateur(data);
         this.newUserOkButton.getScene().getWindow().hide();
     }
 
