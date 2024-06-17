@@ -1,7 +1,6 @@
 package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.modele.Artiste;
-import fr.uga.iut2.genevent.modele.Evenement;
 import fr.uga.iut2.genevent.modele.Salle;
 import fr.uga.iut2.genevent.modele.Spectateur;
 import javafx.event.ActionEvent;
@@ -10,8 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.util.Date;
 
 public class CreationControleur {
     //Attribut local
@@ -90,6 +87,7 @@ public class CreationControleur {
 
         Spectateur spectateur = new Spectateur(nom, prenom);
         mainControleur.ajouterSpectateur(spectateur);
+        System.out.println("aaaa");
     }
 
     private void creerArtiste() {
