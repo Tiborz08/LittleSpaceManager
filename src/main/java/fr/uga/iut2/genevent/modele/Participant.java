@@ -45,9 +45,15 @@ public abstract class Participant extends Personne {
         }
     }
 
+    /**
+     * Retire un événement de la liste des événements auxquels participe le participant, en vérifiant s'il est présent
+     * Informe l'événement que le participant n'est plus un de ses participants.
+     * @param evenement Un événement auquel le participant participe.
+     */
     public void removeEvenement(Evenement evenement) {
         if (evenements.contains(evenement)) {
             evenement.removeParticipant(this);
+            evenements.remove(evenement);
         }
     }
 }
