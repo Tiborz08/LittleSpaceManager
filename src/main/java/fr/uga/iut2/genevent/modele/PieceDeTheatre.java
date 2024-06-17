@@ -9,8 +9,8 @@ public class PieceDeTheatre extends Evenement {
     private ArrayList<Accessoire> accessoires;
 
     //CONSTRUCTEUR
-    public PieceDeTheatre(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
-        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin);
+    public PieceDeTheatre(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description) {
+        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin, description);
         this.accessoires = new ArrayList<>();
     }
 
