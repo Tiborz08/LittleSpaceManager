@@ -37,7 +37,7 @@ public class MainControleur {
     }
 
     public void ouvrirFenetreCreation(String typeCreation) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationControleur.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/Creation" + typeCreation + "View.fxml"));
         Parent root = loader.load();
 
         CreationControleur creationController = loader.getController();
