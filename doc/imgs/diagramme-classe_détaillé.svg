@@ -340,7 +340,7 @@
       <path fill="none" d="M0 20 L441 20 L441 192 L0 192 L0 0 L88 0 L88 20" clip-path="url(#clipPath21)"/>
     </g>
     <g font-size="11px" transform="translate(356,22)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1">
-      <text x="192" xml:space="preserve" y="11" clip-path="url(#clipPath22)" stroke="none">controleur</text>
+      <text x="192" xml:space="preserve" y="11" clip-path="url(#clipPath22)" stroke="none">oldControleur</text>
     </g>
     <g font-size="11px" transform="translate(12,522)" fill-opacity="1" fill="rgb(230,159,0)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(230,159,0)" font-weight="bold" stroke-opacity="1">
       <rect x="0" width="146" height="64" y="0" clip-path="url(#clipPath23)" stroke="none"/>

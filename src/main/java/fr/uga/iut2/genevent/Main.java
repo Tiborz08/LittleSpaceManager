@@ -1,6 +1,6 @@
 package fr.uga.iut2.genevent;
 
-import fr.uga.iut2.genevent.controleur.Controleur;
+import fr.uga.iut2.genevent.controleur.OldControleur;
 import fr.uga.iut2.genevent.modele.GenEvent;
 import fr.uga.iut2.genevent.util.Persisteur;
 import java.io.IOException;
@@ -23,10 +23,10 @@ public class Main {
             System.exit(Main.EXIT_ERR_LOAD);
         }
 
-        Controleur controleur = new Controleur(genevent);
+        OldControleur oldControleur = new OldControleur(genevent);
         // `Controleur.demarrer` garde le contrôle de l'exécution tant que
         // l'utilisa·teur/trice n'a pas saisi la commande QUITTER.
-        controleur.demarrer();
+        oldControleur.demarrer();
 
         try {
             Persisteur.sauverEtat(genevent);

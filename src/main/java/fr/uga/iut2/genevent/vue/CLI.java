@@ -1,6 +1,6 @@
 package fr.uga.iut2.genevent.vue;
 
-import fr.uga.iut2.genevent.controleur.Controleur;
+import fr.uga.iut2.genevent.controleur.OldControleur;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
@@ -30,10 +30,10 @@ public class CLI extends IHM {
      * Nombre maximum d'essais pour la lecture d'une saisie utilisa·teur/trice.
      */
     private static final int MAX_ESSAIS = 3;
-    private final Controleur controleur;
+    private final OldControleur oldControleur;
 
-    public CLI(Controleur controleur) {
-        this.controleur = controleur;
+    public CLI(OldControleur oldControleur) {
+        this.oldControleur = oldControleur;
     }
 
 //-----  Éléments du dialogue  -------------------------------------------------
@@ -153,10 +153,10 @@ public class CLI extends IHM {
                 case QUITTER:
                     break;
                 case CREER_UTILISATEUR:
-                    this.controleur.saisirUtilisateur();
+                    this.oldControleur.saisirUtilisateur();
                     break;
                 case CREER_EVENEMENT:
-                    this.controleur.saisirEvenement();
+                    this.oldControleur.saisirEvenement();
                     break;
                 default:
                     assert false : "Commande inconnue.";
@@ -172,13 +172,13 @@ public class CLI extends IHM {
     @Override
     public void saisirUtilisateur() {
         InfosUtilisateur infos = dialogueSaisirUtilisateur();
-        controleur.creerUtilisateur(infos);
+        oldControleur.creerUtilisateur(infos);
     }
 
     @Override
     public void saisirNouvelEvenement(final Set<String> nomsExistants) {
         InfosNouvelEvenement infos = dialogueSaisirNouvelEvenement(nomsExistants);
-        controleur.creerEvenement(infos);
+        oldControleur.creerEvenement(infos);
     }
 
 //-----  Primitives d'affichage  -----------------------------------------------

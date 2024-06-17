@@ -36,7 +36,7 @@ Si vous ne souhaitez pas supprimer le fichier, vous devez incrémenter l'attribu
 ## Structure du squelette de code fourni
 
 Le squelette de code fourni suit le patron de conception MVC (Modèle, Vue Contrôleur) ainsi que représenté sur le diagramme de classe détaillé ci-après.
-Les composants principaux du patron sont regroupés dans les *packages* respectifs `genevent.modele`, `genevent.vue` et `genevent.controleur`.
+Les composants principaux du patron sont regroupés dans les *packages* respectifs `genevent.modele`, `genevent.vue` et `genevent.oldControleur`.
 
 ![Diagramme de classe détaillé](doc/imgs/diagramme-classe_détaillé.svg)
 
