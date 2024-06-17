@@ -65,7 +65,7 @@ public class JavaFXGUI extends IHM {
         mainViewLoader.setController(this);
         Scene mainScene = new Scene(mainViewLoader.load());
         try {
-            mainScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/main.css")).toExternalForm());
+            mainScene.getStylesheets().add(getClass().getResource("style/main.css").toExternalForm());
         } catch (NullPointerException e) {
             System.err.println("Impossible de charger le fichier de style.");
         }
