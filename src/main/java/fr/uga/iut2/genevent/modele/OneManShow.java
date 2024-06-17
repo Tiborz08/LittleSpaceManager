@@ -10,8 +10,8 @@ public class OneManShow extends Evenement {
     //CONSTRUCTEUR
 
 
-    public OneManShow(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, Salle salle) {
-        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin, salle);
+    public OneManShow(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin,String description, Salle salle) {
+        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin,description, salle);
     }
 
 }

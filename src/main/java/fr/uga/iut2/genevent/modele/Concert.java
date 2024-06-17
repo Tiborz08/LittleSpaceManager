@@ -11,8 +11,8 @@ public class Concert extends Evenement {
     private String genre;
 
     //CONSTRUCTEUR
-    public Concert(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin,Salle salle) {
-        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin,salle);
+    public Concert(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin,String description,Salle salle) {
+        super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin,description,salle);
     }
 
     //GETTER
