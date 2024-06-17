@@ -64,7 +64,11 @@ public class JavaFXGUI extends IHM {
         FXMLLoader mainViewLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         mainViewLoader.setController(this);
         Scene mainScene = new Scene(mainViewLoader.load());
-        mainScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/main.css")).toExternalForm());
+        try {
+            mainScene.getStylesheets().add(getClass().getResource("style/main.css").toExternalForm());
+        } catch (NullPointerException e) {
+            System.err.println("Impossible de charger le fichier de style.");
+        }
         primaryStage.setTitle("GenEvent");
         primaryStage.setScene(mainScene);
         primaryStage.show();
