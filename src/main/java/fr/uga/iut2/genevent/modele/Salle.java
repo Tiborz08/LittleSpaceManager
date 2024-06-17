@@ -76,4 +76,19 @@ public class Salle {
         }
         return true;
     }
+
+    /**
+     * Retourne la liste des évenements qui n'ont pas encore débutés
+     * @return La liste des évenements n'ayant pas encore débuté, trié par ordre chronologique
+     */
+    public TreeSet<Evenement> getEvenementsFuturs(){
+        TreeSet<Evenement> evenementsFuturs = new TreeSet<>();
+        Date aujourdhui = new Date();
+        for (Evenement evenement : evenements){
+            if(evenement.getDebut().after(aujourdhui)){
+                evenementsFuturs.add(evenement);
+            }
+        }
+        return evenementsFuturs;
+    }
 }
