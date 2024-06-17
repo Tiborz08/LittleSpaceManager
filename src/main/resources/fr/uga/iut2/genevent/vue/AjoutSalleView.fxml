@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.uga.iut2.genevent.controleur.AjoutSalleController">
+    <stylesheets>
+        <URL value="@style/main.css" />
+    </stylesheets>
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <ImageView fitHeight="65.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo/logo-lsm.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </HBox>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="label" text="Ajouter un évènement">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Label>
+            <Label styleClass="label" text="Ajouter du personnel" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Label>
+            <Label styleClass="label" text="Ajouter un artiste" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Label>
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" styleClass="cb" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="cb" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="cb" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="168.0" styleClass="btn,btn-success" text="Créer la salle" />
+            <Button mnemonicParsing="false" styleClass="btn" text="Créer un évènement" />
+            <Button layoutX="322.0" layoutY="40.0" mnemonicParsing="false" styleClass="btn" text="Ajouter un personnel" />
+         </children>
+      </HBox>
+    </children>
+</VBox>
