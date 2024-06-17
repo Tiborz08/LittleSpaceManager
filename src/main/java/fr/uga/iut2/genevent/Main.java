@@ -3,16 +3,38 @@ package fr.uga.iut2.genevent;
 import fr.uga.iut2.genevent.controleur.OldControleur;
 import fr.uga.iut2.genevent.modele.GenEvent;
 import fr.uga.iut2.genevent.util.Persisteur;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
 
-public class Main {
+public class Main extends Application {
 
     public static final int EXIT_ERR_LOAD = 2;
     public static final int EXIT_ERR_SAVE = 3;
 
-    public static void main(String[] args) {
-        GenEvent genevent = null;
+        @Override
+        public void start(Stage stage) throws IOException {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AcceuilView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("LittleSpaceManager");
+            stage.setScene(scene);
+            stage.show();
+        }
+
+        public static void main(String[] args) {
+            launch();
+        }
+
+
+    }
+/*    public static void main(String[] args) {
+
+    }*/
+/*        GenEvent genevent = null;
 
         try {
             genevent = Persisteur.lireEtat();
@@ -36,5 +58,6 @@ public class Main {
             System.err.flush();
             System.exit(Main.EXIT_ERR_SAVE);
         }
-    }
-}
+    }*/
+
+
