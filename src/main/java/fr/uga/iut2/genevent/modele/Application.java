@@ -1,6 +1,8 @@
 package fr.uga.iut2.genevent.modele;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Application {
     private ArrayList<Salle> salles=new ArrayList<>();
@@ -31,7 +33,6 @@ public class Application {
     public void addSalle(Salle salle){
         salles.add(salle);
     }
-
 
 
 }
