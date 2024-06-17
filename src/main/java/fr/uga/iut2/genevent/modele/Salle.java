@@ -43,11 +43,7 @@ public class Salle {
     }
 
     public void setCapacite_max(int capacite_max) {
-        if (capacite_max < 0) {
-            this.capacite_max = 0;
-        } else {
-            this.capacite_max = capacite_max;
-        }
+        this.capacite_max = Math.max(capacite_max, 0);
     }
 
     public int getIdSalle() {
