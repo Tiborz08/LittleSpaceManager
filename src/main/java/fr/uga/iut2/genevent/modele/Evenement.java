@@ -26,19 +26,18 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, Salle salle) {
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) {
+        setSalle(salle);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
         setCapaciteSpectateur(capaciteSpectateur);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
-        this.debut = debut;
-        this.fin = fin;
+        definirDates(debut, fin);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
-        setSalle(salle);
     }
 
     public int getIdEvent() {
@@ -181,13 +180,26 @@ public abstract class Evenement implements Comparable<Evenement> {
     }
 
     /**
+     * Cette fonction permet de définir les dates de début et de fin de l'événement.
+     * La fonction vérifie que la date de début est bien avant la date de fin et que la salle est disponible.
+     * @param debut Le début de l'événement
+     * @param fin La fin de l'événement
+     */
+    public void definirDates(Date debut, Date fin){
+        if (debut.before(fin) && salle.verifierDisponibilite(debut, fin)) {
+            this.debut = debut;
+            this.fin = fin;
+        }
+    }
+
+    /**
      * Cette fonction sert à changer la date de début de l'événement en s'assurant que la salle est disponible.
      *
      * @param debutEv
      */
 
     public void setDebut(Date debutEv) {
-        if (salle.verifierDisponibilite(debutEv, this.fin)) {
+        if (salle.verifierDisponibilite(debutEv, this.fin) && debutEv.before(this.fin)) {
             this.debut = debut;
         }
     }
@@ -199,7 +211,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
 
     public void setFin(Date finEv) {
-        if (salle.verifierDisponibilite(this.debut, finEv)) {
+        if (salle.verifierDisponibilite(this.debut, finEv) && this.debut.before(finEv)) {
             this.fin = fin;
         }
     }
