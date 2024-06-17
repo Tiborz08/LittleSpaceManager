@@ -26,11 +26,11 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description) {
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, Salle salle) {
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
-        this.capaciteParticipants = capaciteParticipants;
-        this.capaciteSpectateur = capaciteSpectateur;
+        setCapaciteParticipants(capaciteParticipants);
+        setCapaciteSpectateur(capaciteSpectateur);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
         this.debut = debut;
@@ -38,6 +38,7 @@ public abstract class Evenement implements Comparable<Evenement> {
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
+        setSalle(salle);
     }
 
     public int getIdEvent() {
