@@ -33,8 +33,7 @@ public abstract class Evenement implements Comparable<Evenement> {
         setCapaciteSpectateur(capaciteSpectateur);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
-        this.debut = debut;
-        this.fin = fin;
+        definirDates(debut, fin);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
@@ -177,6 +176,19 @@ public abstract class Evenement implements Comparable<Evenement> {
     public void setCapaciteSpectateur(int capacite) {
         if (capaciteParticipants + capacite <= salle.getCapacite_max()) {
             this.capaciteParticipants = capacite;
+        }
+    }
+
+    /**
+     * Cette fonction permet de définir les dates de début et de fin de l'événement.
+     * La fonction vérifie que la date de début est bien avant la date de fin et que la salle est disponible.
+     * @param debut Le début de l'événement
+     * @param fin La fin de l'événement
+     */
+    public void definirDates(Date debut, Date fin){
+        if (debut.before(fin) && salle.verifierDisponibilite(debut, fin)) {
+            this.debut = debut;
+            this.fin = fin;
         }
     }
 
