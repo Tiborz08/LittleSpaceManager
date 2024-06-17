@@ -17,7 +17,7 @@ public class Salle {
     public Salle(String nom, String adresse, int capacite_max) {
         setNom(nom);
         setAdresse(adresse);
-        setAdresse(adresse);
+        setCapacite_max(capacite_max);
         this.idSalle = newId();
         this.evenements = new TreeSet<>();
     }
