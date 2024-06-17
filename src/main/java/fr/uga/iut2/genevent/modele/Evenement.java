@@ -16,6 +16,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     private float coutInitial;
     private float prixTickets;
     private Date debut;
+    private String description;
     private Date fin;
 
     private Salle salle;
@@ -25,7 +26,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin) {
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description) {
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         this.capaciteParticipants = capaciteParticipants;
@@ -34,6 +35,7 @@ public abstract class Evenement implements Comparable<Evenement> {
         this.prixTickets = prixTickets;
         this.debut = debut;
         this.fin = fin;
+        setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
     }
@@ -48,6 +50,10 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public Date getFin() {
         return fin;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public ArrayList<Participant> getParticipants() {
@@ -94,6 +100,19 @@ public abstract class Evenement implements Comparable<Evenement> {
         else{
             System.out.println("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
+    }
+
+    public void setDescription(String description) {
+
+        if (description != null && !description.isEmpty()) {
+            if (description.length() > 150) {
+                description = description.substring(0, 150);
+            }
+            this.description = description;
+        } else {
+            this.description = "Aucune description";
+        }
+
     }
 
     public Salle getSalle() {
