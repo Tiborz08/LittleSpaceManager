@@ -37,19 +37,6 @@
 
 }
 
-.cb .arrow {
-    -fx-background-color: #4b5c6b;
-}
-
-.cb .arrow-button {
-    -fx-background-color: #4b5c6b;
-    -fx-background-radius: 0 5px 5px 0;
-}
-
-.cb .arrow-button:hover {
-    -fx-background-color: #3b4c5b;
-}
-
 .cb:focused {
     -fx-border-color: #4b5c6b;
     -fx-background-color: #f2f2f2;
