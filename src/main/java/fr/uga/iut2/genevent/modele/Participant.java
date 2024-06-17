@@ -20,11 +20,7 @@ public abstract class Participant extends Personne {
      * @param salaire Réel à virgule qui représente le salaire du participant.
      */
     public void setSalaire(float salaire) {
-        if (salaire < 0) {
-            this.salaire = 0;
-        } else {
-            this.salaire = salaire;
-        }
+        this.salaire = Math.max(0, salaire);
     }
 
     //GETTER
