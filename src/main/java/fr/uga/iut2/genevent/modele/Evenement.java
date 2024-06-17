@@ -87,8 +87,13 @@ public abstract class Evenement implements Comparable<Evenement> {
     }
 
     public void setSalle(Salle salle) {
-        salle.addEvenement(this);
-        this.salle = salle;
+        if(capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()){
+            salle.addEvenement(this);
+            this.salle = salle;
+        }
+        else{
+            System.out.println("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
+        }
     }
 
     public Salle getSalle() {
