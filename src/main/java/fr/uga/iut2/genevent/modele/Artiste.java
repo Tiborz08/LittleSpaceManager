@@ -22,11 +22,7 @@ public class Artiste extends Participant {
      * @param popularite Popularité rattachée à l'artiste.
      */
     public void setPopularite(float popularite) {
-        if (popularite < 0) {
-            this.popularite = 0;
-        } else {
-            this.popularite = popularite;
-        }
+        this.popularite = Math.max(0, popularite);
     }
 
     //GUETTER
