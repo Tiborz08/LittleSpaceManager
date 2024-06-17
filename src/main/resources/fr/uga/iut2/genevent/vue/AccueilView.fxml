@@ -17,7 +17,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="95.0" prefWidth="696.0" spacing="40.0">
          <children>
-            <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
+            <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerPersonnel" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btAjoutSpectateur" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spéctateur" textFill="WHITE">
+            <Button fx:id="btAjoutSpectateur" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSpectateur" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spectateur" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btAjoutArtiste" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
+            <Button fx:id="btAjoutArtiste" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerArtiste" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>

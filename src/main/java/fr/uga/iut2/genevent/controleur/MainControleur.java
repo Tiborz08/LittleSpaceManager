@@ -58,4 +58,24 @@ public class MainControleur {
     public void onButtonCreerSalle(ActionEvent event) throws Exception{
         ouvrirFenetreCreation("Salle", event);
     }
+
+//    @FXML
+//    public void onButtonCreerEvenement(ActionEvent event) throws Exception{
+//        ouvrirFenetreCreation("Evenement", event);
+//    }
+
+    @FXML
+    public void onButtonCreerPersonnel(ActionEvent event) throws Exception{
+        ouvrirFenetreCreation("Personnel", event);
+    }
+
+    @FXML
+    public void onButtonCreerArtiste(ActionEvent event) throws Exception{
+        ouvrirFenetreCreation("Artiste", event);
+    }
+
+    @FXML
+    public void onButtonCreerSpectateur(ActionEvent event) throws Exception{
+        ouvrirFenetreCreation("Spectateur", event);
+    }
 }
