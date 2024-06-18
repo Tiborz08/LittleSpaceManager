@@ -147,19 +147,10 @@ public class CreationControleur {
     }
 
 
-    private void creerSalle() {
+    private void creerSalle() throws Exception {
         String nom = tfNomSalle.getText();
         int capaciteMax=0;
         String adresse = tfAdresse.getText();
-        if (nom.isEmpty()){
-            tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
-        }
-        if (adresse.isEmpty()){
-            tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
-        }
-        if (tfCapaciteMax.getText().isEmpty()){
-            tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
-        }
 
         if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())){
             try {
@@ -173,10 +164,22 @@ public class CreationControleur {
                 laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
             }
 
+        } else {
+            if (nom.isEmpty()){
+                tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+            if (adresse.isEmpty()){
+                tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+            if (tfCapaciteMax.getText().isEmpty()){
+                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         }
     }
 
-    private void creerSpectateur() {
+    private void creerSpectateur() throws Exception {
 
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
@@ -193,6 +196,8 @@ public class CreationControleur {
             if(prenom.isEmpty()){
                 tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         } else{
             Spectateur spectateur = new Spectateur(nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
@@ -207,15 +212,13 @@ public class CreationControleur {
 
 
 
-    private void creerPersonnel(){
+    private void creerPersonnel() throws Exception {
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
         float salaire = 0.0f;
         tfNomPersonne.setStyle("");
         tfPrenomPersonne.setStyle("");
         tfSalaire.setStyle("");
-
-
 
         try {
             salaire = Float.parseFloat(tfSalaire.getText());
@@ -232,6 +235,8 @@ public class CreationControleur {
             if (tfSalaire.getText().isEmpty()) {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
             }else {
                 Personnel personnel = new Personnel(nom, prenom, salaire);
                 mainControleur.ajouterPersonnel(personnel);
@@ -242,7 +247,7 @@ public class CreationControleur {
         }
     }
 
-    private void creerArtiste() {
+    private void creerArtiste() throws Exception {
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
         float salaire = 0.0f;
@@ -276,7 +281,7 @@ public class CreationControleur {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
-            System.out.println("Vous devez renseigner tous les champs pour créer un artiste.");
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         }else {
             Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
             mainControleur.ajouterArtiste(artiste);
