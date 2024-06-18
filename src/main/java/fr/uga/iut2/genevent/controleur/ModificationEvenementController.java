@@ -8,10 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Date;
@@ -21,6 +23,8 @@ public class ModificationEvenementController {
     //Bilan comptable
     @FXML
     private Button btnBilan;
+    @FXML
+    private Button btnRetour;
     @FXML
     private Button btnQuitter;
     @FXML
@@ -44,8 +48,21 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    public void onBilanClick(ActionEvent event){
+    public void onRetourClick(ActionEvent event){
+        Stage stage = (Stage) btnRetour.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void onBilanClick(ActionEvent event) throws Exception{
         try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/BilanComptableView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root, 498, 245);
 
             /*=================================================================
                 A modifier quand La liste des événements sera fonctionelle
@@ -53,13 +70,10 @@ public class ModificationEvenementController {
 
             Salle testSalle = new Salle("i", "Jardin d'Eden", 200);
             Concert eventActuel = new Concert("HeavenFest", 1, 1000, 15, new Date(), new Date(), "Feur", testSalle);
+            Artiste Adam = new Artiste("", "Adam", 100, 1.5f);
+            eventActuel.addParticipant(Adam);
 
             //==================================================================
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/BilanComptable.fxml"));
-            loader.setController(this);
-            Stage stage = (Stage)btnQuitter.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
 
             float total=0;
             labelCoutInitial.setText(""+eventActuel.getCoutInitial());
@@ -84,8 +98,11 @@ public class ModificationEvenementController {
 
             labelTotal.setText(""+total);
 
-            stage.setScene(scene);
-            stage.show();
+            //=================================================================
+
+            popupStage.setScene(scene);
+            popupStage.setTitle("Bilan Comptable");
+            popupStage.show();
 
         }catch (Exception e){e.printStackTrace();}
 
