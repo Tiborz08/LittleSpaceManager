@@ -2,24 +2,37 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.modele.*;
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class MainControleur {
 
-    private ArrayList<Evenement> evenements = new ArrayList<>();
+    private TreeSet<Evenement> evenements = new TreeSet<>();
     private ArrayList<Artiste> artistes = new ArrayList<>();
     private ArrayList<Spectateur> spectateurs = new ArrayList<>();
     private ArrayList<Personnel> personnels = new ArrayList<>();
     private ArrayList<Salle> salles = new ArrayList<>();
+
+    //attribut accueil
+    @FXML
+    private ListView<Evenement> lvEvenement;
+
+    public void initialize(){
+        actualisationEvenement();
+        System.out.println("suu");
+    }
 
     public void ajouterEvenement(Evenement evenement) {
         evenements.add(evenement);
@@ -88,7 +101,15 @@ public class MainControleur {
         ouvrirFenetreCreation("Spectateur", event);
     }
 
+    //getter
     public ArrayList<Salle> getSalles() {
         return salles;
+    }
+
+    //méthode
+    @FXML
+    private void actualisationEvenement(){
+        ObservableList<Evenement> listeEvenement = FXCollections.observableArrayList(new ArrayList<>(evenements));
+        lvEvenement.setItems(listeEvenement);
     }
 }
