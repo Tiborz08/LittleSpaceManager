@@ -38,6 +38,9 @@ public class CreationControleur {
     private ComboBox<String> cbType;
 
     @FXML
+    private ComboBox<Integer> cbPopularite;
+
+    @FXML
     private DatePicker dpDebut, dpFin;
 
     //Attribut création salle
@@ -48,7 +51,7 @@ public class CreationControleur {
 
     //Attribut création Personne
     @FXML
-    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire, tfPopularite;
+    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
 
     //Attribut ALL Button
     @FXML
@@ -59,6 +62,11 @@ public class CreationControleur {
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")){
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
+
+            cbType.setItems(types);
+
+
+
 
             cbType.setItems(types);
 
@@ -78,7 +86,9 @@ public class CreationControleur {
             configureNumericTextField(tfSalaire);
         } else if (typeCreation.equalsIgnoreCase("Artiste")) {
             configureNumericTextField(tfSalaire);
-            configureNumericTextField(tfPopularite);
+            ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+            cbPopularite.setItems(options);
+            cbPopularite.setValue(1);
         } else if (typeCreation.equalsIgnoreCase("salle")){
             configureNumericTextField(tfCapaciteMax);
         }
@@ -236,7 +246,7 @@ public class CreationControleur {
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
         float salaire = 0.0f;
-        float popularite = 0.0f;
+        int popularite = 0;
 
         try {
             salaire = Float.parseFloat(tfSalaire.getText());
@@ -244,18 +254,18 @@ public class CreationControleur {
         }
 
         try {
-            popularite = Float.parseFloat(tfPopularite.getText());
+            popularite = cbPopularite.getValue();
         } catch (NumberFormatException e) {
         }
 
         tfNomPersonne.setStyle("");
         tfPrenomPersonne.setStyle("");
         tfSalaire.setStyle("");
-        tfPopularite.setStyle("");
 
 
 
-        if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty() || tfPopularite.getText().isEmpty()) {
+
+        if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty()) {
             if (nom.isEmpty()){
                 tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
@@ -264,9 +274,6 @@ public class CreationControleur {
             }
             if (tfSalaire.getText().isEmpty()){
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
-            }
-            if (tfPopularite.getText().isEmpty()){
-                tfPopularite.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
             System.out.println("Vous devez renseigner tous les champs pour créer un artiste.");

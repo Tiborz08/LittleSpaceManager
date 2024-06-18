@@ -61,11 +61,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></Label>
-            <TextField fx:id="tfPopularite" layoutX="435.0" layoutY="36.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
+            <ComboBox fx:id="cbPopularite" prefWidth="150.0" promptText="Choisir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             </children>
             <VBox.margin>
                 <Insets left="40.0" />
