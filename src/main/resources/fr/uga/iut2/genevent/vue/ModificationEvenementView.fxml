@@ -18,17 +18,17 @@
           <RowConstraints maxHeight="231.0" minHeight="0.0" prefHeight="54.0" valignment="CENTER" />
         </rowConstraints>
          <children>
-            <ListView prefHeight="200.0" prefWidth="200.0">
+            <ListView fx:id="lvSpectateur" prefHeight="200.0" prefWidth="200.0">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </ListView>
-            <ListView prefHeight="553.0" prefWidth="137.0" GridPane.columnIndex="1">
+            <ListView fx:id="lvArtiste" prefHeight="553.0" prefWidth="137.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </ListView>
-            <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+            <ListView fx:id="lvPersonnel" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
