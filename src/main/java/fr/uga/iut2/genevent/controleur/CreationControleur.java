@@ -82,23 +82,29 @@ public class CreationControleur {
 
     private void creerSalle() {
         String nom = tfNomSalle.getText();
+        int capaciteMax=0;
         String adresse = tfAdresse.getText();
         if (nom.isEmpty()){
-            laNomSalle.setStyle("-fx-text-fill:#c8143c");
+            tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
         if (adresse.isEmpty()){
-            laAdresse.setStyle("-fx-text-fill: #c8143c");
+            tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
         if (tfCapaciteMax.getText().isEmpty()){
-            laCapaciteMax.setStyle("-fx-text-fill: #c8143c");
+            tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
 
-        if (!(adresse.isEmpty() && nom.isEmpty() && tfCapaciteMax.getText().isEmpty())){
-            int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
-            Salle salle = new Salle(nom, adresse, capaciteMax);
-            mainControleur.ajouterSalle(salle);
-            Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
-            stage.close();
+        if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())){
+            try {
+                capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
+                Salle salle = new Salle(nom, adresse, capaciteMax);
+                mainControleur.ajouterSalle(salle);
+                Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
+                stage.close();
+            } catch (NumberFormatException e) {
+                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+
         }
     }
 
