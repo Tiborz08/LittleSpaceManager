@@ -34,6 +34,12 @@ public class ModificationEvenementController {
     private Label labelPrixTickets;
     @FXML
     private Label labelTotal;
+    //Supprimer evenement
+    @FXML
+    private Button btnValiderSupre;
+    @FXML
+    private Button btnAnnulerSupre;
+
 
     private MainControleur mainControleur;
     private Evenement evenement;
@@ -116,6 +122,45 @@ public class ModificationEvenementController {
         }catch (Exception e){e.printStackTrace();}
 
 
+    }
+
+    @FXML
+    public void onSupr(Event event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root, 498, 245);
+            popupStage.setScene(scene);
+            popupStage.setTitle("Suprimer "+evenement.getNom()+" ?");
+            popupStage.show();
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+    @FXML
+    public void onValiderSupre(Event event){
+        try {
+            mainControleur.getEvenements().remove(evenement);
+            Stage stage = (Stage) btnValiderSupre.getScene().getWindow();
+            stage.close();
+            Stage stage1 = (Stage)  btnRetour.getScene().getWindow();
+            stage1.close();
+            mainControleur.initialize();
+            System.out.println(mainControleur.getEvenements().toString());
+        }catch (Exception e){e.printStackTrace();}
+
+
+    }
+
+    @FXML
+    public void onAnnulerSupre(Event event){
+        try {
+            Stage stage = (Stage) btnAnnulerSupre.getScene().getWindow();
+            stage.close();
+        }catch (Exception e){e.printStackTrace();}
     }
 
 }

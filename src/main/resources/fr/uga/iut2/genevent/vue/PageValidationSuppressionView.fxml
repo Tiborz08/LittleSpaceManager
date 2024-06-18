@@ -13,12 +13,12 @@
          </VBox.margin></Label>
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="552.0" spacing="50.0">
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #4b5c6b;" text="Valider" textFill="WHITE">
+            <Button fx:id="btnValiderSupre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onValiderSupre" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #4b5c6b;" text="Valider" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #4b5c6b;" text="Annuler" textFill="WHITE">
+            <Button fx:id="btnAnnulerSupre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAnnulerSupre" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #4b5c6b;" text="Annuler" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
