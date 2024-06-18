@@ -2,6 +2,8 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.modele.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,6 +71,17 @@ public class CreationControleur {
             } else {
                 System.err.println("MainControleur n'est pas initialisé");
             }
+
+            configureNumericTextField(tfCoutInitial);
+            configureNumericTextField(tfPrixTicket);
+            configureNumericTextField(tfCapaciteParticipant);
+        } else if (typeCreation.equalsIgnoreCase("personnel")){
+            configureNumericTextField(tfSalaire);
+        } else if (typeCreation.equalsIgnoreCase("Artiste")) {
+            configureNumericTextField(tfSalaire);
+            configureNumericTextField(tfPopularite);
+        } else if (typeCreation.equalsIgnoreCase("salle")){
+            configureNumericTextField(tfCapaciteMax);
         }
     }
 
@@ -80,8 +93,16 @@ public class CreationControleur {
         this.typeCreation = typeCreation;
     }
 
-    public void setCbSalle(ArrayList<Salle> salles){
-
+    private void configureNumericTextField(TextField textField) {
+        // Ajouter un ChangeListener au TextField pour filtrer les entrées non numériques
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
     @FXML
