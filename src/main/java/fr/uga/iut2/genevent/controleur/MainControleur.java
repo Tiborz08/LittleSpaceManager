@@ -7,10 +7,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,6 +30,9 @@ public class MainControleur {
     private ArrayList<Personnel> personnels = new ArrayList<>();
     private ArrayList<Salle> salles = new ArrayList<>();
 
+    @FXML
+    private Button btnAnnuler;
+
     //attribut accueil
     @FXML
     private ListView<Evenement> lvEvenement;
@@ -36,6 +44,12 @@ public class MainControleur {
 
     public void ajouterEvenement(Evenement evenement) {
         evenements.add(evenement);
+    }
+
+    @FXML
+    public void onAnnulerClick(ActionEvent event){
+        Stage stage = (Stage) btnAnnuler.getScene().getWindow();
+        stage.close();
     }
 
     public void ajouterArtiste(Artiste artiste) {
@@ -76,14 +90,53 @@ public class MainControleur {
         stage.showAndWait();
     }
 
+
+
+
+    public void afficherFenetreErreur(String textErreur) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AlerteErreurView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+
+        Label erreurLabel = new Label(textErreur);
+        erreurLabel.setWrapText(true);
+        erreurLabel.setPrefWidth(400);
+
+        if (root instanceof VBox) {
+            VBox vbox = (VBox) root;
+            ((VBox) root).getChildren().add(erreurLabel);
+            vbox.setPrefSize(500, 300);
+        } else {
+            throw new Exception("Le root n'est pas une instance de VBox");
+        }
+
+        Stage stage = new Stage();
+        stage.setTitle("Erreur");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.setAlwaysOnTop(true);
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
+
+
+
+
+
     @FXML
     public void onButtonCreerSalle(ActionEvent event) throws Exception{
         ouvrirFenetreCreation("Salle", event);
     }
 
     @FXML
-    public void onButtonCreerEvenement(ActionEvent event) throws Exception{
-        ouvrirFenetreCreation("Événement", event);
+    public void onButtonCreerEvenement(ActionEvent event) throws Exception {
+        if (salles.isEmpty()) {
+            afficherFenetreErreur("Vous devez paramétrer une salle avant de pouvoir créer un événement.");
+        } else {
+            ouvrirFenetreCreation("Événement", event);
+        }
     }
 
     @FXML
