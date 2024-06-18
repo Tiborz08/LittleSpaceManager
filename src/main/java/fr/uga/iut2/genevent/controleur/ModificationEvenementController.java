@@ -1,6 +1,9 @@
 package fr.uga.iut2.genevent.controleur;
 
-import fr.uga.iut2.genevent.modele.*;
+import fr.uga.iut2.genevent.modele.Artiste;
+import fr.uga.iut2.genevent.modele.Evenement;
+import fr.uga.iut2.genevent.modele.Personnel;
+import fr.uga.iut2.genevent.modele.Spectateur;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,9 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class ModificationEvenementController {
@@ -25,6 +30,8 @@ public class ModificationEvenementController {
     @FXML
     private Button btnQuitter;
     @FXML
+    private Button btnModifier;
+    @FXML
     private Label labelCoutInitial;
     @FXML
     private Label labelSalairesArt;
@@ -34,6 +41,12 @@ public class ModificationEvenementController {
     private Label labelPrixTickets;
     @FXML
     private Label labelTotal;
+    @FXML
+    private ListView<Personnel> lvPersonnel;
+    @FXML
+    private ListView<Spectateur> lvSpectateur;
+    @FXML
+    private ListView<Artiste> lvArtiste;
     //Supprimer evenement
     @FXML
     private Button btnValiderSupre;
@@ -90,28 +103,16 @@ public class ModificationEvenementController {
 
             //==================================================================
 
-            float total=0;
-            labelCoutInitial.setText(""+evenement.getCoutInitial());
-            total+=evenement.getCoutInitial();
 
-            float f = 0;
-            for(Participant a : evenement.getArtistes()){
-                f+=a.getSalaire();
-            }
-            labelSalairesArt.setText(""+f);
-            total+=f;
+            labelCoutInitial.setText(String.valueOf(evenement.getCoutInitial()));
 
-            f=0;
-            for(Participant a : evenement.getPersonnels()){
-                f+=a.getSalaire();
-            }
-            labelSalairesPer.setText(""+f);
-            total+=f;
+            labelSalairesArt.setText(String.valueOf(evenement.getSalairesArtistes()));
 
-            labelPrixTickets.setText(""+evenement.getPrixTickets()*evenement.getNombreTickets());
-            total+=evenement.getPrixTickets()*evenement.getNombreTickets();
+            labelSalairesPer.setText(String.valueOf(evenement.getSalairesPersonnels()));
 
-            labelTotal.setText(""+total);
+            labelPrixTickets.setText(String.valueOf(evenement.getGainsTickets()));
+
+            labelTotal.setText(String.valueOf(evenement.getBenefices()));
 
             //=================================================================
 
@@ -161,6 +162,22 @@ public class ModificationEvenementController {
             Stage stage = (Stage) btnAnnulerSupre.getScene().getWindow();
             stage.close();
         }catch (Exception e){e.printStackTrace();}
+    }
+
+    @FXML
+    public void onButtonModifierClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ModificationEvenementView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+
+        Stage stage = mainControleur.getStage();
+
+        Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
+        popupPrecedent.close();
+
+        stage.setScene(new Scene(root));
+
+
     }
 
 }
