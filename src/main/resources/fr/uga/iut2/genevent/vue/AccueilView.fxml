@@ -9,7 +9,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="384.0" prefWidth="696.0">
          <children>
-            <ListView prefHeight="395.0" prefWidth="696.0" style="-fx-border-color: #9eadba;" />
+            <ListView fx:id="lvEvenement" prefHeight="395.0" prefWidth="696.0" style="-fx-border-color: #9eadba;" />
          </children>
          <VBox.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
