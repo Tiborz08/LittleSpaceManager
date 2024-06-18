@@ -38,6 +38,8 @@ public class CreationControleur {
     //Attribut création salle
     @FXML
     private TextField tfNomSalle, tfCapaciteMax, tfAdresse;
+    @FXML
+    private Label laNomSalle,laCapaciteMax,laAdresse;
 
     //Attribut création Personne
     @FXML
@@ -75,6 +77,8 @@ public class CreationControleur {
                 creerSpectateur();
             } else if (typeCreation.equalsIgnoreCase("artiste")) {
                 creerArtiste();
+            } else if (typeCreation.equalsIgnoreCase("personnel")) {
+                creerPersonnel();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,9 +90,23 @@ public class CreationControleur {
         String nom = tfNomSalle.getText();
         int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
         String adresse = tfAdresse.getText();
+        if (nom.isEmpty()){
+            laNomSalle.setStyle("-fx-text-fill:#c8143c");
+        }
+        if (adresse.isEmpty()){
+            laAdresse.setStyle("-fx-text-fill: #c8143c");
+        }
+        if (tfCapaciteMax.getText().isEmpty()){
+            laCapaciteMax.setStyle("-fx-text-fill: #c8143c");
+        }
 
-        Salle salle = new Salle(nom, adresse, capaciteMax);
-        mainControleur.ajouterSalle(salle);
+        if (!(adresse.isEmpty() && nom.isEmpty() && tfCapaciteMax.getText().isEmpty())){
+            int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
+            Salle salle = new Salle(nom, adresse, capaciteMax);
+            mainControleur.ajouterSalle(salle);
+            Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
+            stage.close();
+        }
     }
 
     private void creerSpectateur() {
@@ -121,6 +139,10 @@ public class CreationControleur {
     }
 
 
+
+    private void creerPersonnel(){
+
+    }
 
     private void creerArtiste() {
         String nom = tfNomPersonne.getText();
@@ -185,15 +207,16 @@ public class CreationControleur {
 
         Evenement evenement;
 
-        if (cbType.getValue().equalsIgnoreCase("Concert")){
+        if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")){
             evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else if (cbType.getValue().equalsIgnoreCase("Théàtre")) {
+        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théàtre")) {
             evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         } else {
             evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         }
 
         mainControleur.ajouterEvenement(evenement);
+
     }
 
 }
