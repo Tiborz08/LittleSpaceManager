@@ -64,10 +64,10 @@ public class MainControleur {
         ouvrirFenetreCreation("Salle", event);
     }
 
-//    @FXML
-//    public void onButtonCreerEvenement(ActionEvent event) throws Exception{
-//        ouvrirFenetreCreation("Evenement", event);
-//    }
+    @FXML
+    public void onButtonCreerEvenement(ActionEvent event) throws Exception{
+        ouvrirFenetreCreation("Evenement", event);
+    }
 
     @FXML
     public void onButtonCreerPersonnel(ActionEvent event) throws Exception{

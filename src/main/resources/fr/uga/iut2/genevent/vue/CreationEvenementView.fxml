@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="715.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="725.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Création d'évènement">
          <VBox.margin>
@@ -18,14 +18,15 @@
       <GridPane prefHeight="267.0" prefWidth="678.0">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="132.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="230.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="116.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="214.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="135.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="230.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Nom Évènement">
@@ -38,17 +39,17 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Date de fin" GridPane.rowIndex="2">
+            <Label text="Date de fin" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Salle" GridPane.columnIndex="2">
+            <Label text="Type" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Type" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="Salle" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -63,25 +64,61 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="tfDateDebut" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="tfDateFin" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
             <TextField fx:id="tfPrixTicket" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <ComboBox fx:id="cbSalle" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" />
-            <ComboBox fx:id="cbType" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cbType" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" />
+            <ComboBox fx:id="cbSalle" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin></ComboBox>
+            <Label text="Coût initial" GridPane.rowIndex="3">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label text="Capacité participant" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="tfCoutIntial" layoutX="144.0" layoutY="164.0" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="tfCapaciteParticipant" layoutX="144.0" layoutY="230.0" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <DatePicker fx:id="dpDebut" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <DatePicker fx:id="dpFin" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </DatePicker>
          </children>
       </GridPane>
+      <HBox alignment="CENTER" prefHeight="197.0" prefWidth="725.0">
+         <children>
+            <Label text="Description">
+               <HBox.margin>
+                  <Insets left="35.0" right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextArea fx:id="taDescription" prefHeight="191.0" prefWidth="565.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="715.0" spacing="400.0">
          <children>
             <Button fx:id="btAnnuler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAnnulerClick" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: #4b5c6b;" text="Annuler" textFill="WHITE">

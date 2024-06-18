@@ -1,5 +1,6 @@
 package fr.uga.iut2.genevent.modele;
 
+import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
 import java.util.ArrayList;
@@ -26,14 +27,14 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) {
+    public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         this.nom = nom;
         definirDates(salle, debut, fin);
         setSalle(salle);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
-        setCapaciteSpectateur(capaciteSpectateur);
+        setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
         setDescription(description);
@@ -186,10 +187,13 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @param debut Le début de l'événement
      * @param fin La fin de l'événement
      */
-    public void definirDates(Salle salle, Date debut, Date fin){
+    public void definirDates(Salle salle, Date debut, Date fin) throws CreateException{
         if ((debut.before(fin) || debut.equals(fin)) && salle.verifierDisponibilite(debut, fin)) {
             this.debut = debut;
             this.fin = fin;
+        }
+        else {
+            throw new CreateException("La salle n'est pas disponible pour les dates renseignées ou la date de début est après la date de fin.");
         }
     }
 
