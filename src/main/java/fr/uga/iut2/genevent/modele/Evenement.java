@@ -69,6 +69,14 @@ public abstract class Evenement implements Comparable<Evenement> {
         return tickets;
     }
 
+    public ArrayList<Spectateur> getSpectateurs() {
+        ArrayList<Spectateur> spectateurs = new ArrayList<>();
+        for (Ticket ticket: tickets) {
+            spectateurs.add(ticket.getSpectateur());
+        }
+        return spectateurs;
+    }
+
     public float getPrixTickets() {
         return prixTickets;
     }
