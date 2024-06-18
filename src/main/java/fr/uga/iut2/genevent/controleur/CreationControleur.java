@@ -310,14 +310,41 @@ public class CreationControleur {
 
 
     private void creerEvenement() throws CreateException {
-        String nom = tfNomEvenement.getText();
-        int capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
-        float coutInitial = Float.parseFloat(tfCoutInitial.getText());
-        float prixTicket = Float.parseFloat(tfPrixTicket.getText());
-        Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        String description = taDescription.getText();
-        Salle salle = cbSalle.getValue();
+        String nom;
+        int capaciteParticipant;
+        float coutInitial;
+        float prixTicket;
+        Date debut;
+        Date fin;
+        String description;
+        Salle salle;
+
+        nom = tfNomEvenement.getText();
+        if(nom.isEmpty()){
+            throw new CreateException("Vous devez entrer un nom pour l'événement");
+        }
+        if(tfCapaciteParticipant.getText().isEmpty()){
+            throw new CreateException("Vous devez rentrer une valeur pour le nombre maximal d'employés");
+        }
+        else {
+            capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+        }
+        if(tfCoutInitial.getText().isEmpty()){
+            throw new CreateException("Vous devez rentrer une valeur pour le coût initial de l'événement");
+        }
+        else {
+            coutInitial = Float.parseFloat(tfCoutInitial.getText());
+        }
+        if(tfPrixTicket.getText().isEmpty()){
+            throw new CreateException("Vous devez renseigner le prix pour un ticket, si l'évenement est gratuit, renseignez 0");
+        }
+        else {
+            prixTicket = Float.parseFloat(tfPrixTicket.getText());
+        }
+        debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        description = taDescription.getText();
+        salle = cbSalle.getValue();
 
 
         Evenement evenement;
