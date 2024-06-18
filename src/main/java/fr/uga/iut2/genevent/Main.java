@@ -21,7 +21,7 @@ public class Main extends Application {
 
         @Override
         public void start(Stage stage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("vue/OptionEvenementView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("vue/AccueilView.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("LittleSpaceManager");
             stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
