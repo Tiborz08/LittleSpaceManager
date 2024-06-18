@@ -38,6 +38,9 @@ public class CreationControleur {
     private ComboBox<String> cbType;
 
     @FXML
+    private ComboBox<Integer> cbPopularite;
+
+    @FXML
     private DatePicker dpDebut, dpFin;
 
     //Attribut création salle
@@ -48,7 +51,7 @@ public class CreationControleur {
 
     //Attribut création Personne
     @FXML
-    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire, tfPopularite;
+    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
 
     //Attribut ALL Button
     @FXML
@@ -62,6 +65,11 @@ public class CreationControleur {
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")){
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
+
+            cbType.setItems(types);
+
+
+
 
             cbType.setItems(types);
 
@@ -81,7 +89,9 @@ public class CreationControleur {
             configureNumericTextField(tfSalaire);
         } else if (typeCreation.equalsIgnoreCase("Artiste")) {
             configureNumericTextField(tfSalaire);
-            configureNumericTextField(tfPopularite);
+            ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+            cbPopularite.setItems(options);
+            cbPopularite.setValue(1);
         } else if (typeCreation.equalsIgnoreCase("salle")){
             configureNumericTextField(tfCapaciteMax);
         }
@@ -140,7 +150,7 @@ public class CreationControleur {
     }
 
 
-    private void creerSalle() {
+    private void creerSalle() throws Exception {
         String nom = tfNomSalle.getText();
         int capaciteMax=0;
         String adresse = tfAdresse.getText();
@@ -167,10 +177,22 @@ public class CreationControleur {
                 laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
             }
 
+        } else {
+            if (nom.isEmpty()){
+                tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+            if (adresse.isEmpty()){
+                tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+            if (tfCapaciteMax.getText().isEmpty()){
+                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         }
     }
 
-    private void creerSpectateur() {
+    private void creerSpectateur() throws Exception {
 
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
@@ -187,6 +209,8 @@ public class CreationControleur {
             if(prenom.isEmpty()){
                 tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         } else{
             Spectateur spectateur = new Spectateur(nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
@@ -201,15 +225,13 @@ public class CreationControleur {
 
 
 
-    private void creerPersonnel(){
+    private void creerPersonnel() throws Exception {
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
         float salaire = 0.0f;
         tfNomPersonne.setStyle("");
         tfPrenomPersonne.setStyle("");
         tfSalaire.setStyle("");
-
-
 
         try {
             salaire = Float.parseFloat(tfSalaire.getText());
@@ -226,6 +248,8 @@ public class CreationControleur {
             if (tfSalaire.getText().isEmpty()) {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
+
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
             }else {
                 Personnel personnel = new Personnel(nom, prenom, salaire);
                 mainControleur.ajouterPersonnel(personnel);
@@ -236,11 +260,11 @@ public class CreationControleur {
         }
     }
 
-    private void creerArtiste() {
+    private void creerArtiste() throws Exception {
         String nom = tfNomPersonne.getText();
         String prenom = tfPrenomPersonne.getText();
         float salaire = 0.0f;
-        float popularite = 0.0f;
+        int popularite = 0;
 
         try {
             salaire = Float.parseFloat(tfSalaire.getText());
@@ -248,18 +272,18 @@ public class CreationControleur {
         }
 
         try {
-            popularite = Float.parseFloat(tfPopularite.getText());
+            popularite = cbPopularite.getValue();
         } catch (NumberFormatException e) {
         }
 
         tfNomPersonne.setStyle("");
         tfPrenomPersonne.setStyle("");
         tfSalaire.setStyle("");
-        tfPopularite.setStyle("");
 
 
 
-        if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty() || tfPopularite.getText().isEmpty()) {
+
+        if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty()) {
             if (nom.isEmpty()){
                 tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
@@ -269,11 +293,8 @@ public class CreationControleur {
             if (tfSalaire.getText().isEmpty()){
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
-            if (tfPopularite.getText().isEmpty()){
-                tfPopularite.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
-            }
 
-            System.out.println("Vous devez renseigner tous les champs pour créer un artiste.");
+            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
         }else {
             Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
             mainControleur.ajouterArtiste(artiste);
