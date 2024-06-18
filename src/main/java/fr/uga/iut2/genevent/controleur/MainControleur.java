@@ -1,6 +1,7 @@
 package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.modele.*;
+import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,11 +42,14 @@ public class MainControleur {
     }
 
     public void ouvrirFenetreCreation(String typeCreation, ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/Creation" + typeCreation + "View.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/Creation" + LittleSpaceManager_Utilitaire.removeAccents(typeCreation) + "View.fxml"));
 
         CreationControleur creationController = new CreationControleur();
         creationController.setMainController(this);
         creationController.setTypeCreation(typeCreation);
+        if (typeCreation.equalsIgnoreCase("événement")){
+
+        }
 
         loader.setController(creationController);
         Parent root = loader.load();
@@ -66,7 +70,7 @@ public class MainControleur {
 
     @FXML
     public void onButtonCreerEvenement(ActionEvent event) throws Exception{
-        ouvrirFenetreCreation("Evenement", event);
+        ouvrirFenetreCreation("Événement", event);
     }
 
     @FXML
@@ -82,5 +86,9 @@ public class MainControleur {
     @FXML
     public void onButtonCreerSpectateur(ActionEvent event) throws Exception{
         ouvrirFenetreCreation("Spectateur", event);
+    }
+
+    public ArrayList<Salle> getSalles() {
+        return salles;
     }
 }
