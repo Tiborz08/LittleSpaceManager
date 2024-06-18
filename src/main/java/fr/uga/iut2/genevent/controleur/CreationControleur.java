@@ -4,10 +4,11 @@ import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.modele.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.time.ZoneId;
+import java.util.Date;
 
 public class CreationControleur {
     //Attribut local
@@ -81,7 +82,6 @@ public class CreationControleur {
 
     private void creerSalle() {
         String nom = tfNomSalle.getText();
-        int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
         String adresse = tfAdresse.getText();
         if (nom.isEmpty()){
             laNomSalle.setStyle("-fx-text-fill:#c8143c");
