@@ -58,7 +58,7 @@ public class CreationControleur {
 
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")){
-            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre");
+            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
 
             cbType.setItems(types);
 
@@ -297,8 +297,10 @@ public class CreationControleur {
             evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théàtre")) {
             evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else {
+        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")){
             evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+        } else{
+            evenement = new Autre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         }
 
         mainControleur.ajouterEvenement(evenement);
