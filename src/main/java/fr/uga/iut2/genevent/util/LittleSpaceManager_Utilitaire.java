@@ -17,4 +17,22 @@ public class LittleSpaceManager_Utilitaire {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
+    public static String removeAccents(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.replaceAll("[éèêë]", "e")
+                .replaceAll("[ÉÈÊË]", "E")
+                .replaceAll("[àâä]", "a")
+                .replaceAll("[ÀÂÄ]", "A")
+                .replaceAll("[îï]", "i")
+                .replaceAll("[ÎÏ]", "I")
+                .replaceAll("[ôö]", "o")
+                .replaceAll("[ÔÖ]", "O")
+                .replaceAll("[ûü]", "u")
+                .replaceAll("[ÛÜ]", "U")
+                .replaceAll("[ç]", "c")
+                .replaceAll("[Ç]", "C");
+    }
+
 }
