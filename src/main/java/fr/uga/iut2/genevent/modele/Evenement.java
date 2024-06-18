@@ -33,7 +33,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         this.nom = nom;
         definirDates(salle, debut, fin);
-        setSalle(salle);
+        setSalleAdaptee(salle, capaciteParticipants);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
@@ -85,6 +85,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         return tickets.size();
     }
 
+    public float getGainsTickets() {
+        return getPrixTickets() * getNombreTickets();
+    }
+
     public float getCoutInitial() {return coutInitial;}
 
     /**
@@ -106,6 +110,16 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
         else{
             System.out.println("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
+        }
+    }
+
+    public void setSalleAdaptee(Salle salle, int capaciteParticipants) throws CreateException {
+        if(capaciteParticipants <= salle.getCapacite_max()){
+            salle.addEvenement(this);
+            this.salle = salle;
+        }
+        else{
+            throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
     }
 
@@ -241,6 +255,14 @@ public abstract class Evenement implements Comparable<Evenement> {
         return personnels;
     }
 
+    public float getSalairesPersonnels(){
+        float salaires = 0;
+        for (Participant personnel: getPersonnels()) {
+            salaires += personnel.getSalaire();
+        }
+        return salaires;
+    }
+
     /**
      * Cette fonction renvoie la liste des artistes qui participent à l'événement
      * @return
@@ -254,6 +276,14 @@ public abstract class Evenement implements Comparable<Evenement> {
 
         }
         return artistes;
+    }
+
+    public float getSalairesArtistes(){
+        float salaires = 0;
+        for (Participant artiste: getArtistes()) {
+            salaires += artiste.getSalaire();
+        }
+        return salaires;
     }
 
     /**
