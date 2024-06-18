@@ -84,7 +84,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="tfCoutIntial" layoutX="144.0" layoutY="164.0" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="tfCoutInitial" layoutX="144.0" layoutY="164.0" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
