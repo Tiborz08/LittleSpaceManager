@@ -1,8 +1,7 @@
 package fr.uga.iut2.genevent.controleur;
 
-import fr.uga.iut2.genevent.modele.*;
+import fr.uga.iut2.genevent.modele.Evenement;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,8 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.Date;
 
 public class ModificationEvenementController {
 
@@ -84,28 +81,16 @@ public class ModificationEvenementController {
 
             //==================================================================
 
-            float total=0;
-            labelCoutInitial.setText(""+evenement.getCoutInitial());
-            total+=evenement.getCoutInitial();
 
-            float f = 0;
-            for(Participant a : evenement.getArtistes()){
-                f+=a.getSalaire();
-            }
-            labelSalairesArt.setText(""+f);
-            total+=f;
+            labelCoutInitial.setText(String.valueOf(evenement.getCoutInitial()));
 
-            f=0;
-            for(Participant a : evenement.getPersonnels()){
-                f+=a.getSalaire();
-            }
-            labelSalairesPer.setText(""+f);
-            total+=f;
+            labelSalairesArt.setText(String.valueOf(evenement.getSalairesArtistes()));
 
-            labelPrixTickets.setText(""+evenement.getPrixTickets()*evenement.getNombreTickets());
-            total+=evenement.getPrixTickets()*evenement.getNombreTickets();
+            labelSalairesPer.setText(String.valueOf(evenement.getSalairesPersonnels()));
 
-            labelTotal.setText(""+total);
+            labelPrixTickets.setText(String.valueOf(evenement.getGainsTickets()));
+
+            labelTotal.setText(String.valueOf(evenement.getBenefices()));
 
             //=================================================================
 
