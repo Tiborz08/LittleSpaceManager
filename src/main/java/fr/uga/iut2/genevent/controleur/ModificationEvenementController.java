@@ -1,9 +1,6 @@
 package fr.uga.iut2.genevent.controleur;
 
-import fr.uga.iut2.genevent.modele.Artiste;
-import fr.uga.iut2.genevent.modele.Concert;
-import fr.uga.iut2.genevent.modele.Participant;
-import fr.uga.iut2.genevent.modele.Salle;
+import fr.uga.iut2.genevent.modele.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -38,9 +35,21 @@ public class ModificationEvenementController {
     @FXML
     private Label labelTotal;
 
+    private MainControleur mainControleur;
+    private Evenement evenement;
+
 
 
     //Methodes
+
+    public void setMainControleur(MainControleur mainControleur){
+        this.mainControleur = mainControleur;
+    }
+
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
+    }
+
     @FXML
     public void onQuitterClick(ActionEvent event){
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
@@ -68,33 +77,33 @@ public class ModificationEvenementController {
                 A modifier quand La liste des événements sera fonctionelle
             ==================================================================*/
 
-            Salle testSalle = new Salle("i", "Jardin d'Eden", 200);
-            Concert eventActuel = new Concert("HeavenFest", 1, 1000, 15, new Date(), new Date(), "Feur", testSalle);
-            Artiste Adam = new Artiste("", "Adam", 100, 1.5f);
-            eventActuel.addParticipant(Adam);
+//            Salle testSalle = new Salle("i", "Jardin d'Eden", 200);
+//            Concert eventActuel = new Concert("HeavenFest", 1, 1000, 15, new Date(), new Date(), "Feur", testSalle);
+//            Artiste Adam = new Artiste("", "Adam", 100, 1.5f);
+//            eventActuel.addParticipant(Adam);
 
             //==================================================================
 
             float total=0;
-            labelCoutInitial.setText(""+eventActuel.getCoutInitial());
-            total+=eventActuel.getCoutInitial();
+            labelCoutInitial.setText(""+evenement.getCoutInitial());
+            total+=evenement.getCoutInitial();
 
             float f = 0;
-            for(Participant a : eventActuel.getArtistes()){
+            for(Participant a : evenement.getArtistes()){
                 f+=a.getSalaire();
             }
             labelSalairesArt.setText(""+f);
             total+=f;
 
             f=0;
-            for(Participant a : eventActuel.getPersonnels()){
+            for(Participant a : evenement.getPersonnels()){
                 f+=a.getSalaire();
             }
             labelSalairesPer.setText(""+f);
             total+=f;
 
-            labelPrixTickets.setText(""+eventActuel.getPrixTickets()*eventActuel.getNombreTickets());
-            total+=eventActuel.getPrixTickets()*eventActuel.getNombreTickets();
+            labelPrixTickets.setText(""+evenement.getPrixTickets()*evenement.getNombreTickets());
+            total+=evenement.getPrixTickets()*evenement.getNombreTickets();
 
             labelTotal.setText(""+total);
 

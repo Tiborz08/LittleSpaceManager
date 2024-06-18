@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -31,7 +32,18 @@ public class MainControleur {
 
     public void initialize(){
         actualisationEvenement();
-        System.out.println("suu");
+        lvEvenement.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Evenement selectedEvenement = lvEvenement.getSelectionModel().getSelectedItem();
+                if (selectedEvenement != null) {
+                    try {
+                        ouvrirOptionEvenement(selectedEvenement);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void ajouterEvenement(Evenement evenement) {
@@ -60,9 +72,6 @@ public class MainControleur {
         CreationControleur creationController = new CreationControleur();
         creationController.setMainController(this);
         creationController.setTypeCreation(typeCreation);
-        if (typeCreation.equalsIgnoreCase("événement")){
-
-        }
 
         loader.setController(creationController);
         Parent root = loader.load();
@@ -70,6 +79,25 @@ public class MainControleur {
         Stage stage = new Stage();
         stage.setTitle("Création de " + typeCreation);
         stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
+        stage.setScene(new Scene(root));
+        stage.setAlwaysOnTop(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void ouvrirOptionEvenement(Evenement evenement) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionEvenementView.fxml"));
+
+        ModificationEvenementController modificationControleur = new ModificationEvenementController();
+        modificationControleur.setMainControleur(this);
+        modificationControleur.setEvenement(evenement);
+
+        loader.setController(modificationControleur);
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Option événement");
         stage.setScene(new Scene(root));
         stage.setAlwaysOnTop(true);
         stage.initModality(Modality.APPLICATION_MODAL);
