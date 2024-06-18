@@ -126,6 +126,8 @@ public class CreationControleur {
             } else if (typeCreation.equalsIgnoreCase("personnel")) {
                 creerPersonnel();
             }
+            stage.close();
+            mainControleur.initialize();
         } catch (Exception e) {
             e.printStackTrace();
         }
