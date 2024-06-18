@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,9 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ import java.util.TreeSet;
 
 public class MainControleur {
 
+    private static final Log log = LogFactory.getLog(MainControleur.class);
     private TreeSet<Evenement> evenements = new TreeSet<>();
     private ArrayList<Artiste> artistes = new ArrayList<>();
     private ArrayList<Spectateur> spectateurs = new ArrayList<>();
@@ -103,6 +104,8 @@ public class MainControleur {
 
 
     public void afficherFenetreErreur(String textErreur) throws Exception {
+        log.warn(textErreur);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AlerteErreurView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
@@ -161,7 +164,7 @@ public class MainControleur {
     @FXML
     public void onButtonCreerEvenement(ActionEvent event) throws Exception {
         if (salles.isEmpty()) {
-            afficherFenetreErreur("Vous devez paramétrer une salle avant de pouvoir créer un événement.");
+            afficherFenetreErreur("Vous devez paramétrer au moins une salle avant de pouvoir créer un événement.");
         } else {
             ouvrirFenetreCreation("Événement", event);
         }

@@ -111,7 +111,7 @@ public class CreationControleur {
     }
 
     @FXML
-    public void onCreerClick(ActionEvent event) {
+    public void onCreerClick(ActionEvent event) throws Exception {
         Stage stage = (Stage) btCreer.getScene().getWindow();
         String title = stage.getTitle();
         try {
@@ -128,7 +128,10 @@ public class CreationControleur {
             }
             stage.close();
             mainControleur.initialize();
-        } catch (Exception e) {
+        } catch(CreateException e) {
+            mainControleur.afficherFenetreErreur(e.getMessage());
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
