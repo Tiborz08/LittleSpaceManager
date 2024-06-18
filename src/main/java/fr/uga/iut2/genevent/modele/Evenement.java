@@ -27,14 +27,14 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+    public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         this.nom = nom;
         definirDates(salle, debut, fin);
         setSalle(salle);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
-        setCapaciteSpectateur(capaciteSpectateur);
+        setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
         this.coutInitial = coutInitial;
         this.prixTickets = prixTickets;
         setDescription(description);

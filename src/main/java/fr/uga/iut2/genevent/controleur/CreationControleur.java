@@ -1,14 +1,14 @@
 package fr.uga.iut2.genevent.controleur;
 
-import fr.uga.iut2.genevent.modele.Artiste;
-import fr.uga.iut2.genevent.modele.Salle;
-import fr.uga.iut2.genevent.modele.Spectateur;
+import fr.uga.iut2.genevent.exception.CreateException;
+import fr.uga.iut2.genevent.modele.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.time.ZoneId;
+import java.util.Date;
 
 public class CreationControleur {
     //Attribut local
@@ -17,13 +17,19 @@ public class CreationControleur {
 
     //Attribut création événement
     @FXML
-    private TextField tfNomEvenement, tfDateDebut, tfDateFin, tfPrixTicket;
+    private TextField tfNomEvenement, tfPrixTicket, tfCapaciteParticipant, tfCoutInitial;
+
+    @FXML
+    private TextArea taDescription;
 
     @FXML
     private ComboBox<Salle> cbSalle;
 
     @FXML
     private ComboBox<String> cbType;
+
+    @FXML
+    private DatePicker dpDebut, dpFin;
 
     //Attribut création salle
     @FXML
@@ -58,7 +64,7 @@ public class CreationControleur {
         String title = stage.getTitle();
         try {
             if (typeCreation.equalsIgnoreCase("événement")) {
-                //creerEvenement();
+                creerEvenement();
             } else if (typeCreation.equalsIgnoreCase("salle")) {
                 creerSalle();
             } else if (typeCreation.equalsIgnoreCase("spectateur")) {
@@ -98,6 +104,29 @@ public class CreationControleur {
 
         Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
         mainControleur.ajouterArtiste(artiste);
+    }
+
+    private void creerEvenement() throws CreateException {
+        String nom = tfNomEvenement.getText();
+        int capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+        float coutInitial = Float.parseFloat(tfCoutInitial.getText());
+        float prixTicket = Float.parseFloat(tfPrixTicket.getText());
+        Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        String description = taDescription.getText();
+        Salle salle = cbSalle.getValue();
+
+        Evenement evenement;
+
+        if (cbType.getValue().equalsIgnoreCase("Concert")){
+            evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+        } else if (cbType.getValue().equalsIgnoreCase("Théàtre")) {
+            evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+        } else {
+            evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+        }
+
+        mainControleur.ajouterEvenement(evenement);
     }
 
 }
