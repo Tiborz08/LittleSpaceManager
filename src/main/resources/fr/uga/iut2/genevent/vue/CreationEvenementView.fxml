@@ -39,17 +39,17 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Date de fin" GridPane.rowIndex="2">
+            <Label text="Date de fin" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Salle" GridPane.columnIndex="2">
+            <Label text="Type" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Type" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="Salle" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -64,23 +64,16 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="tfDateDebut" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="tfDateFin" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
             <TextField fx:id="tfPrixTicket" prefWidth="210.0" style="-fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <ComboBox fx:id="cbSalle" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" />
-            <ComboBox fx:id="cbType" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cbType" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" />
+            <ComboBox fx:id="cbSalle" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin></ComboBox>
             <Label text="Coût initial" GridPane.rowIndex="3">
                <padding>
                   <Insets right="10.0" />
@@ -101,6 +94,16 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
+            <DatePicker fx:id="dpDebut" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <DatePicker fx:id="dpFin" prefWidth="210.0" style="-fx-background-color: white; -fx-border-color: #9eadba;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </DatePicker>
          </children>
       </GridPane>
       <HBox alignment="CENTER" prefHeight="197.0" prefWidth="725.0">
