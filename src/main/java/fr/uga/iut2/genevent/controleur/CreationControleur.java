@@ -54,6 +54,9 @@ public class CreationControleur {
     @FXML
     private Button btAnnuler, btCreer;
 
+    @FXML
+    private TextArea taTags;
+
     //méthodes
 
     public void initialize() {
@@ -141,6 +144,7 @@ public class CreationControleur {
         String nom = tfNomSalle.getText();
         int capaciteMax=0;
         String adresse = tfAdresse.getText();
+        String tagsLong = taTags.getText();
         if (nom.isEmpty()){
             tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
@@ -154,7 +158,7 @@ public class CreationControleur {
         if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())){
             try {
                 capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
-                Salle salle = new Salle(nom, adresse, capaciteMax);
+                Salle salle = new Salle(nom, adresse, capaciteMax, tagsLong);
                 mainControleur.ajouterSalle(salle);
                 Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
                 stage.close();

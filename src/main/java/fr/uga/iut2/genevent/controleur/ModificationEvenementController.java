@@ -136,7 +136,7 @@ public class ModificationEvenementController {
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
             popupStage.setScene(scene);
-            popupStage.setTitle("Suprimer "+evenement.getNom()+" ?");
+            popupStage.setTitle("Supprimer "+evenement.getNom()+" ?");
             popupStage.show();
         }catch (Exception e){e.printStackTrace();}
     }

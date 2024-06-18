@@ -1,5 +1,6 @@
 package fr.uga.iut2.genevent.modele;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -12,12 +13,15 @@ public class Salle {
     private String adresse;
     private int capacite_max;
     private int idSalle;
+    private TreeSet<String> tags;
     private TreeSet<Evenement> evenements;
 
-    public Salle(String nom, String adresse, int capacite_max) {
+    public Salle(String nom, String adresse, int capacite_max, String tagsLong) {
         setNom(nom);
         setAdresse(adresse);
         setCapacite_max(capacite_max);
+        this.tags=new TreeSet<>();
+        this.setTags(tagsLong);
         this.idSalle = newId();
         this.evenements = new TreeSet<>();
     }
@@ -91,6 +95,26 @@ public class Salle {
         }
         return evenementsFuturs;
     }
+
+    //====== GESTION DES TAGS ====================================
+
+
+    public TreeSet<String> getTags() {
+        return tags;
+    }
+
+    public void addTag(String tag){
+        tags.add(tag);
+    }
+
+    public void setTags(String tagsLong){
+        String[] tagsSplit = tagsLong.split(",");
+        for(String tag : tagsSplit){
+            tags.add(tag.toLowerCase());
+        }
+    }
+
+
 
     @Override
     public String toString() {

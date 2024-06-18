@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -205,5 +206,41 @@ public class MainControleur {
     @FXML
     public Stage getStage(){
         return (Stage) lvEvenement.getScene().getWindow();
+    }
+
+    //Voir Salle
+
+    @FXML
+    private Button btnVoirSalles;
+    @FXML
+    private ListView<String> lvSalles;
+
+    @FXML
+    public void onButtonVoirSalle(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ListeSallesView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root, 737, 438);
+            popupStage.setScene(scene);
+            popupStage.setTitle("Liste des salles");
+
+            ArrayList<String> lvSallesTemp = new ArrayList<>();
+            for(Salle s : salles){
+                String tags = "";
+                for(String t : s.getTags()){
+                    tags += " "+t;
+                }
+                lvSallesTemp.add("\t"+s+"\nAdresse : "+s.getAdresse()+"\nCapacité max : "+s.getCapacite_max()+"\n" + tags);
+            }
+
+            ObservableList<String> listeSalle = FXCollections.observableArrayList(new ArrayList<>(lvSallesTemp));
+            lvSalles.setItems(listeSalle);
+
+            popupStage.show();
+        }catch (Exception e){e.printStackTrace();}
     }
 }
