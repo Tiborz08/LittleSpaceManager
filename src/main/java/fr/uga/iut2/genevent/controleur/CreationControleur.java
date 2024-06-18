@@ -4,9 +4,11 @@ import fr.uga.iut2.genevent.modele.Artiste;
 import fr.uga.iut2.genevent.modele.Salle;
 import fr.uga.iut2.genevent.modele.Spectateur;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,6 +30,8 @@ public class CreationControleur {
     //Attribut création salle
     @FXML
     private TextField tfNomSalle, tfCapaciteMax, tfAdresse;
+    @FXML
+    private Label laNomSalle,laCapaciteMax,laAdresse;
 
     //Attribut création Personne
     @FXML
@@ -74,11 +78,24 @@ public class CreationControleur {
 
     private void creerSalle() {
         String nom = tfNomSalle.getText();
-        int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
         String adresse = tfAdresse.getText();
+        if (nom.isEmpty()){
+            laNomSalle.setStyle("-fx-text-fill:#c8143c");
+        }
+        if (adresse.isEmpty()){
+            laAdresse.setStyle("-fx-text-fill: #c8143c");
+        }
+        if (tfCapaciteMax.getText().isEmpty()){
+            laCapaciteMax.setStyle("-fx-text-fill: #c8143c");
+        }
 
-        Salle salle = new Salle(nom, adresse, capaciteMax);
-        mainControleur.ajouterSalle(salle);
+        if (!(adresse.isEmpty() && nom.isEmpty() && tfCapaciteMax.getText().isEmpty())){
+            int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
+            Salle salle = new Salle(nom, adresse, capaciteMax);
+            mainControleur.ajouterSalle(salle);
+            Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
+            stage.close();
+        }
     }
 
     private void creerSpectateur() {
