@@ -1,9 +1,13 @@
 package fr.uga.iut2.genevent.modele;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 
 public abstract class Participant extends Personne {
 
+    private static final Log log = LogFactory.getLog(Participant.class);
     private ArrayList<Evenement> evenements = new ArrayList<>();
     private float salaire;
 
@@ -21,6 +25,7 @@ public abstract class Participant extends Personne {
      */
     public void setSalaire(float salaire) {
         this.salaire = Math.max(0, salaire);
+        log.info("Le salaire de " + this.getNom() + " est de " + this.getSalaire() + "€.");
     }
 
     //GETTER

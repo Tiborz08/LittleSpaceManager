@@ -9,18 +9,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import java.lang.reflect.Type;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class CreationControleur {
+    private static final Log log = LogFactory.getLog(CreationControleur.class);
+
     //Attribut local
     String typeCreation;
     private MainControleur mainControleur;
@@ -154,6 +153,7 @@ public class CreationControleur {
                 mainControleur.ajouterSalle(salle);
                 Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
                 stage.close();
+                log.info("Salle créée : " + salle.getNom() + ", " + salle.getAdresse() + ", " + salle.getCapacite_max() + " personnes maximum");
             } catch (NumberFormatException e) {
                 laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
             }
@@ -181,11 +181,11 @@ public class CreationControleur {
         } else{
             Spectateur spectateur = new Spectateur(nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
-            System.out.println("Nom : " + nom);
-            System.out.println("Prenom : " + prenom);
 
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
             stage.close();
+
+            log.info("Spectateur créé : " + spectateur.getNom() + " " + spectateur.getPrenom());
 
         }
     }
@@ -222,6 +222,8 @@ public class CreationControleur {
                 mainControleur.ajouterPersonnel(personnel);
                 Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
                 stage.close();
+
+                log.info("Personnel créé : " + personnel.getNom() + " " + personnel.getPrenom());
         }
     }
 
@@ -268,6 +270,7 @@ public class CreationControleur {
             mainControleur.ajouterArtiste(artiste);
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
             stage.close();
+            log.info("Artiste créé : " + artiste.getNom() + " " + artiste.getPrenom());
         }
 
     }
@@ -297,6 +300,7 @@ public class CreationControleur {
         }
 
         mainControleur.ajouterEvenement(evenement);
+        log.info("Evenement de type " + evenement.getClass().getSimpleName().toLowerCase() + " crée : " + evenement.getNom());
 
     }
 
