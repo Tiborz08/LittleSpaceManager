@@ -195,6 +195,18 @@ public class MainControleur {
         return evenements;
     }
 
+    public ArrayList<Artiste> getArtistes() {
+        return artistes;
+    }
+
+    public ArrayList<Spectateur> getSpectateurs() {
+        return spectateurs;
+    }
+
+    public ArrayList<Personnel> getPersonnels() {
+        return personnels;
+    }
+
     //méthode
     @FXML
     private void actualisationEvenement(){
