@@ -15,6 +15,7 @@ public class Concert extends Evenement {
     //CONSTRUCTEUR
     public Concert(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin,String description,Salle salle) throws CreateException {
         super(nom, capaciteParticipants, capaciteSpectateur, coutInitial, prixTickets, debut, fin,description,salle);
+        setGenre("Inconnu");
     }
 
     //GETTER
