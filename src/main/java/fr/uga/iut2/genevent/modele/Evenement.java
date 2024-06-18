@@ -1,5 +1,6 @@
 package fr.uga.iut2.genevent.modele;
 
+import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
-    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) {
+    public Evenement(String nom, int capaciteParticipants, int capaciteSpectateur, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         this.nom = nom;
         definirDates(salle, debut, fin);
         setSalle(salle);
