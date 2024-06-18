@@ -67,15 +67,14 @@ public class CreationControleur {
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
 
             cbType.setItems(types);
-
-
-            cbType.setItems(types);
+            cbType.getSelectionModel().selectFirst();
 
             if (mainControleur != null) {
                 ArrayList<Salle> salleList = mainControleur.getSalles();
                 ObservableList<Salle> salles = FXCollections.observableArrayList(salleList);
 
                 cbSalle.setItems(salles);
+                cbSalle.getSelectionModel().selectFirst();
             } else {
                 System.err.println("MainControleur n'est pas initialisé");
             }
@@ -89,7 +88,7 @@ public class CreationControleur {
             configureNumericTextField(tfSalaire);
             ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
             cbPopularite.setItems(options);
-            cbPopularite.setValue(1);
+            cbPopularite.getSelectionModel().selectFirst();
         } else if (typeCreation.equalsIgnoreCase("salle")) {
             configureNumericTextField(tfCapaciteMax);
         }
