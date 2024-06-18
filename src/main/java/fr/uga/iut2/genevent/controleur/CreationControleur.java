@@ -73,6 +73,8 @@ public class CreationControleur {
                 creerSpectateur();
             } else if (typeCreation.equalsIgnoreCase("artiste")) {
                 creerArtiste();
+            } else if (typeCreation.equalsIgnoreCase("personnel")) {
+                creerPersonnel();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,6 +111,10 @@ public class CreationControleur {
         Spectateur spectateur = new Spectateur(nom, prenom);
         mainControleur.ajouterSpectateur(spectateur);
         System.out.println("aaaa");
+    }
+
+    private void creerPersonnel(){
+
     }
 
     private void creerArtiste() {
