@@ -2,6 +2,8 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.modele.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,7 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Type;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreationControleur {
@@ -50,12 +54,34 @@ public class CreationControleur {
     private Button btAnnuler, btCreer;
 
     //méthodes
+
+    public void initialize() {
+        if (typeCreation.equalsIgnoreCase("événement")){
+            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre");
+
+            cbType.setItems(types);
+
+            if (mainControleur != null) {
+                ArrayList<Salle> salleList = mainControleur.getSalles();
+                ObservableList<Salle> salles = FXCollections.observableArrayList(salleList);
+
+                cbSalle.setItems(salles);
+            } else {
+                System.err.println("MainControleur n'est pas initialisé");
+            }
+        }
+    }
+
     public void setMainController(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
     public void setTypeCreation(String typeCreation){
         this.typeCreation = typeCreation;
+    }
+
+    public void setCbSalle(ArrayList<Salle> salles){
+
     }
 
     @FXML
@@ -88,23 +114,29 @@ public class CreationControleur {
 
     private void creerSalle() {
         String nom = tfNomSalle.getText();
-        int capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
+        int capaciteMax=0;
         String adresse = tfAdresse.getText();
         if (nom.isEmpty()){
-            laNomSalle.setStyle("-fx-text-fill:#c8143c");
+            tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
         if (adresse.isEmpty()){
-            laAdresse.setStyle("-fx-text-fill: #c8143c");
+            tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
         if (tfCapaciteMax.getText().isEmpty()){
-            laCapaciteMax.setStyle("-fx-text-fill: #c8143c");
+            tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
         }
 
-        if (!(adresse.isEmpty() && nom.isEmpty() && tfCapaciteMax.getText().isEmpty())){
-            Salle salle = new Salle(nom, adresse, capaciteMax);
-            mainControleur.ajouterSalle(salle);
-            Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
-            stage.close();
+        if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())){
+            try {
+                capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
+                Salle salle = new Salle(nom, adresse, capaciteMax);
+                mainControleur.ajouterSalle(salle);
+                Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
+                stage.close();
+            } catch (NumberFormatException e) {
+                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            }
+
         }
     }
 

@@ -91,4 +91,9 @@ public class Salle {
         }
         return evenementsFuturs;
     }
+
+    @Override
+    public String toString() {
+        return idSalle + " - " + nom;
+    }
 }
