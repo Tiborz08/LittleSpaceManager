@@ -193,7 +193,36 @@ public class CreationControleur {
 
 
     private void creerPersonnel(){
+        String nom = tfNomPersonne.getText();
+        String prenom = tfPrenomPersonne.getText();
+        float salaire = 0.0f;
+        tfNomPersonne.setStyle("");
+        tfPrenomPersonne.setStyle("");
+        tfSalaire.setStyle("");
 
+
+
+        try {
+            salaire = Float.parseFloat(tfSalaire.getText());
+        } catch (NumberFormatException e) {
+        }
+
+        if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty()) {
+            if (nom.isEmpty()) {
+                tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            }
+            if (prenom.isEmpty()) {
+                tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            }
+            if (tfSalaire.getText().isEmpty()) {
+                tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            }
+            }else {
+                Personnel personnel = new Personnel(nom, prenom, salaire);
+                mainControleur.ajouterPersonnel(personnel);
+                Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
+                stage.close();
+        }
     }
 
     private void creerArtiste() {
