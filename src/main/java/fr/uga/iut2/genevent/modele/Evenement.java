@@ -2,11 +2,14 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Evenement implements Comparable<Evenement> {
+    private static final Log log = LogFactory.getLog(Evenement.class);
 
     //ATTRIBUTIONS
 
@@ -263,6 +266,7 @@ public abstract class Evenement implements Comparable<Evenement> {
         for (Participant participant : participants) {
             totalSalaires += participant.getSalaire();
         }
+        log.info("Génération des bénéfices pour l'événement " + this.getNom() + " : " + (prixTickets * tickets.size() - coutInitial - totalSalaires) + "€.");
         return prixTickets * tickets.size() - coutInitial - totalSalaires;
     }
 
