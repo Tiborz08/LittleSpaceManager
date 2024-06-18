@@ -38,6 +38,9 @@ public class MainControleur {
     @FXML
     private ListView<Evenement> lvEvenement;
 
+    @FXML
+    private Label erreurLabel;
+
     public void initialize(){
         actualisationEvenement();
         lvEvenement.setOnMouseClicked(event -> {
@@ -107,13 +110,12 @@ public class MainControleur {
         loader.setController(this);
         Parent root = loader.load();
 
-        Label erreurLabel = new Label(textErreur);
-        erreurLabel.setWrapText(true);
-        erreurLabel.setPrefWidth(400);
+
+
+        erreurLabel.setText(textErreur);
 
         if (root instanceof VBox) {
             VBox vbox = (VBox) root;
-            ((VBox) root).getChildren().add(erreurLabel);
             vbox.setPrefSize(500, 300);
         } else {
             throw new Exception("Le root n'est pas une instance de VBox");
