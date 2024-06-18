@@ -7,7 +7,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="528.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="labelAssocier" text="Associer un ">
+        <Label fx:id="lbAssocier" text="Associer un ">
             <VBox.margin>
                 <Insets bottom="20.0" top="20.0" />
             </VBox.margin>
