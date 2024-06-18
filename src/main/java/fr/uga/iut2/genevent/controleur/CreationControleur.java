@@ -47,7 +47,7 @@ public class CreationControleur {
     @FXML
     private TextField tfNomSalle, tfCapaciteMax, tfAdresse;
     @FXML
-    private Label laNomSalle,laCapaciteMax,laAdresse;
+    private Label laNomSalle, laCapaciteMax, laAdresse;
 
     //Attribut création Personne
     @FXML
@@ -63,12 +63,10 @@ public class CreationControleur {
     //méthodes
 
     public void initialize() {
-        if (typeCreation.equalsIgnoreCase("événement")){
+        if (typeCreation.equalsIgnoreCase("événement")) {
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
 
             cbType.setItems(types);
-
-
 
 
             cbType.setItems(types);
@@ -85,14 +83,14 @@ public class CreationControleur {
             configureNumericTextField(tfCoutInitial);
             configureNumericTextField(tfPrixTicket);
             configureNumericTextField(tfCapaciteParticipant);
-        } else if (typeCreation.equalsIgnoreCase("personnel")){
+        } else if (typeCreation.equalsIgnoreCase("personnel")) {
             configureNumericTextField(tfSalaire);
         } else if (typeCreation.equalsIgnoreCase("Artiste")) {
             configureNumericTextField(tfSalaire);
             ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
             cbPopularite.setItems(options);
             cbPopularite.setValue(1);
-        } else if (typeCreation.equalsIgnoreCase("salle")){
+        } else if (typeCreation.equalsIgnoreCase("salle")) {
             configureNumericTextField(tfCapaciteMax);
         }
     }
@@ -101,7 +99,7 @@ public class CreationControleur {
         this.mainControleur = mainControleur;
     }
 
-    public void setTypeCreation(String typeCreation){
+    public void setTypeCreation(String typeCreation) {
         this.typeCreation = typeCreation;
     }
 
@@ -118,7 +116,7 @@ public class CreationControleur {
     }
 
     @FXML
-    public void onAnnulerClick(ActionEvent event){
+    public void onAnnulerClick(ActionEvent event) {
         Stage stage = (Stage) btAnnuler.getScene().getWindow();
         stage.close();
     }
@@ -141,10 +139,9 @@ public class CreationControleur {
             }
             stage.close();
             mainControleur.initialize();
-        } catch(CreateException e) {
+        } catch (CreateException e) {
             mainControleur.afficherFenetreErreur(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -152,20 +149,23 @@ public class CreationControleur {
 
     private void creerSalle() throws Exception {
         String nom = tfNomSalle.getText();
-        int capaciteMax=0;
+        int capaciteMax = 0;
         String adresse = tfAdresse.getText();
         String tagsLong = taTags.getText();
-        if (nom.isEmpty()){
-            tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+        if (nom.isEmpty()) {
+            tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            ;
         }
-        if (adresse.isEmpty()){
-            tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+        if (adresse.isEmpty()) {
+            tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            ;
         }
-        if (tfCapaciteMax.getText().isEmpty()){
-            tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+        if (tfCapaciteMax.getText().isEmpty()) {
+            tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+            ;
         }
 
-        if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())){
+        if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())) {
             try {
                 capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
                 Salle salle = new Salle(nom, adresse, capaciteMax, tagsLong);
@@ -174,18 +174,22 @@ public class CreationControleur {
                 stage.close();
                 log.info("Salle créée : " + salle.getNom() + ", " + salle.getAdresse() + ", " + salle.getCapacite_max() + " personnes maximum");
             } catch (NumberFormatException e) {
-                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                ;
             }
 
         } else {
-            if (nom.isEmpty()){
-                tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            if (nom.isEmpty()) {
+                tfNomSalle.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                ;
             }
-            if (adresse.isEmpty()){
-                tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            if (adresse.isEmpty()) {
+                tfAdresse.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                ;
             }
-            if (tfCapaciteMax.getText().isEmpty()){
-                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
+            if (tfCapaciteMax.getText().isEmpty()) {
+                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                ;
             }
 
             throw new CreateException("Vous devez remplir tous les champs");
@@ -203,15 +207,15 @@ public class CreationControleur {
         if (nom.isEmpty() || prenom.isEmpty()) {
             System.out.println("Vous devez entrer le nom et le prénom du spectateur.");
 
-            if (nom.isEmpty()){
+            if (nom.isEmpty()) {
                 tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
-            if(prenom.isEmpty()){
+            if (prenom.isEmpty()) {
                 tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
             throw new CreateException("Vous devez remplir tous les champs");
-        } else{
+        } else {
             Spectateur spectateur = new Spectateur(nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
 
@@ -221,7 +225,6 @@ public class CreationControleur {
 
         }
     }
-
 
 
     private void creerPersonnel() throws Exception {
@@ -249,13 +252,13 @@ public class CreationControleur {
             }
 
             throw new CreateException("Vous devez remplir tous les champs");
-            }else {
-                Personnel personnel = new Personnel(nom, prenom, salaire);
-                mainControleur.ajouterPersonnel(personnel);
-                Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
-                stage.close();
+        } else {
+            Personnel personnel = new Personnel(nom, prenom, salaire);
+            mainControleur.ajouterPersonnel(personnel);
+            Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
+            stage.close();
 
-                log.info("Personnel créé : " + personnel.getNom() + " " + personnel.getPrenom());
+            log.info("Personnel créé : " + personnel.getNom() + " " + personnel.getPrenom());
         }
     }
 
@@ -280,21 +283,19 @@ public class CreationControleur {
         tfSalaire.setStyle("");
 
 
-
-
         if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty()) {
-            if (nom.isEmpty()){
+            if (nom.isEmpty()) {
                 tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
-            if (prenom.isEmpty()){
+            if (prenom.isEmpty()) {
                 tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
-            if (tfSalaire.getText().isEmpty()){
+            if (tfSalaire.getText().isEmpty()) {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
             throw new CreateException("Vous devez remplir tous les champs");
-        }else {
+        } else {
             Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
             mainControleur.ajouterArtiste(artiste);
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
@@ -303,7 +304,6 @@ public class CreationControleur {
         }
 
     }
-
 
 
     private void creerEvenement() throws CreateException {
@@ -317,16 +317,15 @@ public class CreationControleur {
         Salle salle = cbSalle.getValue();
 
 
-
         Evenement evenement;
 
-        if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")){
+        if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")) {
             evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théàtre")) {
             evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")){
+        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")) {
             evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else{
+        } else {
             evenement = new Autre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         }
 
