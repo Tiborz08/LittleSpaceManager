@@ -8,7 +8,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Supprimer" textFill="WHITE">
+            <Button fx:id="btnSupr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSupr" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

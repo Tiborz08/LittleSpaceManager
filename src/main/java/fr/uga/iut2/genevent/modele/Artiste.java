@@ -1,10 +1,10 @@
 package fr.uga.iut2.genevent.modele;
 
 public class Artiste extends Participant {
-    private float popularite;
+    private int popularite;
 
     //CONSTRUCTEUR
-    public Artiste(String nom, String prenom, float salaire, float popularite) {
+    public Artiste(String nom, String prenom, float salaire, int popularite) {
         super(nom, prenom, salaire);
         setPopularite(popularite);
         setSalaire(salaire);
@@ -21,8 +21,8 @@ public class Artiste extends Participant {
      *
      * @param popularite Popularité rattachée à l'artiste.
      */
-    public void setPopularite(float popularite) {
-        this.popularite = Math.max(0, popularite);
+    public void setPopularite(int popularite) {
+        this.popularite = popularite;
     }
 
     //GUETTER

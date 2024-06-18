@@ -191,6 +191,9 @@ public class MainControleur {
     public ArrayList<Salle> getSalles() {
         return salles;
     }
+    public TreeSet<Evenement> getEvenements(){
+        return evenements;
+    }
 
     //méthode
     @FXML
