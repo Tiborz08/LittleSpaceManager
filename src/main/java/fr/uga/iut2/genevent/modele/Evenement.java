@@ -82,6 +82,8 @@ public abstract class Evenement implements Comparable<Evenement> {
         return tickets.size();
     }
 
+    public float getCoutInitial() {return coutInitial;}
+
     /**
      * Ajoute un participant à la liste des participants de l'événement, en vérifiant s'il n'est pas déjà présent, et informe le participant qu'il est inscrit en tant que participant à cet événement.
      *

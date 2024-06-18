@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="498.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="498.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.uga.iut2.genevent.controleur.ModificationEvenementController">
    <children>
       <GridPane prefHeight="185.0" prefWidth="478.0">
         <columnConstraints>
@@ -24,15 +24,15 @@
             <Label text="Salaires Artistes : " GridPane.rowIndex="1" />
             <Label text="Salaires Personnels : " GridPane.rowIndex="2" />
             <Label text="Prix Tickets : " GridPane.rowIndex="3" />
-            <Label text="Label" GridPane.columnIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="labelCoutInitial" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="labelSalairesArt" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelSalairesPer" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="labelPrixTickets" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Total : " GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="labelTotal" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
          <VBox.margin>
             <Insets left="20.0" />
@@ -40,7 +40,7 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="498.0">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #4b5c6b;" text="Quitter" textFill="WHITE">
+            <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#onQuitterClick" style="-fx-background-color: #4b5c6b;" text="Quitter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
