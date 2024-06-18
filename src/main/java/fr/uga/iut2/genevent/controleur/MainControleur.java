@@ -193,4 +193,9 @@ public class MainControleur {
         ObservableList<Evenement> listeEvenement = FXCollections.observableArrayList(new ArrayList<>(evenements));
         lvEvenement.setItems(listeEvenement);
     }
+
+    @FXML
+    public Stage getStage(){
+        return (Stage) lvEvenement.getScene().getWindow();
+    }
 }

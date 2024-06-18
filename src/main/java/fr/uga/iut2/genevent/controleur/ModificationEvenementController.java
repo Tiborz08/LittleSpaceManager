@@ -1,6 +1,9 @@
 package fr.uga.iut2.genevent.controleur;
 
+import fr.uga.iut2.genevent.modele.Artiste;
 import fr.uga.iut2.genevent.modele.Evenement;
+import fr.uga.iut2.genevent.modele.Personnel;
+import fr.uga.iut2.genevent.modele.Spectateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Date;
 
 public class ModificationEvenementController {
 
@@ -22,6 +29,8 @@ public class ModificationEvenementController {
     @FXML
     private Button btnQuitter;
     @FXML
+    private Button btnModifier;
+    @FXML
     private Label labelCoutInitial;
     @FXML
     private Label labelSalairesArt;
@@ -31,6 +40,12 @@ public class ModificationEvenementController {
     private Label labelPrixTickets;
     @FXML
     private Label labelTotal;
+    @FXML
+    private ListView<Personnel> lvPersonnel;
+    @FXML
+    private ListView<Spectateur> lvSpectateur;
+    @FXML
+    private ListView<Artiste> lvArtiste;
 
     private MainControleur mainControleur;
     private Evenement evenement;
@@ -99,6 +114,22 @@ public class ModificationEvenementController {
             popupStage.show();
 
         }catch (Exception e){e.printStackTrace();}
+
+
+    }
+
+    @FXML
+    public void onButtonModifierClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ModificationEvenementView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+
+        Stage stage = mainControleur.getStage();
+
+        Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
+        popupPrecedent.close();
+
+        stage.setScene(new Scene(root));
 
 
     }
