@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,6 +66,9 @@ public class CreationControleur {
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")) {
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
+
+            dpDebut.setValue(LocalDate.now());
+            dpFin.setValue(LocalDate.now());
 
             cbType.setItems(types);
             cbType.getSelectionModel().selectFirst();
