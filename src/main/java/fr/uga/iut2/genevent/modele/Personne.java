@@ -54,4 +54,9 @@ public abstract class Personne {
     public String getPrenom() {
         return prenom;
     }
+
+    @Override
+    public String toString() {
+        return nom + " " + prenom;
+    }
 }
