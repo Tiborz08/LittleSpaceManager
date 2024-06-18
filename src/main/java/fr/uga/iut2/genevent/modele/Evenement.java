@@ -85,6 +85,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         return tickets.size();
     }
 
+    public float getGainsTickets() {
+        return getPrixTickets() * getNombreTickets();
+    }
+
     public float getCoutInitial() {return coutInitial;}
 
     /**
@@ -241,6 +245,14 @@ public abstract class Evenement implements Comparable<Evenement> {
         return personnels;
     }
 
+    public float getSalairesPersonnels(){
+        float salaires = 0;
+        for (Participant personnel: getPersonnels()) {
+            salaires += personnel.getSalaire();
+        }
+        return salaires;
+    }
+
     /**
      * Cette fonction renvoie la liste des artistes qui participent à l'événement
      * @return
@@ -254,6 +266,14 @@ public abstract class Evenement implements Comparable<Evenement> {
 
         }
         return artistes;
+    }
+
+    public float getSalairesArtistes(){
+        float salaires = 0;
+        for (Participant artiste: getArtistes()) {
+            salaires += artiste.getSalaire();
+        }
+        return salaires;
     }
 
     /**
