@@ -320,25 +320,22 @@ public class CreationControleur {
         Salle salle;
 
         nom = tfNomEvenement.getText();
-        if(nom.isEmpty()){
+        if (nom.isEmpty()) {
             throw new CreateException("Vous devez entrer un nom pour l'événement");
         }
-        if(tfCapaciteParticipant.getText().isEmpty()){
+        if (tfCapaciteParticipant.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le nombre maximal d'employés");
-        }
-        else {
+        } else {
             capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
         }
-        if(tfCoutInitial.getText().isEmpty()){
+        if (tfCoutInitial.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le coût initial de l'événement");
-        }
-        else {
+        } else {
             coutInitial = Float.parseFloat(tfCoutInitial.getText());
         }
-        if(tfPrixTicket.getText().isEmpty()){
+        if (tfPrixTicket.getText().isEmpty()) {
             throw new CreateException("Vous devez renseigner le prix pour un ticket, si l'évenement est gratuit, renseignez 0");
-        }
-        else {
+        } else {
             prixTicket = Float.parseFloat(tfPrixTicket.getText());
         }
         debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
