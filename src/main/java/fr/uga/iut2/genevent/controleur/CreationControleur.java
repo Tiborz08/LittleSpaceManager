@@ -188,7 +188,7 @@ public class CreationControleur {
                 tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");;
             }
 
-            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
+            throw new CreateException("Vous devez remplir tous les champs");
         }
     }
 
@@ -210,13 +210,12 @@ public class CreationControleur {
                 tfPrenomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
-            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
+            throw new CreateException("Vous devez remplir tous les champs");
         } else{
             Spectateur spectateur = new Spectateur(nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
 
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
-            stage.close();
 
             log.info("Spectateur créé : " + spectateur.getNom() + " " + spectateur.getPrenom());
 
@@ -249,7 +248,7 @@ public class CreationControleur {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
-            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
+            throw new CreateException("Vous devez remplir tous les champs");
             }else {
                 Personnel personnel = new Personnel(nom, prenom, salaire);
                 mainControleur.ajouterPersonnel(personnel);
@@ -294,7 +293,7 @@ public class CreationControleur {
                 tfSalaire.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
             }
 
-            mainControleur.afficherFenetreErreur("Vous devez remplir tous les champs");
+            throw new CreateException("Vous devez remplir tous les champs");
         }else {
             Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
             mainControleur.ajouterArtiste(artiste);
