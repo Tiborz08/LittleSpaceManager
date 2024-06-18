@@ -282,4 +282,13 @@ public abstract class Evenement implements Comparable<Evenement> {
             return -1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Nom : " + nom + "\n" +
+                "Adresse : " + salle.getAdresse() + "\n" +
+                "Début : " + debut + "\n" +
+                "Fin : " + fin + "\n" +
+                "Description : " + description;
+    }
 }
