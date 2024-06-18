@@ -187,10 +187,13 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @param debut Le début de l'événement
      * @param fin La fin de l'événement
      */
-    public void definirDates(Salle salle, Date debut, Date fin){
+    public void definirDates(Salle salle, Date debut, Date fin) throws CreateException{
         if ((debut.before(fin) || debut.equals(fin)) && salle.verifierDisponibilite(debut, fin)) {
             this.debut = debut;
             this.fin = fin;
+        }
+        else {
+            throw new CreateException("La salle n'est pas disponible pour les dates renseignées ou la date de début est après la date de fin.");
         }
     }
 
