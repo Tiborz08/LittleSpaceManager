@@ -255,4 +255,19 @@ public class ModificationEvenementController {
 
     }
 
+    @FXML
+    private void onValiderClick(){
+        Stage stage = (Stage) btnValider.getScene().getWindow();
+
+        if (cbAssocier.getValue() != null){
+            Personne personne = cbAssocier.getValue();
+            if (personne.getClass().equals(Artiste.class) || personne.getClass().equals(Personnel.class)){
+                evenement.addParticipant((Participant) personne);
+            } else {
+                evenement.addTicket((Spectateur) personne);
+            }
+        }
+        initialize();
+        stage.close();
+    }
 }
