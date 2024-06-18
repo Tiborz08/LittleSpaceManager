@@ -47,6 +47,9 @@ public class MainControleur {
         CreationControleur creationController = new CreationControleur();
         creationController.setMainController(this);
         creationController.setTypeCreation(typeCreation);
+        if (typeCreation.equalsIgnoreCase("événement")){
+
+        }
 
         loader.setController(creationController);
         Parent root = loader.load();
@@ -83,5 +86,9 @@ public class MainControleur {
     @FXML
     public void onButtonCreerSpectateur(ActionEvent event) throws Exception{
         ouvrirFenetreCreation("Spectateur", event);
+    }
+
+    public ArrayList<Salle> getSalles() {
+        return salles;
     }
 }

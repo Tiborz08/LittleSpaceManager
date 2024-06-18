@@ -2,12 +2,16 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.modele.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Type;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreationControleur {
@@ -46,12 +50,34 @@ public class CreationControleur {
     private Button btAnnuler, btCreer;
 
     //méthodes
+
+    public void initialize() {
+        if (typeCreation.equalsIgnoreCase("événement")){
+            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre");
+
+            cbType.setItems(types);
+
+            if (mainControleur != null) {
+                ArrayList<Salle> salleList = mainControleur.getSalles();
+                ObservableList<Salle> salles = FXCollections.observableArrayList(salleList);
+
+                cbSalle.setItems(salles);
+            } else {
+                System.err.println("MainControleur n'est pas initialisé");
+            }
+        }
+    }
+
     public void setMainController(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
     public void setTypeCreation(String typeCreation){
         this.typeCreation = typeCreation;
+    }
+
+    public void setCbSalle(ArrayList<Salle> salles){
+
     }
 
     @FXML
