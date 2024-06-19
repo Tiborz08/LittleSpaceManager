@@ -62,7 +62,7 @@ public class ModificationEvenementController {
     @FXML
     private ComboBox<Salle> cbSalle;
     @FXML
-    private Button btnModifiactionValider;
+    private Button btnModificationValider;
 
     //Spec Piece de theatre
     @FXML
@@ -333,7 +333,7 @@ public class ModificationEvenementController {
         loader.setController(mainControleur);
         Parent root = loader.load();
 
-        Stage stage = (Stage) btnModifiactionValider.getScene().getWindow();
+        Stage stage = (Stage) btnModificationValider.getScene().getWindow();
 
 
         Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
