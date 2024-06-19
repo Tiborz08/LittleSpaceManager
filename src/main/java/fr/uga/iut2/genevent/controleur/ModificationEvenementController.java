@@ -147,7 +147,8 @@ public class ModificationEvenementController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
         } catch (IOException e){
             e.printStackTrace();
         }
