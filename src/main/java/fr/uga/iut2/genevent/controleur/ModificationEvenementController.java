@@ -345,17 +345,17 @@ public class ModificationEvenementController {
         if (!tfNom.getText().equalsIgnoreCase(evenement.getNom())){
             evenement.setNom(tfNom.getText());
         }
-        if (!debut.equals(evenement.getDebut())){
-            evenement.setDebut(debut);
-        }
-        if (!fin.equals(evenement.getFin())){
-            evenement.setFin(fin);
+        if (!debut.equals(evenement.getDebut()) || !fin.equals(evenement.getFin())){
+            Salle temp = evenement.getSalle();
+            evenement.setSalle(null);
+            evenement.definirDates(temp, debut, fin);
+            evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
             evenement.setSalle(cbSalle.getValue());
         }
-        if (!tfPrixTicket.getText().equalsIgnoreCase(String.valueOf(evenement.getPrixTickets()))){
-            evenement.setPrixTickets(Integer.parseInt(tfPrixTicket.getText()));
+        if ((Float.parseFloat(tfPrixTicket.getText()) != evenement.getPrixTickets())){
+            evenement.setPrixTickets(Float.parseFloat(tfPrixTicket.getText()));
         }
 
         stage.setScene(new Scene(root));
