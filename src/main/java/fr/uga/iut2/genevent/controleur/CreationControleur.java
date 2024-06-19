@@ -18,6 +18,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Contrôleur pour la création d'éléments tels que des événements, des salles, des spectateurs, des artistes et du personnel.
+ * Cette classe gère les interactions avec l'interface utilisateur et la logique métier pour créer de nouveaux éléments.
+ */
+
 public class CreationControleur {
     private static final Log log = LogFactory.getLog(CreationControleur.class);
 
@@ -63,6 +68,12 @@ public class CreationControleur {
 
     //méthodes
 
+    /**
+     * Initialise la vue de la création d'un élément en fonction du type d'élément spécifié.
+     * Cette méthode est appelée automatiquement après que le fichier FXML associé a été chargé.
+     * Elle configure les éléments de l'interface utilisateur en fonction du type d'élément à créer.
+     * Elle définit également les valeurs par défaut pour ces éléments.
+     */
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")) {
             ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
@@ -98,14 +109,30 @@ public class CreationControleur {
         }
     }
 
+    /**
+     * Définit le contrôleur principal de l'application.
+     *
+     * @param mainControleur le contrôleur principal de l'application.
+     */
     public void setMainController(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
+    /**
+     * Définit le type d'élément à créer.
+     *
+     * @param typeCreation le type d'élément à créer.
+     */
     public void setTypeCreation(String typeCreation) {
         this.typeCreation = typeCreation;
     }
 
+    /**
+     * Configure un champ de texte pour accepter uniquement des nombres.
+     * Cette méthode ajoute un ChangeListener au champ de texte spécifié pour filtrer les entrées non numériques.
+     *
+     * @param textField le champ de texte à configurer.
+     */
     private void configureNumericTextField(TextField textField) {
         // Ajouter un ChangeListener au TextField pour filtrer les entrées non numériques
         textField.textProperty().addListener(new ChangeListener<String>() {
@@ -118,12 +145,27 @@ public class CreationControleur {
         });
     }
 
+    /**
+     * Ferme la fenêtre de création d'un élément lorsque le bouton Annuler est cliqué.
+     *
+     * @param event
+     */
+
     @FXML
     public void onAnnulerClick(ActionEvent event) {
         Stage stage = (Stage) btAnnuler.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Crée un nouvel élément de type spécifié lorsque le bouton Créer est cliqué.
+     * Cette méthode appelle la méthode de création appropriée en fonction du type d'élément à créer,
+     * puis ferme la fenêtre de création et met à jour la vue principale de l'application.
+     * Si une exception de création est levée, une fenêtre d'erreur est affichée avec le message d'erreur correspondant.
+     *
+     * @param event l'événement ActionEvent qui a déclenché la création de l'élément.
+     * @throws Exception si une erreur se produit lors de la création de l'élément.
+     */
     @FXML
     public void onCreerClick(ActionEvent event) throws Exception {
         Stage stage = (Stage) btCreer.getScene().getWindow();
@@ -149,6 +191,14 @@ public class CreationControleur {
         }
     }
 
+    /**
+     * Crée une nouvelle salle avec les informations saisies dans l'interface utilisateur.
+     * Cette méthode vérifie que tous les champs obligatoires sont remplis, puis crée un nouveau objet de type Salle
+     * avec les informations saisies. Si la capacité maximale saisie n'est pas un nombre entier valide, une exception est levée.
+     * Si un ou plusieurs champs obligatoires ne sont pas remplis, une exception de création est levée avec un message d'erreur approprié.
+     *
+     * @throws Exception
+     */
 
     private void creerSalle() throws Exception {
         String nom = tfNomSalle.getText();
@@ -199,6 +249,14 @@ public class CreationControleur {
         }
     }
 
+    /**
+     * Crée un nouveau spectateur avec les informations saisies dans l'interface utilisateur.
+     * Cette méthode vérifie que les champs Nom et Prénom sont remplis, puis crée un nouveau objet de la classe Spectateur
+     * avec les informations saisies. Si un ou plusieurs champs obligatoires ne sont pas remplis, une exception de création est levée
+     * avec un message d'erreur approprié.
+     *
+     * @throws Exception
+     */
     private void creerSpectateur() throws Exception {
 
         String nom = tfNomPersonne.getText();
@@ -229,6 +287,14 @@ public class CreationControleur {
         }
     }
 
+    /**
+     * Crée un nouveau membre du personnel avec les informations saisies dans l'interface utilisateur.
+     * Cette méthode vérifie que les champs Nom, Prénom et Salaire sont remplis, puis crée une nouvel objet de la classe Personnel
+     * avec les informations saisies. Si le salaire saisi n'est pas un nombre valide, une exception est levée.
+     * Si un ou plusieurs champs obligatoires ne sont pas remplis, une exception de création est levée avec un message d'erreur approprié.
+     *
+     * @throws Exception
+     */
 
     private void creerPersonnel() throws Exception {
         String nom = tfNomPersonne.getText();
@@ -264,6 +330,15 @@ public class CreationControleur {
             log.info("Personnel créé : " + personnel.getNom() + " " + personnel.getPrenom());
         }
     }
+
+    /**
+     * Crée un nouvel artiste avec les informations saisies dans l'interface utilisateur.
+     * Cette méthode vérifie que les champs Nom, Prénom et Salaire sont remplis, puis crée une nouvel objet de la classe Artiste
+     * avec les informations saisies. Si le salaire saisi n'est pas un nombre valide, une exception est levée.
+     * Si un ou plusieurs champs obligatoires ne sont pas remplis, une exception de création est levée avec un message d'erreur approprié.
+     *
+     * @throws Exception
+     */
 
     private void creerArtiste() throws Exception {
         String nom = tfNomPersonne.getText();
@@ -308,6 +383,14 @@ public class CreationControleur {
 
     }
 
+    /**
+     * Crée un nouvel événement avec les informations saisies dans l'interface utilisateur.
+     * Cette méthode vérifie que tous les champs obligatoires sont remplis, puis crée une nouvelle instance de la classe Evenement
+     * ou de ses sous-classes (Concert, PieceDeTheatre, OneManShow ou Autre) avec les informations saisies.
+     * Si un ou plusieurs champs obligatoires ne sont pas remplis, une exception de création est levée avec un message d'erreur approprié.
+     *
+     * @throws CreateException
+     */
 
     private void creerEvenement() throws CreateException {
         String nom;

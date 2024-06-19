@@ -62,8 +62,11 @@ public class ModificationEvenementController {
     @FXML
     private ComboBox<Salle> cbSalle;
     @FXML
-    private Button btnModifiactionValider;
+    private Button btnModificationValider;
 
+    //Spec Piece de theatre
+    @FXML
+    private Button btnSpec;
 
 
     //Supprimer evenement
@@ -118,18 +121,6 @@ public class ModificationEvenementController {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
-
-            /*=================================================================
-                A modifier quand La liste des événements sera fonctionelle
-            ==================================================================*/
-
-//            Salle testSalle = new Salle("i", "Jardin d'Eden", 200);
-//            Concert eventActuel = new Concert("HeavenFest", 1, 1000, 15, new Date(), new Date(), "Feur", testSalle);
-//            Artiste Adam = new Artiste("", "Adam", 100, 1.5f);
-//            eventActuel.addParticipant(Adam);
-
-            //==================================================================
-
 
             labelCoutInitial.setText(String.valueOf(evenement.getCoutInitial()));
 
@@ -216,6 +207,9 @@ public class ModificationEvenementController {
         cbSalle.setValue(evenement.getSalle());
         tfPrixTicket.setText(String.valueOf(evenement.getPrixTickets()));
 
+        //Bouton spec qui s'active que si l'event est une pdt ou un concert.
+        btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
+
         Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
         popupPrecedent.close();
 
@@ -300,12 +294,20 @@ public class ModificationEvenementController {
     }
 
     private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
+        Stage satge = (Stage) btnCreerAssocier.getScene().getWindow();
+        satge.close();
         if (typepersonne.compareToIgnoreCase("spectateur")==0){
             mainControleur.onButtonCreerSpectateur(event);
+            ouvertureAssociationPage("Spectateur");
+            cbAssocier.setValue(mainControleur.getSpectateurs().get(mainControleur.getSpectateurs().size()-1));
         } else if (typepersonne.compareToIgnoreCase("personnel")==0) {
             mainControleur.onButtonCreerPersonnel(event);
+            ouvertureAssociationPage("Personnel");
+            cbAssocier.setValue(mainControleur.getPersonnels().get(mainControleur.getPersonnels().size()-1));
         }else {
             mainControleur.onButtonCreerArtiste(event);
+            ouvertureAssociationPage("Artiste");
+            cbAssocier.setValue(mainControleur.getArtistes().get(mainControleur.getArtistes().size()-1));
         }
     }
 
@@ -331,7 +333,7 @@ public class ModificationEvenementController {
         loader.setController(mainControleur);
         Parent root = loader.load();
 
-        Stage stage = (Stage) btnModifiactionValider.getScene().getWindow();
+        Stage stage = (Stage) btnModificationValider.getScene().getWindow();
 
 
         Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -359,5 +361,13 @@ public class ModificationEvenementController {
         }
 
         stage.setScene(new Scene(root));
+    }
+
+    //Bouton Spec accessoires
+
+
+    @FXML
+    public void onSpecClick() throws IOException {
+
     }
 }
