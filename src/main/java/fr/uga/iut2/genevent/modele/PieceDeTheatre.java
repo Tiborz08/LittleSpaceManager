@@ -5,12 +5,29 @@ import fr.uga.iut2.genevent.exception.CreateException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Cette class permet de créer des objets de type PieceDeTheatre. Cette class hérite de la class Evenement.
+ */
+
 public class PieceDeTheatre extends Evenement {
 
     //ATTRIBUTIONS
     private ArrayList<Accessoire> accessoires;
 
     //CONSTRUCTEUR
+
+    /**
+     * Le constructeur des objets PieceDeTheatre prend en paramètre le nom de la Piece, la capacité de spectateur qu'elle va accueillir, le cout initial nécessaire, le prix des tickets, une date de débt et de fin, une description de la pièce de théàtre, ainsi qu'une salle dans laquelle la pièce va se passer.
+     * @param nom
+     * @param capaciteParticipants
+     * @param coutInitial
+     * @param prixTickets
+     * @param debut
+     * @param fin
+     * @param description
+     * @param salle
+     * @throws CreateException
+     */
     public PieceDeTheatre(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         super(nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
         this.accessoires = new ArrayList<>();
@@ -18,6 +35,10 @@ public class PieceDeTheatre extends Evenement {
 
     //GETTER
 
+    /**
+     * Cette fonction renvoie la liste des accessoires reliés à la pièce de théàtre.
+     * @return
+     */
     public ArrayList<Accessoire> getAccessoires() {
         return accessoires;
     }
