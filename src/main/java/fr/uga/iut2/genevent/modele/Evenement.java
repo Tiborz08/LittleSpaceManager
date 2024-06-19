@@ -37,8 +37,8 @@ public abstract class Evenement implements Comparable<Evenement> {
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         setCapaciteParticipants(capaciteParticipants);
         setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
-        this.coutInitial = coutInitial;
-        this.prixTickets = prixTickets;
+        setCoutInitial(coutInitial);
+        setPrixTickets(prixTickets);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
@@ -80,6 +80,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         return prixTickets;
     }
 
+    public void setPrixTickets(float prixTickets) {
+        this.prixTickets = Math.max(0, prixTickets);
+    }
+
     public String getNom() {
         return nom;
     }
@@ -106,6 +110,10 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public float getCoutInitial() {
         return coutInitial;
+    }
+
+    public void setCoutInitial(float coutInitial) {
+        this.coutInitial = Math.max(0, coutInitial);
     }
 
     /**
