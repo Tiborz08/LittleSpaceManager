@@ -257,7 +257,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public void setDebut(Date debutEv) {
         if (salle.verifierDisponibilite(debutEv, this.fin) && (debutEv.before(this.fin) || debutEv.equals(this.fin))) {
-            this.debut = debut;
+            this.debut = debutEv;
             log.info("La date de début de l'événement " + this.getNom() + " a été modifiée à " + LittleSpaceManager_Utilitaire.afficherDateChiffre(debutEv) + ".");
         }
     }
@@ -270,7 +270,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public void setFin(Date finEv) {
         if (salle.verifierDisponibilite(this.debut, finEv) && (this.debut.before(finEv) || this.debut.equals(finEv))) {
-            this.fin = fin;
+            this.fin = finEv;
             log.info("La date de fin de l'événement " + this.getNom() + " a été modifiée à " + LittleSpaceManager_Utilitaire.afficherDateChiffre(finEv));
         }
     }
