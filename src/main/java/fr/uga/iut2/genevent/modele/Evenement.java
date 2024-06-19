@@ -469,7 +469,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
     @Override
     public String toString() {
-        return "Nom : " + nom + "\n" +
+        return this.getClass().getSimpleName() + " : " + nom + "\n" +
                 "Adresse : " + salle.getAdresse() + "\n" +
                 "Début : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(debut) + "\n" +
                 "Fin : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(fin) + "\n" +
