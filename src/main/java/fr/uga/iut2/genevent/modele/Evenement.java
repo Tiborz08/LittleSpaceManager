@@ -113,8 +113,16 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
-    public void setSalle(Salle salle) {
-        if (capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()) {
+    public void setSalle(Salle salle) throws CreateException {
+        if (salle == null) {
+            Salle temporaire = this.salle;
+            this.salle = null;
+            if(temporaire != null){
+                temporaire.enleverDeLHistorique(this);
+            }
+
+        }
+        else if (capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()) {
             salle.addEvenement(this);
             this.salle = salle;
         } else {
