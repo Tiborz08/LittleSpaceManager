@@ -326,7 +326,7 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onValiderModificationClick() throws CreateException, IOException {
+    private void onValiderModificationClick() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AccueilView.fxml"));
         loader.setController(mainControleur);
         Parent root = loader.load();
@@ -343,7 +343,12 @@ public class ModificationEvenementController {
         if (!debut.equals(evenement.getDebut()) || !fin.equals(evenement.getFin())){
             Salle temp = evenement.getSalle();
             evenement.setSalle(null);
-            evenement.definirDates(temp, debut, fin);
+            try {
+                evenement.definirDates(temp, debut, fin);
+            }
+            catch (CreateException e){
+                mainControleur.afficherFenetreErreur(e.getMessage());
+            }
             evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
