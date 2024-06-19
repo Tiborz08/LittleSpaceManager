@@ -389,7 +389,8 @@ public class ModificationEvenementController {
         }
 
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 
     private  void onCreerAssocierClick(Event event){
