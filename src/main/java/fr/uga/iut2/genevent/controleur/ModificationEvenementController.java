@@ -349,8 +349,8 @@ public class ModificationEvenementController {
         if (!cbSalle.getValue().equals(evenement.getSalle())){
             evenement.setSalle(cbSalle.getValue());
         }
-        if (!tfPrixTicket.getText().equalsIgnoreCase(String.valueOf(evenement.getPrixTickets()))){
-            evenement.setPrixTickets(Integer.parseInt(tfPrixTicket.getText()));
+        if ((Float.parseFloat(tfPrixTicket.getText()) != evenement.getPrixTickets())){
+            evenement.setPrixTickets(Float.parseFloat(tfPrixTicket.getText()));
         }
 
         stage.setScene(new Scene(root));
