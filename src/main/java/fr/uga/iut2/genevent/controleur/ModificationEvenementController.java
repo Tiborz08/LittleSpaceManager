@@ -300,12 +300,17 @@ public class ModificationEvenementController {
     }
 
     private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
+        Stage satge = (Stage) btnCreerAssocier.getScene().getWindow();
+        satge.close();
         if (typepersonne.compareToIgnoreCase("spectateur")==0){
             mainControleur.onButtonCreerSpectateur(event);
+            ouvertureAssociationPage("Spectateur");
         } else if (typepersonne.compareToIgnoreCase("personnel")==0) {
             mainControleur.onButtonCreerPersonnel(event);
+            ouvertureAssociationPage("Personnel");
         }else {
             mainControleur.onButtonCreerArtiste(event);
+            ouvertureAssociationPage("Artiste");
         }
     }
 
