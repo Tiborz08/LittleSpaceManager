@@ -15,8 +15,8 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     private int idEvent;
     private String nom;
-    private int capaciteParticipants;
-    private int capaciteSpectateur;
+    public int capaciteParticipants;
+    public int capaciteSpectateur;
     private float coutInitial;
     private float prixTickets;
     private Date debut;
@@ -36,7 +36,6 @@ public abstract class Evenement implements Comparable<Evenement> {
         setSalleAdaptee(salle, capaciteParticipants);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         setCapaciteParticipants(capaciteParticipants);
-        setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
         setCoutInitial(coutInitial);
         setPrixTickets(prixTickets);
         setDescription(description);
@@ -137,9 +136,10 @@ public abstract class Evenement implements Comparable<Evenement> {
             }
 
         }
-        else if (capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()) {
+        else if (capaciteParticipants <= salle.getCapacite_max()) {
             salle.addEvenement(this);
             this.salle = salle;
+            setCapaciteParticipants(capaciteParticipants);
         } else {
             throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
@@ -213,8 +213,9 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
 
     public void setCapaciteParticipants(int capacite) {
-        if (capaciteSpectateur + capacite <= salle.getCapacite_max()) {
+        if (capacite <= salle.getCapacite_max()) {
             this.capaciteParticipants = capacite;
+            capaciteSpectateur = salle.getCapacite_max() - capaciteParticipants;
         }
 
     }
