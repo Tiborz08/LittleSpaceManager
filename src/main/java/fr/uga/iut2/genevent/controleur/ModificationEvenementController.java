@@ -268,23 +268,23 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onCreerClick(Event event){
+    private void onCreerClick(ActionEvent event) throws Exception {
         String typepersonne= lbAssocier.getText();
         String[] words = typepersonne.split(" ");
         ArrayList<String> tmp=new ArrayList<>();
         for (String word : words) {
             tmp.add(word);
         }
-        ouvertureBonnePageCreer(tmp.get(2));
+        ouvertureBonnePageCreer(tmp.get(2),event);
     }
 
-    private  void ouvertureBonnePageCreer(String typepersonne){
-        if (typepersonne.equals("spectateur")){
-
-        } else if (typepersonne.equals("spectateur")) {
-
+    private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
+        if (typepersonne.compareToIgnoreCase("spectateur")==0){
+            mainControleur.onButtonCreerSpectateur(event);
+        } else if (typepersonne.compareToIgnoreCase("personnel")==0) {
+            mainControleur.onButtonCreerPersonnel(event);
         }else {
-
+            mainControleur.onButtonCreerArtiste(event);
         }
     }
 
