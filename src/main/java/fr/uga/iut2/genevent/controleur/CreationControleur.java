@@ -202,7 +202,7 @@ public class CreationControleur {
 
     private void creerSalle() throws Exception {
         String nom = tfNomSalle.getText();
-        int capaciteMax = 0;
+        int capaciteMax;
         String adresse = tfAdresse.getText();
         String tagsLong = taTags.getText();
         if (nom.isEmpty()) {
