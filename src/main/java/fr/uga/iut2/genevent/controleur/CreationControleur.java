@@ -61,7 +61,7 @@ public class CreationControleur {
 
     //Attribut ALL Button
     @FXML
-    private Button btAnnuler, btCreer;
+    private Button btnAnnuler, btCreer;
 
     @FXML
     private TextArea taTags;
@@ -153,7 +153,7 @@ public class CreationControleur {
 
     @FXML
     public void onAnnulerClick(ActionEvent event) {
-        Stage stage = (Stage) btAnnuler.getScene().getWindow();
+        Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
 
@@ -227,8 +227,8 @@ public class CreationControleur {
                 stage.close();
                 log.info("Salle créée : " + salle.getNom() + ", " + salle.getAdresse() + ", " + salle.getCapacite_max() + " personnes maximum");
             } catch (NumberFormatException e) {
-                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
-                ;
+                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                throw new CreateException("La capacité de la salle est trop élévée");
             }
 
         } else {
@@ -392,7 +392,7 @@ public class CreationControleur {
      * @throws CreateException
      */
 
-    private void creerEvenement() throws CreateException {
+    private void creerEvenement() throws Exception {
         String nom;
         int capaciteParticipant;
         float coutInitial;
@@ -409,17 +409,42 @@ public class CreationControleur {
         if (tfCapaciteParticipant.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le nombre maximal d'employés");
         } else {
-            capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+
+            try {
+                capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+                if(capaciteParticipant > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le nombre de salariés maximum est trop élevé");
+            }
         }
         if (tfCoutInitial.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le coût initial de l'événement");
         } else {
-            coutInitial = Float.parseFloat(tfCoutInitial.getText());
+            try {
+                coutInitial = Float.parseFloat(tfCoutInitial.getText());
+                if(coutInitial > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le coût initial de l'événement est trop important");
+            }
         }
         if (tfPrixTicket.getText().isEmpty()) {
             throw new CreateException("Vous devez renseigner le prix pour un ticket, si l'évenement est gratuit, renseignez 0");
         } else {
-            prixTicket = Float.parseFloat(tfPrixTicket.getText());
+            try {
+                prixTicket = Float.parseFloat(tfPrixTicket.getText());
+                if(prixTicket > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le prix du ticket est trop élevé");
+            }
         }
         debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -431,7 +456,7 @@ public class CreationControleur {
 
         if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")) {
             evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théàtre")) {
+        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théâtre")) {
             evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")) {
             evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
