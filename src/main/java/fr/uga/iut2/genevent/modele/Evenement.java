@@ -341,8 +341,8 @@ public abstract class Evenement implements Comparable<Evenement> {
     public String toString() {
         return "Nom : " + nom + "\n" +
                 "Adresse : " + salle.getAdresse() + "\n" +
-                "Début : " + debut + "\n" +
-                "Fin : " + fin + "\n" +
+                "Début : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(debut) + "\n" +
+                "Fin : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(fin) + "\n" +
                 "Description : " + description;
     }
 }
