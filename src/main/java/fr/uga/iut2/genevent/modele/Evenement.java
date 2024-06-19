@@ -31,11 +31,10 @@ public abstract class Evenement implements Comparable<Evenement> {
     //CONSTRUCTEUR(S)
 
     public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
-        this.nom = nom;
+        setNom(nom);
         definirDates(salle, debut, fin);
         setSalleAdaptee(salle, capaciteParticipants);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
-        this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
         setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
         this.coutInitial = coutInitial;
@@ -83,6 +82,14 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public String getNom() {
         return nom;
+    }
+
+    public void setNom(String string){
+        if (string != null && !string.isEmpty()) {
+            this.nom = LittleSpaceManager_Utilitaire.capitalize(string);
+        } else {
+            this.nom = "Aucun nom";
+        }
     }
 
     public int getNombreParticipants() {
