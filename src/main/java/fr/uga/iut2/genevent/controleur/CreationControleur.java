@@ -227,8 +227,8 @@ public class CreationControleur {
                 stage.close();
                 log.info("Salle créée : " + salle.getNom() + ", " + salle.getAdresse() + ", " + salle.getCapacite_max() + " personnes maximum");
             } catch (NumberFormatException e) {
-                laCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
-                ;
+                tfCapaciteMax.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");
+                throw new CreateException("La capacité de la salle est trop élévée");
             }
 
         } else {
