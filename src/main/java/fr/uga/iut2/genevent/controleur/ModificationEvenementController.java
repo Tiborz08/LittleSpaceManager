@@ -64,6 +64,9 @@ public class ModificationEvenementController {
     @FXML
     private Button btnModifiactionValider;
 
+    //Spec Piece de theatre
+    @FXML
+    private Button btnSpec;
 
 
     //Supprimer evenement
@@ -118,18 +121,6 @@ public class ModificationEvenementController {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
-
-            /*=================================================================
-                A modifier quand La liste des événements sera fonctionelle
-            ==================================================================*/
-
-//            Salle testSalle = new Salle("i", "Jardin d'Eden", 200);
-//            Concert eventActuel = new Concert("HeavenFest", 1, 1000, 15, new Date(), new Date(), "Feur", testSalle);
-//            Artiste Adam = new Artiste("", "Adam", 100, 1.5f);
-//            eventActuel.addParticipant(Adam);
-
-            //==================================================================
-
 
             labelCoutInitial.setText(String.valueOf(evenement.getCoutInitial()));
 
@@ -215,6 +206,9 @@ public class ModificationEvenementController {
         cbSalle.setItems(listeSalle);
         cbSalle.setValue(evenement.getSalle());
         tfPrixTicket.setText(String.valueOf(evenement.getPrixTickets()));
+
+        //Bouton spec qui s'active que si l'event est une pdt ou un concert.
+        btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
 
         Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
         popupPrecedent.close();
@@ -354,5 +348,13 @@ public class ModificationEvenementController {
         }
 
         stage.setScene(new Scene(root));
+    }
+
+    //Bouton Spec accessoires
+
+
+    @FXML
+    public void onSpecClick() throws IOException {
+
     }
 }
