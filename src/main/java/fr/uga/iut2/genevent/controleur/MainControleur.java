@@ -147,7 +147,7 @@ public class MainControleur {
      * @param textErreur le message d'erreur affiché
      */
     public void afficherFenetreErreur(String textErreur) throws Exception {
-        log.warn(textErreur);
+        log.error(textErreur);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AlerteErreurView.fxml"));
         loader.setController(this);
