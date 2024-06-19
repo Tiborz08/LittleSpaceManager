@@ -18,6 +18,7 @@ public class PieceDeTheatre extends Evenement {
 
     //GETTER
 
+    @Override
     public ArrayList<Accessoire> getAccessoires() {
         return accessoires;
     }
@@ -28,12 +29,10 @@ public class PieceDeTheatre extends Evenement {
      * Permet de créer et d'ajouter un accessoire à une pièce de théatre.
      *
      * @param nom nom de l'accessorie à crée et ajouté.
-     * @return l'accessorie crée
      */
-    public Accessoire addAccessoire(String nom) {
-        Accessoire a = new Accessoire(nom, this);
-        accessoires.add(a);
-        return a;
+    @Override
+    public void addAccessoire(String nom) {
+        accessoires.add(new Accessoire(nom, this));
     }
 
     /**

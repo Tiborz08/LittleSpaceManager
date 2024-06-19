@@ -362,4 +362,10 @@ public abstract class Evenement implements Comparable<Evenement> {
                 "Fin : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(fin) + "\n" +
                 "Description : " + description;
     }
+
+    public ArrayList<Accessoire> getAccessoires(){
+        return null;
+    }
+
+    public void addAccessoire(String nom){}
 }

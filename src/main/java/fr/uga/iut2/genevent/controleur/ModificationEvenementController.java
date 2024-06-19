@@ -135,7 +135,7 @@ public class ModificationEvenementController {
             //=================================================================
 
             popupStage.setScene(scene);
-            popupStage.setTitle("Bilan Comptable");
+            popupStage.setTitle("Bilan : "+evenement.getNom());
             popupStage.show();
 
         } catch (Exception e) {
@@ -360,9 +360,90 @@ public class ModificationEvenementController {
 
     //Bouton Spec accessoires
 
+    @FXML
+    private Button btnValiderAjoutAccessoire;
+    @FXML
+    private Button btnAjouterAccessoire;
+    @FXML
+    private ListView<Accessoire> lvAccessoire;
+    @FXML
+    private Button btnValiderAccessoire;
+    @FXML
+    private TextField tfNomAccessoire;
+    @FXML
+    private Button btnRetourAjoutAccessoire;
 
     @FXML
-    public void onSpecClick() throws IOException {
+    public void onSpecClick(ActionEvent event){
+        try{
+            String type = "";
+            if(evenement instanceof Concert){
+                type="Genre";
+            }else {
+                type = "Accessoire";
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/Modif"+type+"View.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root);
 
+            if(evenement instanceof Concert){
+
+            }else {
+                ObservableList<Accessoire> listeAccessoire = FXCollections.observableArrayList(new ArrayList<>(evenement.getAccessoires()));
+                lvAccessoire.setItems(listeAccessoire);
+            }
+
+            popupStage.setScene(scene);
+            popupStage.setTitle("Ajout à : "+evenement);
+            popupStage.show();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onValiderAjoutAccessoireClick(ActionEvent event){
+        Stage stage = (Stage) btnValiderAjoutAccessoire.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void onAjouterAccessoireClick(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationAccessoireView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root);
+
+            popupStage.setScene(scene);
+            popupStage.setTitle("Ajout à : "+evenement);
+            popupStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onValiderAccessoireClick(ActionEvent event){
+        evenement.addAccessoire(tfNomAccessoire.getText());
+        ObservableList<Accessoire> listeAccessoire = FXCollections.observableArrayList(new ArrayList<>(evenement.getAccessoires()));
+        lvAccessoire.setItems(listeAccessoire);
+
+        Stage stage = (Stage) btnValiderAccessoire.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void onRetourAjoutAccessoireClick(ActionEvent event){
+        Stage stage = (Stage) btnRetourAjoutAccessoire.getScene().getWindow();
+        stage.close();
     }
 }
