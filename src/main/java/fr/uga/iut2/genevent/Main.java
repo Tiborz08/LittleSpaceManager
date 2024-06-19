@@ -1,5 +1,6 @@
 package fr.uga.iut2.genevent;
 
+import fr.uga.iut2.genevent.controleur.MainControleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +23,7 @@ public class Main extends Application {
         @Override
         public void start(Stage stage) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("vue/AccueilView.fxml"));
+            fxmlLoader.setController(new MainControleur());
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("LittleSpaceManager");
             stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));

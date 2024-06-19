@@ -1,5 +1,6 @@
 package fr.uga.iut2.genevent.controleur;
 
+import fr.uga.iut2.genevent.exception.CreateException;
 import fr.uga.iut2.genevent.modele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,15 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ModificationEvenementController {
 
@@ -46,13 +46,26 @@ public class ModificationEvenementController {
     @FXML
     private Label lbAssocier;
     @FXML
+    private ComboBox<Personne> cbAssocier;
+
+    //Modification événement
+    @FXML
     private ListView<Participant> lvPersonnel;
     @FXML
     private ListView<Spectateur> lvSpectateur;
     @FXML
     private ListView<Participant> lvArtiste;
     @FXML
-    private ComboBox<Personne> cbAssocier;
+    private TextField tfNom, tfPrixTicket;
+    @FXML
+    private DatePicker dpDebut, dpFin;
+    @FXML
+    private ComboBox<Salle> cbSalle;
+    @FXML
+    private Button btnModifiactionValider;
+
+
+
     //Supprimer evenement
     @FXML
     private Button btnValiderSupre;
@@ -195,6 +208,14 @@ public class ModificationEvenementController {
 
         Stage stage = mainControleur.getStage();
 
+        tfNom.setText(evenement.getNom());
+        dpDebut.setValue(evenement.getDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        dpFin.setValue(evenement.getFin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        ObservableList<Salle> listeSalle = FXCollections.observableArrayList(mainControleur.getSalles());
+        cbSalle.setItems(listeSalle);
+        cbSalle.setValue(evenement.getSalle());
+        tfPrixTicket.setText(String.valueOf(evenement.getPrixTickets()));
+
         Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
         popupPrecedent.close();
 
@@ -289,7 +310,7 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onValiderClick() {
+    private void onValiderAssociationClick() {
         Stage stage = (Stage) btnValider.getScene().getWindow();
 
         if (cbAssocier.getValue() != null) {
@@ -302,5 +323,36 @@ public class ModificationEvenementController {
         }
         initialize();
         stage.close();
+    }
+
+    @FXML
+    private void onValiderModificationClick() throws CreateException, IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AccueilView.fxml"));
+        loader.setController(mainControleur);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) btnModifiactionValider.getScene().getWindow();
+
+
+        Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        if (!tfNom.getText().equalsIgnoreCase(evenement.getNom())){
+            evenement.setNom(tfNom.getText());
+        }
+        if (!debut.equals(evenement.getDebut())){
+            evenement.setDebut(debut);
+        }
+        if (!fin.equals(evenement.getFin())){
+            evenement.setFin(fin);
+        }
+        if (!cbSalle.getValue().equals(evenement.getSalle())){
+            evenement.setSalle(cbSalle.getValue());
+        }
+        if (!tfPrixTicket.getText().equalsIgnoreCase(String.valueOf(evenement.getPrixTickets()))){
+            evenement.setPrixTickets(Integer.parseInt(tfPrixTicket.getText()));
+        }
+
+        stage.setScene(new Scene(root));
     }
 }
