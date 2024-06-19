@@ -159,6 +159,7 @@ public class ModificationEvenementController {
     public void onValiderSupre(Event event) {
         try {
             mainControleur.getEvenements().remove(evenement);
+            evenement.setSalle(null);
             Stage stage = (Stage) btnValiderSupre.getScene().getWindow();
             stage.close();
             Stage stage1 = (Stage) btnRetour.getScene().getWindow();
