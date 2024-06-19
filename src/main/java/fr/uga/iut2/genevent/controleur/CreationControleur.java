@@ -456,7 +456,7 @@ public class CreationControleur {
 
         if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")) {
             evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
-        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théàtre")) {
+        } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théâtre")) {
             evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")) {
             evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
