@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -81,16 +80,6 @@ public class ModificationEvenementController {
     //option personne
     @FXML
     private Button btnSuprPersonne, btnModifierPersonne;
-
-    //modification personne
-    @FXML
-    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
-    @FXML
-    private ComboBox<Integer> cbPopularite;
-    @FXML
-    private Label lbCreation;
-    @FXML
-    private Button btCreer;
 
 
     //Supprimer evenement
@@ -163,8 +152,10 @@ public class ModificationEvenementController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+
+            // stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.showAndWait();
+            stage.show();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -342,7 +333,7 @@ public class ModificationEvenementController {
         tfPrixTicket.setText(String.valueOf(evenement.getPrixTickets()));
 
         //Bouton spec qui s'active que si l'event est une pdt ou un concert.
-        btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
+        // btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
 
         Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
         popupPrecedent.close();
@@ -399,8 +390,7 @@ public class ModificationEvenementController {
         }
 
         stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        stage.show();
     }
 
     private  void onCreerAssocierClick(Event event){
@@ -571,7 +561,7 @@ public class ModificationEvenementController {
         }
     }
 
-    //Bouton Spec accessoires + genre
+    //Bouton Spec accessoires
 
     @FXML
     private Button btnValiderAjoutAccessoire;
@@ -585,12 +575,6 @@ public class ModificationEvenementController {
     private TextField tfNomAccessoire;
     @FXML
     private Button btnRetourAjoutAccessoire;
-    @FXML
-    private TextField tfGenre;
-    @FXML
-    private Button btnRetourGenre;
-    @FXML
-    private Button btnValiderGenre;
 
     @FXML
     public void onSpecClick(ActionEvent event){
@@ -610,15 +594,14 @@ public class ModificationEvenementController {
             Scene scene = new Scene(root);
 
             if(evenement instanceof Concert){
-                popupStage.setTitle("Modif genre de : "+evenement.getNom());
-                tfGenre.setText(((Concert) evenement).getGenre());
+
             }else {
                 ObservableList<Accessoire> listeAccessoire = FXCollections.observableArrayList(new ArrayList<>(evenement.getAccessoires()));
                 lvAccessoire.setItems(listeAccessoire);
-                popupStage.setTitle("Ajout à : "+evenement.getNom());
             }
 
             popupStage.setScene(scene);
+            popupStage.setTitle("Ajout à : "+evenement);
             popupStage.show();
 
         }catch (Exception e) {
@@ -668,23 +651,6 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    public void onRetourGenreClick(ActionEvent event){
-        Stage stage = (Stage) btnRetourGenre.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    public void onValiderGenreClick(ActionEvent event){
-        if(!Objects.equals(tfGenre.getText(), "")){
-            ((Concert) evenement).setGenre(tfGenre.getText());
-        }
-        Stage stage = (Stage) btnValiderGenre.getScene().getWindow();
-        stage.close();
-    }
-
-    //=====================================
-
-    @FXML
     private void onSuprPersonne(Event event){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
@@ -705,7 +671,15 @@ public class ModificationEvenementController {
 
     }
 
-
+    //modification personne
+    @FXML
+    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
+    @FXML
+    private ComboBox<Integer> cbPopularite;
+    @FXML
+    private Label lbCreation;
+    @FXML
+    private Button btCreer;
 
     @FXML
     private void onButtonModifierPersonne() throws IOException {
