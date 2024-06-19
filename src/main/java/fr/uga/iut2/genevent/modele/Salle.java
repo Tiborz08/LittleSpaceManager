@@ -1,5 +1,7 @@
 package fr.uga.iut2.genevent.modele;
 
+import fr.uga.iut2.genevent.exception.CreateException;
+
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -57,14 +59,14 @@ public class Salle {
         return evenements;
     }
 
-    public void addEvenement(Evenement evenement) {
+    public void addEvenement(Evenement evenement) throws CreateException {
         if (!evenements.contains(evenement) && verifierDisponibilite(evenement.getDebut(), evenement.getFin())) {
             evenements.add(evenement);
             evenement.setSalle(this);
         }
     }
 
-    public void enleverDeLHistorique(Evenement evenement) {
+    public void enleverDeLHistorique(Evenement evenement) throws CreateException {
         this.evenements.remove(evenement);
         evenement.setSalle(null);
     }

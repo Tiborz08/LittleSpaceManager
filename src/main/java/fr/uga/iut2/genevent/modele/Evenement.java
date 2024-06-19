@@ -126,7 +126,7 @@ public abstract class Evenement implements Comparable<Evenement> {
             salle.addEvenement(this);
             this.salle = salle;
         } else {
-            System.out.println("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
+            throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
     }
 
