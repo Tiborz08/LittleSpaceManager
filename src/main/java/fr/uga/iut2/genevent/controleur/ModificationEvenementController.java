@@ -329,6 +329,7 @@ public class ModificationEvenementController {
 
     @FXML
     private void onValiderModificationClick() throws Exception {
+        boolean aucuneErreur = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AccueilView.fxml"));
         loader.setController(mainControleur);
         Parent root = loader.load();
@@ -349,18 +350,27 @@ public class ModificationEvenementController {
                 evenement.definirDates(temp, debut, fin);
             }
             catch (CreateException e){
+                aucuneErreur = false;
                 mainControleur.afficherFenetreErreur(e.getMessage());
             }
             evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
-            evenement.setSalle(cbSalle.getValue());
+            try {
+                evenement.setSalle(cbSalle.getValue());
+            }
+            catch (CreateException e){
+                aucuneErreur = false;
+                mainControleur.afficherFenetreErreur(e.getMessage());
+            }
         }
         if ((Float.parseFloat(tfPrixTicket.getText()) != evenement.getPrixTickets())){
             evenement.setPrixTickets(Float.parseFloat(tfPrixTicket.getText()));
         }
 
-        stage.setScene(new Scene(root));
+        if(aucuneErreur){
+            stage.setScene(new Scene(root));
+        }
     }
 
     //Bouton Spec accessoires
