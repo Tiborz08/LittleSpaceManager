@@ -82,7 +82,11 @@ public class ModificationEvenementController {
     private MainControleur mainControleur;
     private Evenement evenement;
 
-
+    /**
+     * Initialise la vue de modification d'un événement.
+     * Cette méthode est appelée automatiquement après que le fichier FXML associé a été chargé.
+     * Elle met à jour les listes des participants de l'événement.
+     */
     public void initialize() {
         if (lvSpectateur != null && lvPersonnel != null && lvArtiste != null) {
             actualisationListe();
@@ -91,25 +95,52 @@ public class ModificationEvenementController {
 
     //Methodes
 
+    /**
+     * Définit le contrôleur principal de l'application.
+     *
+     * @param mainControleur le contrôleur principal de l'application.
+     */
     public void setMainControleur(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
+    /**
+     * Définit l'événement à modifier.
+     *
+     * @param evenement l'événement à modifier.
+     */
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
     }
 
+    /**
+     * Ferme la fenêtre de modification d'un événement lorsque le bouton Quitter est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onQuitterClick(ActionEvent event) {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Ferme la fenêtre de modification d'un événement lorsque le bouton Retour est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onRetourClick(ActionEvent event) {
         Stage stage = (Stage) btnRetour.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Affiche le bilan comptable de l'événement lorsque le bouton Bilan est cliqué.
+     *
+     * @param event
+     * @throws Exception
+     */
 
     @FXML
     public void onBilanClick(ActionEvent event) throws Exception {
@@ -145,6 +176,13 @@ public class ModificationEvenementController {
 
     }
 
+
+    /**
+     * Affiche une fenêtre de confirmation de suppression de l'événement lorsque le bouton Supprimer est cliqué.
+     *
+     * @param event
+     */
+
     @FXML
     public void onSupr(Event event) {
         try {
@@ -163,6 +201,11 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Supprime l'événement lorsque le bouton Valider de la fenêtre de confirmation de suppression est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onValiderSupre(Event event) {
         try {
@@ -181,6 +224,13 @@ public class ModificationEvenementController {
 
     }
 
+
+    /**
+     * Ferme la fenêtre de confirmation de suppression de l'événement lorsque le bouton Annuler est cliqué.
+     *
+     * @param event l'événement Event qui a déclenché la fermeture de la fenêtre de confirmation.
+     */
+
     @FXML
     public void onAnnulerSupre(Event event) {
         try {
@@ -191,6 +241,11 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Affiche la fenêtre de modification d'un événement lorsque le bouton Modifier est cliqué.
+     *
+     * @throws IOException
+     */
     @FXML
     public void onButtonModifierClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ModificationEvenementView.fxml"));
@@ -216,6 +271,10 @@ public class ModificationEvenementController {
         stage.setScene(new Scene(root));
     }
 
+    /**
+     * Met à jour les listes des participants (personnel, artistes et spectateurs) de l'événement.
+     */
+
     private void actualisationListe() {
 
         //test
@@ -228,6 +287,13 @@ public class ModificationEvenementController {
         ObservableList<Spectateur> listeSpectateur = FXCollections.observableArrayList(evenement.getSpectateurs());
         lvSpectateur.setItems(listeSpectateur);
     }
+
+    /**
+     * Affiche la fenêtre d'association d'un participant à l'événement en fonction du type de participant spécifié.
+     *
+     * @param typePersonne le type de participant à associer à l'événement.
+     * @throws IOException
+     */
 
     private void ouvertureAssociationPage(String typePersonne) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AssocierView.fxml"));
@@ -261,26 +327,53 @@ public class ModificationEvenementController {
 
     }
 
+    /**
+     * Affiche la fenêtre d'association d'un spectateur à l'événement lorsque le bouton Spectateur est cliqué.
+     *
+     * @throws IOException
+     */
+
     @FXML
     private void onSpectateurClick() throws IOException {
         ouvertureAssociationPage("spectateur");
     }
+
+    /**
+     * Affiche la fenêtre d'association d'un artiste à l'événement lorsque le bouton Artiste est cliqué.
+     *
+     * @throws IOException
+     */
 
     @FXML
     private void onArtisteClick() throws IOException {
         ouvertureAssociationPage("artiste");
     }
 
+    /**
+     * Affiche la fenêtre d'association d'un membre du personnel à l'événement lorsque le bouton Personnel est cliqué.
+     *
+     * @throws IOException
+     */
     @FXML
     private void onPersonnelClick() throws IOException {
         ouvertureAssociationPage("personnel");
     }
 
+    /**
+     * Ferme la fenêtre d'association d'un participant à l'événement lorsque le bouton Annuler est cliqué.
+     */
     @FXML
     private void onAnnulerClick() {
         Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Affiche la fenêtre de création d'un participant en fonction du type de participant spécifié.
+     *
+     * @param event
+     * @throws Exception
+     */
 
     @FXML
     private void onCreerClick(ActionEvent event) throws Exception {
@@ -292,6 +385,14 @@ public class ModificationEvenementController {
         }
         ouvertureBonnePageCreer(tmp.get(2),event);
     }
+
+    /**
+     * Affiche la fenêtre de création d'un participant en fonction du type de participant spécifié.
+     *
+     * @param typepersonne le type de participant à créer.
+     * @param event
+     * @throws Exception
+     */
 
     private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
         Stage satge = (Stage) btnCreerAssocier.getScene().getWindow();
@@ -311,6 +412,10 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Associe un participant à l'événement lorsque le bouton Valider de la fenêtre d'association est cliqué.
+     */
+
     @FXML
     private void onValiderAssociationClick() {
         Stage stage = (Stage) btnValider.getScene().getWindow();
@@ -326,6 +431,14 @@ public class ModificationEvenementController {
         initialize();
         stage.close();
     }
+
+
+    /**
+     * Met à jour les informations de l'événement avec les modifications saisies dans l'interface utilisateur.
+     *
+     * @throws CreateException
+     * @throws IOException
+     */
 
     @FXML
     private void onValiderModificationClick() throws CreateException, IOException {
