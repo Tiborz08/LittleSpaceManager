@@ -5,6 +5,10 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 
+/**
+ * Cette Class permet de créer des objets de type Participant. Cette Class est une classe fille de la class Pesonne.
+ */
+
 public abstract class Participant extends Personne {
 
     private static final Log log = LogFactory.getLog(Participant.class);
@@ -12,6 +16,13 @@ public abstract class Participant extends Personne {
     private float salaire;
 
     //CONSTRUCTEUR
+
+    /**
+     * Pour créer un objet type Participant, il faut fournir le nom, prenom et salaire du Participant.
+     * @param nom
+     * @param prenom
+     * @param salaire
+     */
     public Participant(String nom, String prenom, float salaire) {
         super(nom, prenom);
         setSalaire(salaire);
@@ -29,10 +40,19 @@ public abstract class Participant extends Personne {
     }
 
     //GETTER
+
+    /**
+     * Cette fonction renvoie le salaire du participant.
+     * @return
+     */
     public float getSalaire() {
         return salaire;
     }
 
+    /**
+     * Cette fonction renvoie la liste des événements auquel le participant participe.
+     * @return
+     */
     public ArrayList<Evenement> getEvenements() {
         return evenements;
     }
