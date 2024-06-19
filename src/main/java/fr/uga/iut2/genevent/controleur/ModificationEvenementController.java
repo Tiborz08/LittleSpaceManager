@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.logging.Log;
@@ -23,6 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.function.Consumer;
 
+/**
+ * Contrôleur pour la modification d'un événement.
+ * Cette classe gère les interactions avec l'interface utilisateur et la logique métier pour modifier un événement.
+ */
 public class ModificationEvenementController {
 
     private static final Log log = LogFactory.getLog(ModificationEvenementController.class);
@@ -147,8 +152,10 @@ public class ModificationEvenementController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+
+           // stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.showAndWait();
+            stage.show();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -208,6 +215,8 @@ public class ModificationEvenementController {
             loader.setController(this);
             Parent root = loader.load();
             Stage popupStage = new Stage();
+            popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
+
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
@@ -249,6 +258,8 @@ public class ModificationEvenementController {
             loader.setController(this);
             Parent root = loader.load();
             Stage popupStage = new Stage();
+            popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
+
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
@@ -322,7 +333,7 @@ public class ModificationEvenementController {
         tfPrixTicket.setText(String.valueOf(evenement.getPrixTickets()));
 
         //Bouton spec qui s'active que si l'event est une pdt ou un concert.
-        btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
+       // btnSpec.setDisable(!(evenement instanceof PieceDeTheatre | evenement instanceof Concert));
 
         Stage popupPrecedent = (Stage) btnModifier.getScene().getWindow();
         popupPrecedent.close();
@@ -640,12 +651,120 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onSuprPersonne(){
+    private void onSuprPersonne(Event event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Stage popupStage = new Stage();
+            popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+            Scene scene = new Scene(root, 498, 245);
+            popupStage.setScene(scene);
+            popupStage.setTitle("Supprimer " + evenement.getNom() + " ?");
+            popupStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
+    //modification personne
     @FXML
-    private void onModifierPersonne(){
+    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
+    @FXML
+    private ComboBox<Integer> cbPopularite;
+    @FXML
+    private Label lbCreation;
+    @FXML
+    private Button btCreer;
 
+    @FXML
+    private void onButtonModifierPersonne() throws IOException {
+        FXMLLoader loader;
+        Parent root;
+
+        if (personne instanceof Artiste) {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationArtisteView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            Artiste artiste = (Artiste) personne;
+
+            tfNomPersonne.setText(artiste.getNom());
+            tfPrenomPersonne.setText(artiste.getPrenom());
+            tfSalaire.setText(String.valueOf(artiste.getSalaire()));
+            ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+            cbPopularite.setItems(options);
+            cbPopularite.setValue((int) artiste.getPopularite());
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Artiste", artiste));
+            lbCreation.setText("Modification d'un artiste");
+        } else if (personne instanceof Personnel) {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationPersonnelView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            Personnel personnel = (Personnel) personne;
+
+            tfNomPersonne.setText(personnel.getNom());
+            tfPrenomPersonne.setText(personnel.getPrenom());
+            tfSalaire.setText(String.valueOf(personnel.getSalaire()));
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Personnel", personnel));
+            lbCreation.setText("Modification d'un personnel");
+        } else {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationSpectateurView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            tfNomPersonne.setText(personne.getNom());
+            tfPrenomPersonne.setText(personne.getPrenom());
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Spectateur", personne));
+            lbCreation.setText("Modification d'un spectateur");
+        }
+
+        Stage stage = new Stage();
+        Stage popupPrecedent = (Stage) btnModifierPersonne.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+        popupPrecedent.close();
+        stage.show();
+    }
+
+    private void onButtonModifierPersonneValider(ActionEvent event, String type, Object personne) {
+        // Vérifiez le type et effectuez les opérations de modification nécessaires
+        if (type.equals("Artiste") && personne instanceof Artiste) {
+            Artiste artiste = (Artiste) personne;
+            artiste.setNom(tfNomPersonne.getText());
+            artiste.setPrenom(tfPrenomPersonne.getText());
+            artiste.setSalaire(Float.parseFloat(tfSalaire.getText()));
+            artiste.setPopularite(cbPopularite.getValue());
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+
+            System.out.println("Modification de l'artiste réussie : " + artiste);
+        } else if (type.equals("Personnel") && personne instanceof Personnel) {
+            Personnel personnel = (Personnel) personne;
+            personnel.setNom(tfNomPersonne.getText());
+            personnel.setPrenom(tfPrenomPersonne.getText());
+            personnel.setSalaire(Float.parseFloat(tfSalaire.getText()));
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+            System.out.println("Modification du personnel réussie : " + personnel);
+        } else if (type.equals("Spectateur") && personne != null) {
+            // Votre logique de modification pour le spectateur ici
+            System.out.println("Modification du spectateur réussie");
+            Spectateur spectateur = (Spectateur) personne;
+            spectateur.setNom(tfNomPersonne.getText());
+            spectateur.setPrenom(tfPrenomPersonne.getText());
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+        } else {
+            System.err.println("Type non reconnu ou personne invalide.");
+        }
     }
 }
