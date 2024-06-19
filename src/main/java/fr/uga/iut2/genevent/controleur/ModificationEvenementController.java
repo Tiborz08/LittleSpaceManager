@@ -14,14 +14,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.function.Consumer;
 
 public class ModificationEvenementController {
 
+    private static final Log log = LogFactory.getLog(ModificationEvenementController.class);
     //Bilan comptable
     @FXML
     private Button btnBilan;
@@ -68,6 +72,10 @@ public class ModificationEvenementController {
     @FXML
     private Button btnSpec;
 
+    //option personne
+    @FXML
+    private Button btnSuprPersonne, btnModifierPersonne;
+
 
     //Supprimer evenement
     @FXML
@@ -81,15 +89,65 @@ public class ModificationEvenementController {
 
     private MainControleur mainControleur;
     private Evenement evenement;
+    private Personne personne;
 
 
     public void initialize() {
         if (lvSpectateur != null && lvPersonnel != null && lvArtiste != null) {
             actualisationListe();
         }
+
+        if (lvArtiste != null){
+            ajouterGestionnaireDoubleClic(lvArtiste, this::ouvrirOptionView);
+        }
+        if (lvSpectateur != null){
+            ajouterGestionnaireDoubleClic(lvSpectateur, this::ouvrirOptionView);
+        }
+        if (lvPersonnel != null){
+            ajouterGestionnaireDoubleClic(lvPersonnel, this::ouvrirOptionView);
+        }
+    }
+    //Methodes
+
+    private <T> void ajouterGestionnaireDoubleClic(ListView<T> listView, Consumer<T> action) {
+        listView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    try {
+                        log.info("Selected item : " + selectedItem.toString());
+                        action.accept(selectedItem);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
-    //Methodes
+    @FXML
+    private <T> void ouvrirOptionView(T personne){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionPersonneView.fxml"));
+            loader.setController(this);
+
+            Parent root = loader.load();
+
+            this.personne = (Personne) personne;
+
+            if (personne instanceof Spectateur){
+                btnModificationValider.setDisable(true);
+            } else {
+                btnModificationValider.setDisable(false);
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public void setMainControleur(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
@@ -363,6 +421,16 @@ public class ModificationEvenementController {
 
     @FXML
     public void onSpecClick() throws IOException {
+
+    }
+
+    @FXML
+    private void onSuprPersonne(){
+
+    }
+
+    @FXML
+    private void onModifierPersonne(){
 
     }
 }
