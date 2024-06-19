@@ -60,6 +60,9 @@ public class ModificationEvenementController {
     @FXML
     private Button btnAnnulerSupre;
 
+    @FXML
+    private  Button btnCreerAssocier;
+
 
     private MainControleur mainControleur;
     private Evenement evenement;
@@ -231,6 +234,10 @@ public class ModificationEvenementController {
         stage.show();
     }
 
+    private  void onCreerAssocierClick(Event event){
+
+    }
+
     @FXML
     private void onSpectateurClick() throws IOException {
         ouvertureAssociationPage("spectateur");
@@ -251,8 +258,24 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onCreerClick(){
+    private void onCreerClick(Event event){
+        String typepersonne= lbAssocier.getText();
+        String[] words = typepersonne.split(" ");
+        ArrayList<String> tmp=new ArrayList<>();
+        for (String word : words) {
+            tmp.add(word);
+        }
+        ouvertureBonnePageCreer(tmp.get(2));
+    }
 
+    private  void ouvertureBonnePageCreer(String typepersonne){
+        if (typepersonne.equals("spectateur")){
+
+        } else if (typepersonne.equals("spectateur")) {
+
+        }else {
+
+        }
     }
 
     @FXML
