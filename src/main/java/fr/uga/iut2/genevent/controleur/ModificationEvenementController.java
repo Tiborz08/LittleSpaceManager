@@ -294,12 +294,20 @@ public class ModificationEvenementController {
     }
 
     private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
+        Stage satge = (Stage) btnCreerAssocier.getScene().getWindow();
+        satge.close();
         if (typepersonne.compareToIgnoreCase("spectateur")==0){
             mainControleur.onButtonCreerSpectateur(event);
+            ouvertureAssociationPage("Spectateur");
+            cbAssocier.setValue(mainControleur.getSpectateurs().get(mainControleur.getSpectateurs().size()-1));
         } else if (typepersonne.compareToIgnoreCase("personnel")==0) {
             mainControleur.onButtonCreerPersonnel(event);
+            ouvertureAssociationPage("Personnel");
+            cbAssocier.setValue(mainControleur.getPersonnels().get(mainControleur.getPersonnels().size()-1));
         }else {
             mainControleur.onButtonCreerArtiste(event);
+            ouvertureAssociationPage("Artiste");
+            cbAssocier.setValue(mainControleur.getArtistes().get(mainControleur.getArtistes().size()-1));
         }
     }
 
@@ -334,11 +342,11 @@ public class ModificationEvenementController {
         if (!tfNom.getText().equalsIgnoreCase(evenement.getNom())){
             evenement.setNom(tfNom.getText());
         }
-        if (!debut.equals(evenement.getDebut())){
-            evenement.setDebut(debut);
-        }
-        if (!fin.equals(evenement.getFin())){
-            evenement.setFin(fin);
+        if (!debut.equals(evenement.getDebut()) || !fin.equals(evenement.getFin())){
+            Salle temp = evenement.getSalle();
+            evenement.setSalle(null);
+            evenement.definirDates(temp, debut, fin);
+            evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
             evenement.setSalle(cbSalle.getValue());
