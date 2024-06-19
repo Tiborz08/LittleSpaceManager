@@ -35,6 +35,7 @@ public class PieceDeTheatre extends Evenement {
 
     //GETTER
 
+    @Override
     /**
      * Cette fonction renvoie la liste des accessoires reliés à la pièce de théàtre.
      * @return
@@ -45,16 +46,14 @@ public class PieceDeTheatre extends Evenement {
 
     //METHODES
 
+    @Override
     /**
      * Permet de créer et d'ajouter un accessoire à une pièce de théatre.
      *
      * @param nom nom de l'accessorie à crée et ajouté.
-     * @return l'accessorie crée
      */
-    public Accessoire addAccessoire(String nom) {
-        Accessoire a = new Accessoire(nom, this);
-        accessoires.add(a);
-        return a;
+    public void addAccessoire(String nom) {
+        accessoires.add(new Accessoire(nom, this));
     }
 
     /**
