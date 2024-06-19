@@ -1,6 +1,7 @@
 package fr.uga.iut2.genevent.modele;
 
-import java.util.ArrayList;
+import fr.uga.iut2.genevent.exception.CreateException;
+
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -20,7 +21,7 @@ public class Salle {
         setNom(nom);
         setAdresse(adresse);
         setCapacite_max(capacite_max);
-        this.tags=new TreeSet<>();
+        this.tags = new TreeSet<>();
         this.setTags(tagsLong);
         this.idSalle = newId();
         this.evenements = new TreeSet<>();
@@ -58,14 +59,14 @@ public class Salle {
         return evenements;
     }
 
-    public void addEvenement(Evenement evenement) {
+    public void addEvenement(Evenement evenement) throws CreateException {
         if (!evenements.contains(evenement) && verifierDisponibilite(evenement.getDebut(), evenement.getFin())) {
             evenements.add(evenement);
             evenement.setSalle(this);
         }
     }
 
-    public void enleverDeLHistorique(Evenement evenement) {
+    public void enleverDeLHistorique(Evenement evenement) throws CreateException {
         this.evenements.remove(evenement);
         evenement.setSalle(null);
     }
@@ -83,13 +84,14 @@ public class Salle {
 
     /**
      * Retourne la liste des évenements qui n'ont pas encore débutés
+     *
      * @return La liste des évenements n'ayant pas encore débuté, trié par ordre chronologique
      */
-    public TreeSet<Evenement> getEvenementsFuturs(){
+    public TreeSet<Evenement> getEvenementsFuturs() {
         TreeSet<Evenement> evenementsFuturs = new TreeSet<>();
         Date aujourdhui = new Date();
-        for (Evenement evenement : evenements){
-            if(evenement.getDebut().after(aujourdhui)){
+        for (Evenement evenement : evenements) {
+            if (evenement.getDebut().after(aujourdhui)) {
                 evenementsFuturs.add(evenement);
             }
         }
@@ -103,17 +105,16 @@ public class Salle {
         return tags;
     }
 
-    public void addTag(String tag){
+    public void addTag(String tag) {
         tags.add(tag);
     }
 
-    public void setTags(String tagsLong){
+    public void setTags(String tagsLong) {
         String[] tagsSplit = tagsLong.split(",");
-        for(String tag : tagsSplit){
+        for (String tag : tagsSplit) {
             tags.add(tag.toLowerCase());
         }
     }
-
 
 
     @Override

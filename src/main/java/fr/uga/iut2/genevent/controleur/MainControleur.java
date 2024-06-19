@@ -43,7 +43,7 @@ public class MainControleur {
     @FXML
     private Label erreurLabel;
 
-    public void initialize(){
+    public void initialize() {
         actualisationEvenement();
         lvEvenement.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -64,7 +64,7 @@ public class MainControleur {
     }
 
     @FXML
-    public void onAnnulerClick(ActionEvent event){
+    public void onAnnulerClick(ActionEvent event) {
         Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
@@ -97,14 +97,12 @@ public class MainControleur {
 
         Stage stage = new Stage();
         stage.setTitle("Création de " + typeCreation);
-        stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
         stage.setScene(new Scene(root));
         stage.setAlwaysOnTop(true);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
-
-
 
 
     public void afficherFenetreErreur(String textErreur) throws Exception {
@@ -113,7 +111,6 @@ public class MainControleur {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AlerteErreurView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
-
 
 
         erreurLabel.setText(textErreur);
@@ -137,9 +134,6 @@ public class MainControleur {
     }
 
 
-
-
-
     @FXML
     public void ouvrirOptionEvenement(Evenement evenement) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionEvenementView.fxml"));
@@ -160,7 +154,7 @@ public class MainControleur {
     }
 
     @FXML
-    public void onButtonCreerSalle(ActionEvent event) throws Exception{
+    public void onButtonCreerSalle(ActionEvent event) throws Exception {
         ouvrirFenetreCreation("Salle", event);
     }
 
@@ -174,17 +168,17 @@ public class MainControleur {
     }
 
     @FXML
-    public void onButtonCreerPersonnel(ActionEvent event) throws Exception{
+    public void onButtonCreerPersonnel(ActionEvent event) throws Exception {
         ouvrirFenetreCreation("Personnel", event);
     }
 
     @FXML
-    public void onButtonCreerArtiste(ActionEvent event) throws Exception{
+    public void onButtonCreerArtiste(ActionEvent event) throws Exception {
         ouvrirFenetreCreation("Artiste", event);
     }
 
     @FXML
-    public void onButtonCreerSpectateur(ActionEvent event) throws Exception{
+    public void onButtonCreerSpectateur(ActionEvent event) throws Exception {
         ouvrirFenetreCreation("Spectateur", event);
     }
 
@@ -192,7 +186,8 @@ public class MainControleur {
     public ArrayList<Salle> getSalles() {
         return salles;
     }
-    public TreeSet<Evenement> getEvenements(){
+
+    public TreeSet<Evenement> getEvenements() {
         return evenements;
     }
 
@@ -210,13 +205,13 @@ public class MainControleur {
 
     //méthode
     @FXML
-    private void actualisationEvenement(){
+    private void actualisationEvenement() {
         ObservableList<Evenement> listeEvenement = FXCollections.observableArrayList(new ArrayList<>(evenements));
         lvEvenement.setItems(listeEvenement);
     }
 
     @FXML
-    public Stage getStage(){
+    public Stage getStage() {
         return (Stage) lvEvenement.getScene().getWindow();
     }
 
@@ -228,12 +223,13 @@ public class MainControleur {
     private ListView<String> lvSalles;
 
     @FXML
-    public void onButtonVoirSalle(ActionEvent event){
-        try{
+    public void onButtonVoirSalle(ActionEvent event) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ListeSallesView.fxml"));
             loader.setController(this);
             Parent root = loader.load();
             Stage popupStage = new Stage();
+            popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 737, 438);
@@ -241,18 +237,20 @@ public class MainControleur {
             popupStage.setTitle("Liste des salles");
 
             ArrayList<String> lvSallesTemp = new ArrayList<>();
-            for(Salle s : salles){
+            for (Salle s : salles) {
                 String tags = "";
-                for(String t : s.getTags()){
-                    tags += " "+t;
+                for (String t : s.getTags()) {
+                    tags += " " + t;
                 }
-                lvSallesTemp.add("\t"+s+"\nAdresse : "+s.getAdresse()+"\nCapacité max : "+s.getCapacite_max()+"\n" + tags);
+                lvSallesTemp.add("\t" + s + "\nAdresse : " + s.getAdresse() + "\nCapacité max : " + s.getCapacite_max() + "\n" + tags);
             }
 
             ObservableList<String> listeSalle = FXCollections.observableArrayList(new ArrayList<>(lvSallesTemp));
             lvSalles.setItems(listeSalle);
 
             popupStage.show();
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

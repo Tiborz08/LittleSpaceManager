@@ -71,7 +71,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public ArrayList<Spectateur> getSpectateurs() {
         ArrayList<Spectateur> spectateurs = new ArrayList<>();
-        for (Ticket ticket: tickets) {
+        for (Ticket ticket : tickets) {
             spectateurs.add(ticket.getSpectateur());
         }
         return spectateurs;
@@ -97,7 +97,9 @@ public abstract class Evenement implements Comparable<Evenement> {
         return getPrixTickets() * getNombreTickets();
     }
 
-    public float getCoutInitial() {return coutInitial;}
+    public float getCoutInitial() {
+        return coutInitial;
+    }
 
     /**
      * Ajoute un participant à la liste des participants de l'événement, en vérifiant s'il n'est pas déjà présent, et informe le participant qu'il est inscrit en tant que participant à cet événement.
@@ -111,22 +113,28 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
-    public void setSalle(Salle salle) {
-        if(capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()){
+    public void setSalle(Salle salle) throws CreateException {
+        if (salle == null) {
+            Salle temporaire = this.salle;
+            this.salle = null;
+            if(temporaire != null){
+                temporaire.enleverDeLHistorique(this);
+            }
+
+        }
+        else if (capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()) {
             salle.addEvenement(this);
             this.salle = salle;
-        }
-        else{
-            System.out.println("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
+        } else {
+            throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
     }
 
     public void setSalleAdaptee(Salle salle, int capaciteParticipants) throws CreateException {
-        if(capaciteParticipants <= salle.getCapacite_max()){
+        if (capaciteParticipants <= salle.getCapacite_max()) {
             salle.addEvenement(this);
             this.salle = salle;
-        }
-        else{
+        } else {
             throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
     }
@@ -211,11 +219,12 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction permet de définir les dates de début et de fin de l'événement.
      * La fonction vérifie que la date de début est bien avant la date de fin et que la salle est disponible.
+     *
      * @param debut Le début de l'événement
-     * @param fin La fin de l'événement
+     * @param fin   La fin de l'événement
      */
-    public void definirDates(Salle salle, Date debut, Date fin) throws CreateException{
-        if(debut.after(fin)){
+    public void definirDates(Salle salle, Date debut, Date fin) throws CreateException {
+        if (debut.after(fin)) {
             throw new CreateException("La date de début doit être avant la date de fin");
         } else if (!salle.verifierDisponibilite(debut, fin)) {
             throw new CreateException("La salle n'est pas disponible à ces dates");
@@ -244,19 +253,20 @@ public abstract class Evenement implements Comparable<Evenement> {
      */
 
     public void setFin(Date finEv) {
-        if (salle.verifierDisponibilite(this.debut, finEv) && (this.debut.before(finEv) || this.debut.equals(finEv) )) {
+        if (salle.verifierDisponibilite(this.debut, finEv) && (this.debut.before(finEv) || this.debut.equals(finEv))) {
             this.fin = fin;
         }
     }
 
     /**
      * Cette fonction renvoie la liste des membres du personnel qui participent à l'événement.
+     *
      * @return
      */
-    public ArrayList<Participant> getPersonnels(){
+    public ArrayList<Participant> getPersonnels() {
         ArrayList<Participant> personnels = new ArrayList<>();
-        for (Participant participant: participants) {
-            if (participant.getClass().getSimpleName().equals("Personnel")){
+        for (Participant participant : participants) {
+            if (participant.getClass().getSimpleName().equals("Personnel")) {
                 personnels.add(participant);
             }
 
@@ -264,9 +274,9 @@ public abstract class Evenement implements Comparable<Evenement> {
         return personnels;
     }
 
-    public float getSalairesPersonnels(){
+    public float getSalairesPersonnels() {
         float salaires = 0;
-        for (Participant personnel: getPersonnels()) {
+        for (Participant personnel : getPersonnels()) {
             salaires += personnel.getSalaire();
         }
         return salaires;
@@ -274,12 +284,13 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     /**
      * Cette fonction renvoie la liste des artistes qui participent à l'événement
+     *
      * @return
      */
-    public ArrayList<Participant> getArtistes(){
+    public ArrayList<Participant> getArtistes() {
         ArrayList<Participant> artistes = new ArrayList<>();
-        for (Participant participant: participants) {
-            if (participant.getClass().getSimpleName().equals("Artiste")){
+        for (Participant participant : participants) {
+            if (participant.getClass().getSimpleName().equals("Artiste")) {
                 artistes.add(participant);
             }
 
@@ -287,9 +298,9 @@ public abstract class Evenement implements Comparable<Evenement> {
         return artistes;
     }
 
-    public float getSalairesArtistes(){
+    public float getSalairesArtistes() {
         float salaires = 0;
-        for (Participant artiste: getArtistes()) {
+        for (Participant artiste : getArtistes()) {
             salaires += artiste.getSalaire();
         }
         return salaires;
@@ -330,8 +341,8 @@ public abstract class Evenement implements Comparable<Evenement> {
     public String toString() {
         return "Nom : " + nom + "\n" +
                 "Adresse : " + salle.getAdresse() + "\n" +
-                "Début : " + debut + "\n" +
-                "Fin : " + fin + "\n" +
+                "Début : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(debut) + "\n" +
+                "Fin : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(fin) + "\n" +
                 "Description : " + description;
     }
 }

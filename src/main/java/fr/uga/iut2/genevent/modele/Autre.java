@@ -11,8 +11,8 @@ public class Autre extends Evenement {
 
     //CONSTRUCTEUR
 
-    public Autre(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin,String description, Salle salle) throws CreateException {
-        super(nom, capaciteParticipants, coutInitial, prixTickets, debut, fin,description, salle);
+    public Autre(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+        super(nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
     }
 
 }

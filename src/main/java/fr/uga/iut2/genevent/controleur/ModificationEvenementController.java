@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ModificationEvenementController {
 
@@ -68,15 +67,15 @@ public class ModificationEvenementController {
     private Evenement evenement;
 
 
-    public void initialize(){
-        if (lvSpectateur != null && lvPersonnel != null && lvArtiste != null){
+    public void initialize() {
+        if (lvSpectateur != null && lvPersonnel != null && lvArtiste != null) {
             actualisationListe();
         }
     }
 
     //Methodes
 
-    public void setMainControleur(MainControleur mainControleur){
+    public void setMainControleur(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
@@ -85,20 +84,20 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    public void onQuitterClick(ActionEvent event){
+    public void onQuitterClick(ActionEvent event) {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    public void onRetourClick(ActionEvent event){
+    public void onRetourClick(ActionEvent event) {
         Stage stage = (Stage) btnRetour.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    public void onBilanClick(ActionEvent event) throws Exception{
-        try{
+    public void onBilanClick(ActionEvent event) throws Exception {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/BilanComptableView.fxml"));
             loader.setController(this);
             Parent root = loader.load();
@@ -135,14 +134,16 @@ public class ModificationEvenementController {
             popupStage.setTitle("Bilan Comptable");
             popupStage.show();
 
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
 
     @FXML
-    public void onSupr(Event event){
-        try{
+    public void onSupr(Event event) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
             loader.setController(this);
             Parent root = loader.load();
@@ -151,32 +152,39 @@ public class ModificationEvenementController {
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
             Scene scene = new Scene(root, 498, 245);
             popupStage.setScene(scene);
-            popupStage.setTitle("Supprimer "+evenement.getNom()+" ?");
+            popupStage.setTitle("Supprimer " + evenement.getNom() + " ?");
             popupStage.show();
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    public void onValiderSupre(Event event){
+    public void onValiderSupre(Event event) {
         try {
             mainControleur.getEvenements().remove(evenement);
+            evenement.setSalle(null);
             Stage stage = (Stage) btnValiderSupre.getScene().getWindow();
             stage.close();
-            Stage stage1 = (Stage)  btnRetour.getScene().getWindow();
+            Stage stage1 = (Stage) btnRetour.getScene().getWindow();
             stage1.close();
             mainControleur.initialize();
             System.out.println(mainControleur.getEvenements().toString());
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
 
     @FXML
-    public void onAnnulerSupre(Event event){
+    public void onAnnulerSupre(Event event) {
         try {
             Stage stage = (Stage) btnAnnulerSupre.getScene().getWindow();
             stage.close();
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -193,7 +201,7 @@ public class ModificationEvenementController {
         stage.setScene(new Scene(root));
     }
 
-    private void actualisationListe(){
+    private void actualisationListe() {
 
         //test
         ObservableList<Participant> listePersonnel = FXCollections.observableArrayList(evenement.getPersonnels());
@@ -213,12 +221,12 @@ public class ModificationEvenementController {
 
         Stage stage = new Stage();
 
-        if (typePersonne.equalsIgnoreCase("Spectateur")){
+        if (typePersonne.equalsIgnoreCase("Spectateur")) {
             stage.setTitle("Associer spectateur");
             lbAssocier.setText(lbAssocier.getText() + "spectateur");
             ObservableList<Personne> listSpectateur = FXCollections.observableArrayList(mainControleur.getSpectateurs());
             cbAssocier.setItems(listSpectateur);
-        } else if (typePersonne.equalsIgnoreCase("Artiste")){
+        } else if (typePersonne.equalsIgnoreCase("Artiste")) {
             stage.setTitle("Associer artiste");
             lbAssocier.setText(lbAssocier.getText() + "artiste");
             ObservableList<Personne> listArtiste = FXCollections.observableArrayList(mainControleur.getArtistes());
@@ -242,17 +250,19 @@ public class ModificationEvenementController {
     private void onSpectateurClick() throws IOException {
         ouvertureAssociationPage("spectateur");
     }
+
     @FXML
     private void onArtisteClick() throws IOException {
         ouvertureAssociationPage("artiste");
     }
+
     @FXML
     private void onPersonnelClick() throws IOException {
         ouvertureAssociationPage("personnel");
     }
 
     @FXML
-    private void onAnnulerClick(){
+    private void onAnnulerClick() {
         Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
@@ -279,12 +289,12 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onValiderClick(){
+    private void onValiderClick() {
         Stage stage = (Stage) btnValider.getScene().getWindow();
 
-        if (cbAssocier.getValue() != null){
+        if (cbAssocier.getValue() != null) {
             Personne personne = cbAssocier.getValue();
-            if (personne.getClass().equals(Artiste.class) || personne.getClass().equals(Personnel.class)){
+            if (personne.getClass().equals(Artiste.class) || personne.getClass().equals(Personnel.class)) {
                 evenement.addParticipant((Participant) personne);
             } else {
                 evenement.addTicket((Spectateur) personne);
