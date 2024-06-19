@@ -307,6 +307,7 @@ public class CreationControleur {
         try {
             salaire = Float.parseFloat(tfSalaire.getText());
         } catch (NumberFormatException e) {
+            throw new CreateException("Le salaire est trop élevé");
         }
 
         if (nom.isEmpty() || prenom.isEmpty() || tfSalaire.getText().isEmpty()) {
