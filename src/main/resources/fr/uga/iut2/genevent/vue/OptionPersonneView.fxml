@@ -13,7 +13,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnModifierPersonne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonModifierClick" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Modifier" textFill="WHITE">
+                <Button fx:id="btnModifierPersonne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonModifierPersonne" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Modifier" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>

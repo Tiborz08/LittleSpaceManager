@@ -61,7 +61,7 @@ public class CreationControleur {
 
     //Attribut ALL Button
     @FXML
-    private Button btAnnuler, btCreer;
+    private Button btnAnnuler, btCreer;
 
     @FXML
     private TextArea taTags;
@@ -153,7 +153,7 @@ public class CreationControleur {
 
     @FXML
     public void onAnnulerClick(ActionEvent event) {
-        Stage stage = (Stage) btAnnuler.getScene().getWindow();
+        Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
 

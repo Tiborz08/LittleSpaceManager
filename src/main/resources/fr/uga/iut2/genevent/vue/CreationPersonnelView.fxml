@@ -7,7 +7,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="650.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label text="Ajout de Personnel">
+        <Label fx:id="lbCreation" text="Ajout de Personnel">
             <VBox.margin>
                 <Insets top="20.0" />
             </VBox.margin>
@@ -64,7 +64,7 @@
         </GridPane>
         <HBox alignment="CENTER" prefHeight="78.0" prefWidth="600.0" spacing="300.0">
             <children>
-                <Button fx:id="btAnnuler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAnnulerClick" prefWidth="125.0" style="-fx-background-color: #4b5c6b;" text="Annuler" textFill="WHITE">
+                <Button fx:id="btnAnnuler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAnnulerClick" prefWidth="125.0" style="-fx-background-color: #4b5c6b;" text="Annuler" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>

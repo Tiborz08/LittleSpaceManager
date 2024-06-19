@@ -76,6 +76,16 @@ public class ModificationEvenementController {
     @FXML
     private Button btnSuprPersonne, btnModifierPersonne;
 
+    //modification personne
+    @FXML
+    private TextField tfNomPersonne, tfPrenomPersonne, tfSalaire;
+    @FXML
+    private ComboBox<Integer> cbPopularite;
+    @FXML
+    private Label lbCreation;
+    @FXML
+    private Button btCreer;
+
 
     //Supprimer evenement
     @FXML
@@ -645,7 +655,89 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onModifierPersonne(){
+    private void onButtonModifierPersonne() throws IOException {
+        FXMLLoader loader;
+        Parent root;
 
+        if (personne instanceof Artiste) {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationArtisteView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            Artiste artiste = (Artiste) personne;
+
+            tfNomPersonne.setText(artiste.getNom());
+            tfPrenomPersonne.setText(artiste.getPrenom());
+            tfSalaire.setText(String.valueOf(artiste.getSalaire()));
+            ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+            cbPopularite.setItems(options);
+            cbPopularite.setValue((int) artiste.getPopularite());
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Artiste", artiste));
+            lbCreation.setText("Modification d'un artiste");
+        } else if (personne instanceof Personnel) {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationPersonnelView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            Personnel personnel = (Personnel) personne;
+
+            tfNomPersonne.setText(personnel.getNom());
+            tfPrenomPersonne.setText(personnel.getPrenom());
+            tfSalaire.setText(String.valueOf(personnel.getSalaire()));
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Personnel", personnel));
+            lbCreation.setText("Modification d'un personnel");
+        } else {
+            loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationSpectateurView.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            tfNomPersonne.setText(personne.getNom());
+            tfPrenomPersonne.setText(personne.getPrenom());
+            btCreer.setText("Valider");
+            btCreer.setOnAction(event -> onButtonModifierPersonneValider(event, "Spectateur", personne));
+            lbCreation.setText("Modification d'un spectateur");
+        }
+
+        Stage stage = new Stage();
+        Stage popupPrecedent = (Stage) btnModifierPersonne.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+        popupPrecedent.close();
+        stage.show();
+    }
+
+    private void onButtonModifierPersonneValider(ActionEvent event, String type, Object personne) {
+        // Vérifiez le type et effectuez les opérations de modification nécessaires
+        if (type.equals("Artiste") && personne instanceof Artiste) {
+            Artiste artiste = (Artiste) personne;
+            artiste.setNom(tfNomPersonne.getText());
+            artiste.setPrenom(tfPrenomPersonne.getText());
+            artiste.setSalaire(Float.parseFloat(tfSalaire.getText()));
+            artiste.setPopularite(cbPopularite.getValue());
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+
+            System.out.println("Modification de l'artiste réussie : " + artiste);
+        } else if (type.equals("Personnel") && personne instanceof Personnel) {
+            Personnel personnel = (Personnel) personne;
+            personnel.setNom(tfNomPersonne.getText());
+            personnel.setPrenom(tfPrenomPersonne.getText());
+            personnel.setSalaire(Float.parseFloat(tfSalaire.getText()));
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+            System.out.println("Modification du personnel réussie : " + personnel);
+        } else if (type.equals("Spectateur") && personne != null) {
+            // Votre logique de modification pour le spectateur ici
+            System.out.println("Modification du spectateur réussie");
+            Spectateur spectateur = (Spectateur) personne;
+            spectateur.setNom(tfNomPersonne.getText());
+            spectateur.setPrenom(tfPrenomPersonne.getText());
+            Stage stage = (Stage) btCreer.getScene().getWindow();
+            stage.close();
+            initialize();
+        } else {
+            System.err.println("Type non reconnu ou personne invalide.");
+        }
     }
 }
