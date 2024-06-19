@@ -8,6 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Les événements qui sont dans l'application
+ */
 public abstract class Evenement implements Comparable<Evenement> {
     private static final Log log = LogFactory.getLog(Evenement.class);
 
@@ -15,8 +18,8 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     private int idEvent;
     private String nom;
-    private int capaciteParticipants;
-    private int capaciteSpectateur;
+    public int capaciteParticipants;
+    public int capaciteSpectateur;
     private float coutInitial;
     private float prixTickets;
     private Date debut;
@@ -30,13 +33,24 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     //CONSTRUCTEUR(S)
 
+    /**
+     * Constructeur d'évenement
+     * @param nom Le nom d'un évenement
+     * @param capaciteParticipants Le nombre de personnes salariées présentes sur l'événement
+     * @param coutInitial Le coût d'organisation de base d'un événement
+     * @param prixTickets Le prix d'un seul ticket
+     * @param debut La date de début de l'événement
+     * @param fin La date de fin de l'événement
+     * @param description La description de l'événement
+     * @param salle La salle dans laquelle a lieu l'événement
+     * @throws CreateException Averti des problèmes lors de la création d'une salle (Exemple : Le début qui a lieu après la fin)
+     */
     public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
         setNom(nom);
         definirDates(salle, debut, fin);
         setSalleAdaptee(salle, capaciteParticipants);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
         setCapaciteParticipants(capaciteParticipants);
-        setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
         setCoutInitial(coutInitial);
         setPrixTickets(prixTickets);
         setDescription(description);
@@ -44,30 +58,58 @@ public abstract class Evenement implements Comparable<Evenement> {
         this.participants = new ArrayList<>();
     }
 
+    /**
+     * Renvoie l'id de l'événement
+     * @return l'id de l'événement, qui a été généré automatiquement lors de la création de l'événement
+     */
     public int getIdEvent() {
         return idEvent;
     }
 
+    /**
+     * Renvoie le debut de l'événement
+     * @return la date de début de l'événement
+     */
     public Date getDebut() {
         return debut;
     }
 
+    /**
+     * Renvoie la fin de l'événement
+     * @return la date de fin de l'événement
+     */
     public Date getFin() {
         return fin;
     }
 
+    /**
+     * Renvoie la description de l'événement
+     * @return la description de l'événement
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Renvoie la liste des personnes salariées de l'événement
+     * @return la liste des personnes salariées reliées à cette événement
+     */
     public ArrayList<Participant> getParticipants() {
         return participants;
     }
 
+    /**
+     * Renvoie la liste des tickets pour cet evenement
+     * @return  la liste des tickets pour cet evenement
+     */
     public ArrayList<Ticket> getTickets() {
         return tickets;
     }
 
+    /**
+     * Renvoie la liste des personnes liés aux tickets de l'événement
+     * @return tous les spectateurs qui ont un ticket pour cet événement
+     */
     public ArrayList<Spectateur> getSpectateurs() {
         ArrayList<Spectateur> spectateurs = new ArrayList<>();
         for (Ticket ticket : tickets) {
@@ -76,18 +118,34 @@ public abstract class Evenement implements Comparable<Evenement> {
         return spectateurs;
     }
 
+    /**
+     * Renvoie le prix d'un ticket
+     * @return le prix d'un ticket
+     */
     public float getPrixTickets() {
         return prixTickets;
     }
 
+    /**
+     * Modifie le prix des tickets, le prix ne peut pas être nul
+     * @param prixTickets le prix à définir
+     */
     public void setPrixTickets(float prixTickets) {
         this.prixTickets = Math.max(0, prixTickets);
     }
 
+    /**
+     * Renvoie le nom de l'événement
+     * @return le nom de l'événement
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Modifie le nom de l'événement, le nom est capitalisé, si aucun nom n'es renseigné, l'évenent a comme nom : Aucun nom
+     * @param string le nom de l'événement
+     */
     public void setNom(String string){
         if (string != null && !string.isEmpty()) {
             this.nom = LittleSpaceManager_Utilitaire.capitalize(string);
@@ -96,22 +154,42 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
+    /**
+     * Retourne le nombre de salariés participants à cet événement
+     * @return le nombre de salariés participants à cet événement
+     */
     public int getNombreParticipants() {
         return participants.size();
     }
 
+    /**
+     * Renvoie le nombre de tickets
+     * @return le nombre de tickets
+     */
     public int getNombreTickets() {
         return tickets.size();
     }
 
+    /**
+     * Renvoie les gains octroyés via la vente de billets
+     * @return tout l'argent obtenu par la vente de tickets
+     */
     public float getGainsTickets() {
         return getPrixTickets() * getNombreTickets();
     }
 
+    /**
+     * Renvoie le cout initial d'un événement
+     * @return le cout initial d'un événement
+     */
     public float getCoutInitial() {
         return coutInitial;
     }
 
+    /**
+     * Modifie le coût initial d'un événement, ce coût ne peux pas être négatif
+     * @param coutInitial le coût initial de l'événement
+     */
     public void setCoutInitial(float coutInitial) {
         this.coutInitial = Math.max(0, coutInitial);
     }
@@ -128,6 +206,11 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
+    /**
+     * Relie la salle à l'événement
+     * @param salle la salle dans laquelle se déroule l'événement
+     * @throws CreateException Averti des problèmes lors de la création d'une salle (Exemple : La salle n'est pas disponible aux dates de l'événement)
+     */
     public void setSalle(Salle salle) throws CreateException {
         if (salle == null) {
             Salle temporaire = this.salle;
@@ -137,14 +220,21 @@ public abstract class Evenement implements Comparable<Evenement> {
             }
 
         }
-        else if (capaciteParticipants + capaciteSpectateur <= salle.getCapacite_max()) {
+        else if (capaciteParticipants <= salle.getCapacite_max()) {
             salle.addEvenement(this);
             this.salle = salle;
+            setCapaciteParticipants(capaciteParticipants);
         } else {
             throw new CreateException("La salle ne pourra pas accueillir tout le monde, elle est trop petite");
         }
     }
 
+    /**
+     * Permet de définir une salle assez grande pour accueillir tout le monde
+     * @param salle La salle dans laquelle se déroule l'événement
+     * @param capaciteParticipants Le nombre maximum de salariés
+     * @throws CreateException Averti des problèmes lors de la création d'une salle (Exemple : La salle est trop petite)
+     */
     public void setSalleAdaptee(Salle salle, int capaciteParticipants) throws CreateException {
         if (capaciteParticipants <= salle.getCapacite_max()) {
             salle.addEvenement(this);
@@ -154,6 +244,12 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
+    /**
+     * Permet de modifier la description de la salle
+     * La description fait 150 charactères maximum
+     * Si aucune descritption n'est renseignée, la description par défaut est "Aucune description"
+     * @param description
+     */
     public void setDescription(String description) {
 
         if (description != null && !description.isEmpty()) {
@@ -167,6 +263,10 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     }
 
+    /**
+     * Renvoie la salle dans laquelle se déroule l'événement
+     * @return la salle dans laquelle se déroule l'événement
+     */
     public Salle getSalle() {
         return salle;
     }
@@ -174,7 +274,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction permet d'enlever une participant dans la liste des participants de l'événement. La fonction vérifie que le participant est bien présent dans la liste puis elle le supprime et elle supprime l'événement dans la liste des événement du participant.
      *
-     * @param participant
+     * @param participant Le salarié qui ne participe plus à l'événement
      */
 
     public void removeParticipant(Participant participant) {
@@ -187,7 +287,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction permet de créer un ticket pour un spectateur donné. La fonction ne vérifie pas si le spectateur possède déjà un ticket car il peut en posséder plusieurs.
      *
-     * @param spectateur
+     * @param spectateur Le spectateur qui assiste à l'événement
      */
 
     public void addTicket(Spectateur spectateur) {
@@ -199,7 +299,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction renvoie la capacité max que la salle peut accueillir. Ici, la capacité maximale de Participants et de Spectateur sont additionnées.
      *
-     * @return
+     * @return le nombre maximum de personne, tous genres confondus
      */
 
     public int getCapaciteTotal() {
@@ -209,12 +309,13 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction permet de changer la captacité de place attribuées pour les participants. La fonction se charge de vérifier que la capacité maximale de la salle n'est pas dépassée.
      *
-     * @param capacite
+     * @param capacite Le nombre maximum de salaries
      */
 
     public void setCapaciteParticipants(int capacite) {
-        if (capaciteSpectateur + capacite <= salle.getCapacite_max()) {
+        if (capacite <= salle.getCapacite_max()) {
             this.capaciteParticipants = capacite;
+            capaciteSpectateur = salle.getCapacite_max() - capaciteParticipants;
         }
 
     }
@@ -222,7 +323,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction permet de changer la captacité de place attribuées pour les spectateurs. La fonction se charge de vérifier que la capacité maximale de la salle n'est pas dépassée.
      *
-     * @param capacite
+     * @param capacite Le npmbre maximum de spectateurs
      */
 
     public void setCapaciteSpectateur(int capacite) {
@@ -252,7 +353,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction sert à changer la date de début de l'événement en s'assurant que la salle est disponible.
      *
-     * @param debutEv
+     * @param debutEv Le début de l'événement
      */
 
     public void setDebut(Date debutEv) {
@@ -265,7 +366,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction sert à changer la date de fin de l'événement en s'assurant que la salle est disponible.
      *
-     * @param finEv
+     * @param finEv La fin de l'événement
      */
 
     public void setFin(Date finEv) {
@@ -278,7 +379,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction renvoie la liste des membres du personnel qui participent à l'événement.
      *
-     * @return
+     * @return la liste des salariés qui font parti du personnel
      */
     public ArrayList<Participant> getPersonnels() {
         ArrayList<Participant> personnels = new ArrayList<>();
@@ -291,6 +392,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         return personnels;
     }
 
+    /**
+     * Renvoie le salaire de tous les membres du personnels qui participent à cet événement
+     * @return le salaire de tous les membres du personnels qui participent à cet événement
+     */
     public float getSalairesPersonnels() {
         float salaires = 0;
         for (Participant personnel : getPersonnels()) {
@@ -302,7 +407,7 @@ public abstract class Evenement implements Comparable<Evenement> {
     /**
      * Cette fonction renvoie la liste des artistes qui participent à l'événement
      *
-     * @return
+     * @return la liste des artistes qui participent à l'événement
      */
     public ArrayList<Participant> getArtistes() {
         ArrayList<Participant> artistes = new ArrayList<>();
@@ -315,6 +420,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         return artistes;
     }
 
+    /**
+     * Renvoie le salaire de tous les artistes qui jouent dans l'événement
+     * @return le salaire de tous les artistes qui jouent dans l'événement
+     */
     public float getSalairesArtistes() {
         float salaires = 0;
         for (Participant artiste : getArtistes()) {
@@ -341,7 +450,7 @@ public abstract class Evenement implements Comparable<Evenement> {
      * Trie dans l'odre : dateDebut, dateFin, nom, idEvent
      *
      * @param evenement L'évenement à comparer.
-     * @return
+     * @return 1 ou -1 pour trier en fonction de l'odre correspondant, si les 2 evenements sont identiques, nous renvoyons 0
      */
     @Override
     public int compareTo(Evenement evenement) {
@@ -354,9 +463,13 @@ public abstract class Evenement implements Comparable<Evenement> {
         }
     }
 
+    /**
+     * Méthode d'affichage d'un événement
+     * @return Le nom, l'adresse, la date de début et de fin ainsi que la description de l'événement
+     */
     @Override
     public String toString() {
-        return "Nom : " + nom + "\n" +
+        return this.getClass().getSimpleName() + " : " + nom + "\n" +
                 "Adresse : " + salle.getAdresse() + "\n" +
                 "Début : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(debut) + "\n" +
                 "Fin : " + LittleSpaceManager_Utilitaire.afficherDateChiffre(fin) + "\n" +

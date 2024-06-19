@@ -14,14 +14,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.function.Consumer;
 
 public class ModificationEvenementController {
 
+    private static final Log log = LogFactory.getLog(ModificationEvenementController.class);
     //Bilan comptable
     @FXML
     private Button btnBilan;
@@ -62,11 +66,15 @@ public class ModificationEvenementController {
     @FXML
     private ComboBox<Salle> cbSalle;
     @FXML
-    private Button btnModifiactionValider;
+    private Button btnModificationValider;
 
     //Spec Piece de theatre
     @FXML
     private Button btnSpec;
+
+    //option personne
+    @FXML
+    private Button btnSuprPersonne, btnModifierPersonne;
 
 
     //Supprimer evenement
@@ -81,35 +89,117 @@ public class ModificationEvenementController {
 
     private MainControleur mainControleur;
     private Evenement evenement;
+    private Personne personne;
 
-
+    /**
+     * Initialise la vue de modification d'un événement.
+     * Cette méthode est appelée automatiquement après que le fichier FXML associé a été chargé.
+     * Elle met à jour les listes des participants de l'événement.
+     */
     public void initialize() {
         if (lvSpectateur != null && lvPersonnel != null && lvArtiste != null) {
             actualisationListe();
         }
-    }
 
+        if (lvArtiste != null){
+            ajouterGestionnaireDoubleClic(lvArtiste, this::ouvrirOptionView);
+        }
+        if (lvSpectateur != null){
+            ajouterGestionnaireDoubleClic(lvSpectateur, this::ouvrirOptionView);
+        }
+        if (lvPersonnel != null){
+            ajouterGestionnaireDoubleClic(lvPersonnel, this::ouvrirOptionView);
+        }
+    }
     //Methodes
 
+    private <T> void ajouterGestionnaireDoubleClic(ListView<T> listView, Consumer<T> action) {
+        listView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    try {
+                        log.info("Selected item : " + selectedItem.toString());
+                        action.accept(selectedItem);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    @FXML
+    private <T> void ouvrirOptionView(T personne){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionPersonneView.fxml"));
+            loader.setController(this);
+
+            Parent root = loader.load();
+
+            this.personne = (Personne) personne;
+
+            if (personne instanceof Spectateur){
+                btnModificationValider.setDisable(true);
+            } else {
+                btnModificationValider.setDisable(false);
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Définit le contrôleur principal de l'application.
+     *
+     * @param mainControleur le contrôleur principal de l'application.
+     */
     public void setMainControleur(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
     }
 
+    /**
+     * Définit l'événement à modifier.
+     *
+     * @param evenement l'événement à modifier.
+     */
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
     }
 
+    /**
+     * Ferme la fenêtre de modification d'un événement lorsque le bouton Quitter est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onQuitterClick(ActionEvent event) {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Ferme la fenêtre de modification d'un événement lorsque le bouton Retour est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onRetourClick(ActionEvent event) {
         Stage stage = (Stage) btnRetour.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Affiche le bilan comptable de l'événement lorsque le bouton Bilan est cliqué.
+     *
+     * @param event
+     * @throws Exception
+     */
 
     @FXML
     public void onBilanClick(ActionEvent event) throws Exception {
@@ -145,6 +235,13 @@ public class ModificationEvenementController {
 
     }
 
+
+    /**
+     * Affiche une fenêtre de confirmation de suppression de l'événement lorsque le bouton Supprimer est cliqué.
+     *
+     * @param event
+     */
+
     @FXML
     public void onSupr(Event event) {
         try {
@@ -163,6 +260,11 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Supprime l'événement lorsque le bouton Valider de la fenêtre de confirmation de suppression est cliqué.
+     *
+     * @param event
+     */
     @FXML
     public void onValiderSupre(Event event) {
         try {
@@ -181,6 +283,13 @@ public class ModificationEvenementController {
 
     }
 
+
+    /**
+     * Ferme la fenêtre de confirmation de suppression de l'événement lorsque le bouton Annuler est cliqué.
+     *
+     * @param event l'événement Event qui a déclenché la fermeture de la fenêtre de confirmation.
+     */
+
     @FXML
     public void onAnnulerSupre(Event event) {
         try {
@@ -191,6 +300,11 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Affiche la fenêtre de modification d'un événement lorsque le bouton Modifier est cliqué.
+     *
+     * @throws IOException
+     */
     @FXML
     public void onButtonModifierClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/ModificationEvenementView.fxml"));
@@ -216,6 +330,10 @@ public class ModificationEvenementController {
         stage.setScene(new Scene(root));
     }
 
+    /**
+     * Met à jour les listes des participants (personnel, artistes et spectateurs) de l'événement.
+     */
+
     private void actualisationListe() {
 
         //test
@@ -228,6 +346,13 @@ public class ModificationEvenementController {
         ObservableList<Spectateur> listeSpectateur = FXCollections.observableArrayList(evenement.getSpectateurs());
         lvSpectateur.setItems(listeSpectateur);
     }
+
+    /**
+     * Affiche la fenêtre d'association d'un participant à l'événement en fonction du type de participant spécifié.
+     *
+     * @param typePersonne le type de participant à associer à l'événement.
+     * @throws IOException
+     */
 
     private void ouvertureAssociationPage(String typePersonne) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AssocierView.fxml"));
@@ -261,26 +386,53 @@ public class ModificationEvenementController {
 
     }
 
+    /**
+     * Affiche la fenêtre d'association d'un spectateur à l'événement lorsque le bouton Spectateur est cliqué.
+     *
+     * @throws IOException
+     */
+
     @FXML
     private void onSpectateurClick() throws IOException {
         ouvertureAssociationPage("spectateur");
     }
+
+    /**
+     * Affiche la fenêtre d'association d'un artiste à l'événement lorsque le bouton Artiste est cliqué.
+     *
+     * @throws IOException
+     */
 
     @FXML
     private void onArtisteClick() throws IOException {
         ouvertureAssociationPage("artiste");
     }
 
+    /**
+     * Affiche la fenêtre d'association d'un membre du personnel à l'événement lorsque le bouton Personnel est cliqué.
+     *
+     * @throws IOException
+     */
     @FXML
     private void onPersonnelClick() throws IOException {
         ouvertureAssociationPage("personnel");
     }
 
+    /**
+     * Ferme la fenêtre d'association d'un participant à l'événement lorsque le bouton Annuler est cliqué.
+     */
     @FXML
     private void onAnnulerClick() {
         Stage stage = (Stage) btnAnnuler.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Affiche la fenêtre de création d'un participant en fonction du type de participant spécifié.
+     *
+     * @param event
+     * @throws Exception
+     */
 
     @FXML
     private void onCreerClick(ActionEvent event) throws Exception {
@@ -292,6 +444,14 @@ public class ModificationEvenementController {
         }
         ouvertureBonnePageCreer(tmp.get(2),event);
     }
+
+    /**
+     * Affiche la fenêtre de création d'un participant en fonction du type de participant spécifié.
+     *
+     * @param typepersonne le type de participant à créer.
+     * @param event
+     * @throws Exception
+     */
 
     private  void ouvertureBonnePageCreer(String typepersonne,ActionEvent event) throws Exception {
         Stage satge = (Stage) btnCreerAssocier.getScene().getWindow();
@@ -311,6 +471,10 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Associe un participant à l'événement lorsque le bouton Valider de la fenêtre d'association est cliqué.
+     */
+
     @FXML
     private void onValiderAssociationClick() {
         Stage stage = (Stage) btnValider.getScene().getWindow();
@@ -327,35 +491,63 @@ public class ModificationEvenementController {
         stage.close();
     }
 
+
+    /**
+     * Met à jour les informations de l'événement avec les modifications saisies dans l'interface utilisateur.
+     *
+     * @throws CreateException
+     * @throws IOException
+     */
+
     @FXML
-    private void onValiderModificationClick() throws CreateException, IOException {
+    private void onValiderModificationClick() throws Exception {
+        boolean aucuneErreur = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/AccueilView.fxml"));
         loader.setController(mainControleur);
         Parent root = loader.load();
 
-        Stage stage = (Stage) btnModifiactionValider.getScene().getWindow();
+        Stage stage = (Stage) btnModificationValider.getScene().getWindow();
 
 
         Date debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         if (!tfNom.getText().equalsIgnoreCase(evenement.getNom())){
+            log.info("L'événement " + evenement.getNom() + " a été renommé en " + tfNom.getText());
             evenement.setNom(tfNom.getText());
+
         }
         if (!debut.equals(evenement.getDebut()) || !fin.equals(evenement.getFin())){
+            log.info("L'événement " + evenement.getNom() + " a désormais lieu du " + debut + " au " + fin + ".");
             Salle temp = evenement.getSalle();
             evenement.setSalle(null);
-            evenement.definirDates(temp, debut, fin);
+            try {
+                evenement.definirDates(temp, debut, fin);
+            }
+            catch (CreateException e){
+                aucuneErreur = false;
+                mainControleur.afficherFenetreErreur(e.getMessage());
+            }
             evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
-            evenement.setSalle(cbSalle.getValue());
+            log.info("L'événement " + evenement.getNom() + " sera désormais dans la salle " + cbSalle.getValue().getNom() + ".");
+            try {
+                evenement.setSalle(cbSalle.getValue());
+            }
+            catch (CreateException e){
+                aucuneErreur = false;
+                mainControleur.afficherFenetreErreur(e.getMessage());
+            }
         }
         if ((Float.parseFloat(tfPrixTicket.getText()) != evenement.getPrixTickets())){
+            log.info("Le prix des tickets de l'événement " + evenement.getNom() + " a été modifié de " + evenement.getPrixTickets() + " à " + Float.parseFloat(tfPrixTicket.getText()) + ".");
             evenement.setPrixTickets(Float.parseFloat(tfPrixTicket.getText()));
         }
 
-        stage.setScene(new Scene(root));
+        if(aucuneErreur){
+            stage.setScene(new Scene(root));
+        }
     }
 
     //Bouton Spec accessoires
@@ -445,5 +637,15 @@ public class ModificationEvenementController {
     public void onRetourAjoutAccessoireClick(ActionEvent event){
         Stage stage = (Stage) btnRetourAjoutAccessoire.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void onSuprPersonne(){
+
+    }
+
+    @FXML
+    private void onModifierPersonne(){
+
     }
 }
