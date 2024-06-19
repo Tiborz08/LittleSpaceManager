@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.time.ZoneId;
@@ -22,6 +24,7 @@ import java.util.Date;
 
 public class ModificationEvenementController {
 
+    private static final Log log = LogFactory.getLog(ModificationEvenementController.class);
     //Bilan comptable
     @FXML
     private Button btnBilan;
@@ -341,9 +344,12 @@ public class ModificationEvenementController {
         Date fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         if (!tfNom.getText().equalsIgnoreCase(evenement.getNom())){
+            log.info("L'événement " + evenement.getNom() + " a été renommé en " + tfNom.getText());
             evenement.setNom(tfNom.getText());
+
         }
         if (!debut.equals(evenement.getDebut()) || !fin.equals(evenement.getFin())){
+            log.info("L'événement " + evenement.getNom() + " a désormais lieu du " + debut + " au " + fin + ".");
             Salle temp = evenement.getSalle();
             evenement.setSalle(null);
             try {
@@ -356,6 +362,7 @@ public class ModificationEvenementController {
             evenement.setSalle(temp);
         }
         if (!cbSalle.getValue().equals(evenement.getSalle())){
+            log.info("L'événement " + evenement.getNom() + " sera désormais dans la salle " + cbSalle.getValue().getNom() + ".");
             try {
                 evenement.setSalle(cbSalle.getValue());
             }
@@ -365,6 +372,7 @@ public class ModificationEvenementController {
             }
         }
         if ((Float.parseFloat(tfPrixTicket.getText()) != evenement.getPrixTickets())){
+            log.info("Le prix des tickets de l'événement " + evenement.getNom() + " a été modifié de " + evenement.getPrixTickets() + " à " + Float.parseFloat(tfPrixTicket.getText()) + ".");
             evenement.setPrixTickets(Float.parseFloat(tfPrixTicket.getText()));
         }
 
