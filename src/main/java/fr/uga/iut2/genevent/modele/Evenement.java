@@ -31,15 +31,14 @@ public abstract class Evenement implements Comparable<Evenement> {
     //CONSTRUCTEUR(S)
 
     public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
-        this.nom = nom;
+        setNom(nom);
         definirDates(salle, debut, fin);
         setSalleAdaptee(salle, capaciteParticipants);
         this.idEvent = LittleSpaceManager_Utilitaire.newId();
-        this.nom = nom;
         setCapaciteParticipants(capaciteParticipants);
         setCapaciteSpectateur(salle.getCapacite_max() - capaciteParticipants);
-        this.coutInitial = coutInitial;
-        this.prixTickets = prixTickets;
+        setCoutInitial(coutInitial);
+        setPrixTickets(prixTickets);
         setDescription(description);
         this.tickets = new ArrayList<>();
         this.participants = new ArrayList<>();
@@ -81,8 +80,20 @@ public abstract class Evenement implements Comparable<Evenement> {
         return prixTickets;
     }
 
+    public void setPrixTickets(float prixTickets) {
+        this.prixTickets = Math.max(0, prixTickets);
+    }
+
     public String getNom() {
         return nom;
+    }
+
+    public void setNom(String string){
+        if (string != null && !string.isEmpty()) {
+            this.nom = LittleSpaceManager_Utilitaire.capitalize(string);
+        } else {
+            this.nom = "Aucun nom";
+        }
     }
 
     public int getNombreParticipants() {
@@ -99,6 +110,10 @@ public abstract class Evenement implements Comparable<Evenement> {
 
     public float getCoutInitial() {
         return coutInitial;
+    }
+
+    public void setCoutInitial(float coutInitial) {
+        this.coutInitial = Math.max(0, coutInitial);
     }
 
     /**
