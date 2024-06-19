@@ -392,7 +392,7 @@ public class CreationControleur {
      * @throws CreateException
      */
 
-    private void creerEvenement() throws CreateException {
+    private void creerEvenement() throws Exception {
         String nom;
         int capaciteParticipant;
         float coutInitial;
@@ -409,17 +409,42 @@ public class CreationControleur {
         if (tfCapaciteParticipant.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le nombre maximal d'employés");
         } else {
-            capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+
+            try {
+                capaciteParticipant = Integer.parseInt(tfCapaciteParticipant.getText());
+                if(capaciteParticipant > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le nombre de salariés maximum est trop élevé");
+            }
         }
         if (tfCoutInitial.getText().isEmpty()) {
             throw new CreateException("Vous devez rentrer une valeur pour le coût initial de l'événement");
         } else {
-            coutInitial = Float.parseFloat(tfCoutInitial.getText());
+            try {
+                coutInitial = Float.parseFloat(tfCoutInitial.getText());
+                if(coutInitial > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le coût initial de l'événement est trop important");
+            }
         }
         if (tfPrixTicket.getText().isEmpty()) {
             throw new CreateException("Vous devez renseigner le prix pour un ticket, si l'évenement est gratuit, renseignez 0");
         } else {
-            prixTicket = Float.parseFloat(tfPrixTicket.getText());
+            try {
+                prixTicket = Float.parseFloat(tfPrixTicket.getText());
+                if(prixTicket > 1e9){
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                throw new CreateException("Le prix du ticket est trop élevé");
+            }
         }
         debut = Date.from(dpDebut.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         fin = Date.from(dpFin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
