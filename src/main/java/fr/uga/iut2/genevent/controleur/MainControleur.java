@@ -481,4 +481,8 @@ public class MainControleur {
     public void onQuitterClick(){
         Platform.exit();
     }
+
+    public Stage getStageLvSalle(){
+        return (Stage) lvSalles.getScene().getWindow();
+    }
 }
