@@ -410,7 +410,7 @@ public class MainControleur {
                                 salle.getNom() + "\n" +
                                         "Adresse : " + salle.getAdresse() + "\n" +
                                         "Capacité max : " + salle.getCapacite_max() + "\n" +
-                                        "Tags : " + tags
+                                        "Caractéristiques : " + tags
                         );
                     }
                 }
