@@ -76,3 +76,16 @@
 .btn-info {
     -fx-background-color: #17a2b8;
 }
+
+/*List view couleurs (Double Jaune)*/
+
+/*
+.list-view .list-cell:odd {
+    -fx-background-color: #fff5a3;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #fff8bd;
+}
+
+*/

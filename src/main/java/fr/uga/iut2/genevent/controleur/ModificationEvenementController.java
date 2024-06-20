@@ -133,6 +133,12 @@ public class ModificationEvenementController {
     }
     //Methodes
 
+    /**
+     * Permet de faire en sorte que le double clic sur une liste view déclanche un événement avec l'item séléctionné en paramétre.
+     * @param listView
+     * @param action
+     * @param <T>
+     */
     private <T> void ajouterGestionnaireDoubleClic(ListView<T> listView, Consumer<T> action) {
         listView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -149,6 +155,11 @@ public class ModificationEvenementController {
         });
     }
 
+    /**
+     * Ouvre le panneau des options possibles sur une personne.
+     * @param personne
+     * @param <T>
+     */
     @FXML
     private <T> void ouvrirOptionView(T personne){
         try{
@@ -221,7 +232,6 @@ public class ModificationEvenementController {
      * @param event
      * @throws Exception
      */
-
     @FXML
     public void onBilanClick(ActionEvent event) throws Exception {
         try {
@@ -524,7 +534,6 @@ public class ModificationEvenementController {
      * @throws CreateException
      * @throws IOException
      */
-
     @FXML
     private void onValiderModificationClick() throws Exception {
         boolean aucuneErreur = true;
@@ -597,6 +606,11 @@ public class ModificationEvenementController {
     @FXML
     private Button btnValiderGenre;
 
+    /**
+     * Se déclanche lors du clic sur le bouton "modif spec", qui est accessible seulement si l'événement modifié est un concert ou une PDT,
+     * Si l'événement est un concert, cela ouvre une page de modif du genre, et si c'est une PDT, cela ouvre une page de modif d'accessoires.
+     * @param event
+     */
     @FXML
     public void onSpecClick(ActionEvent event){
         try{
@@ -631,12 +645,20 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Ferme le pop up actuel
+     * @param event
+     */
     @FXML
     public void onValiderAjoutAccessoireClick(ActionEvent event){
         Stage stage = (Stage) btnValiderAjoutAccessoire.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Ouvre une nouvelle page permettant de créer et ajouter un nouvel accessoire.
+     * @param event
+     */
     @FXML
     public void onAjouterAccessoireClick(ActionEvent event){
         try{
@@ -656,6 +678,10 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Permet de valider la creation et l'ajout d'un nouvel accessoire dans une PDT.
+     * @param event
+     */
     @FXML
     public void onValiderAccessoireClick(ActionEvent event){
         evenement.addAccessoire(tfNomAccessoire.getText());
@@ -666,18 +692,30 @@ public class ModificationEvenementController {
         stage.close();
     }
 
+    /**
+     * Ferme le pop up actuel
+     * @param event
+     */
     @FXML
     public void onRetourAjoutAccessoireClick(ActionEvent event){
         Stage stage = (Stage) btnRetourAjoutAccessoire.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Ferme le pop up actuel
+     * @param event
+     */
     @FXML
     public void onRetourGenreClick(ActionEvent event){
         Stage stage = (Stage) btnRetourGenre.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Permet de mettre à jour le genre d'un événement
+     * @param event
+     */
     @FXML
     public void onValiderGenreClick(ActionEvent event){
         if(!Objects.equals(tfGenre.getText(), "")){
@@ -689,6 +727,10 @@ public class ModificationEvenementController {
 
     //=====================================
 
+    /**
+     * Permet de valider la suppression d'une personne, check à quelle catégorie elle appartient, puis la supprime de l'événement. Ferme également le pop up
+     * @param event
+     */
     @FXML
     private void onValiderSuprPersonne(ActionEvent event) {
 
@@ -712,6 +754,10 @@ public class ModificationEvenementController {
         initialize();
     }
 
+    /**
+     * Fait apparaitre un pop up, permettant de demander à l'utilisateur si il est sur de sa suppréssion.
+     * @param event
+     */
     @FXML
     private void onSuprPersonne(Event event){
         try {
@@ -729,7 +775,7 @@ public class ModificationEvenementController {
             btnValiderSupre.setOnAction(this::onValiderSuprPersonne);
 
             popupStage.setScene(scene);
-            popupStage.setTitle("Supprimer " + evenement.getNom() + " ?");
+            popupStage.setTitle("Supprimer de " + evenement.getNom() + " ?");
             popupStage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -747,6 +793,10 @@ public class ModificationEvenementController {
     @FXML
     private Button btCreer;
 
+    /**
+     * Ouvre un pop up de modification d'une personne, adapté au type de la personne (artiste etc...)
+     * @throws IOException
+     */
     @FXML
     private void onButtonModifierPersonne() throws IOException {
         FXMLLoader loader;
@@ -798,6 +848,12 @@ public class ModificationEvenementController {
         stage.show();
     }
 
+    /**
+     * Permet de valider la modification d'une personne, en fonction de son type, modifie ses attributs.
+     * @param event
+     * @param type le type de personne
+     * @param personne la personne modifiée
+     */
     private void onButtonModifierPersonneValider(ActionEvent event, String type, Object personne) {
         // Vérifiez le type et effectuez les opérations de modification nécessaires
         if (type.equals("Artiste") && personne instanceof Artiste) {
@@ -834,6 +890,10 @@ public class ModificationEvenementController {
         }
     }
 
+    /**
+     * Ouvre une page de modification de la salle actuelle.
+     * @throws IOException
+     */
     @FXML
     private void onButtonModifierSalle() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationSalleView.fxml"));
@@ -856,6 +916,10 @@ public class ModificationEvenementController {
         stage.show();
     }
 
+    /**
+     * Valide la modification d'une salle, en mettant à jour ses attributs. Ferme le pop up.
+     * @param event
+     */
     @FXML
     private void onButtonValiderModifierSalle(ActionEvent event){
         salle.setAdresse(tfAdresse.getText());
@@ -869,6 +933,10 @@ public class ModificationEvenementController {
         mainControleur.initialize();
     }
 
+    /**
+     * Permet de valider la suppression d'une salle. Et ferme le pop up.
+     * @param event
+     */
     @FXML
     private void onButtonValiderSuprSalle(ActionEvent event){
         mainControleur.removeSalle(salle);
@@ -883,6 +951,10 @@ public class ModificationEvenementController {
         mainControleur.initialize();
     }
 
+    /**
+     * Ouvre le pop up de validation de la suppression de la salle.
+     * @param event
+     */
     @FXML
     private void onSuprSalle(Event event){
         try {

@@ -352,7 +352,6 @@ public class MainControleur {
      *
      * @return la fenêtre (Stage) associée à la ListView lvEvenement.
      */
-
     @FXML
     public Stage getStage() {
         return (Stage) lvEvenement.getScene().getWindow();
@@ -410,6 +409,11 @@ public class MainControleur {
         }
     }
 
+    /**
+     * Permet d'ouvrir le panneau avec toute les options possibles sur une salle.
+     * @param salle
+     * @throws IOException
+     */
     @FXML
     private void ouvrirOptionSalle(Salle salle) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionSalleView.fxml"));
@@ -429,11 +433,18 @@ public class MainControleur {
 
     }
 
+    /**
+     * Retire la salle de l'existance
+     * @param salle
+     */
     @FXML
     public void removeSalle(Salle salle){
         salles.remove(salle);
     }
 
+    /**
+     * Met à jour la liste des salles dans la listView
+     */
     private void actualisationSalle(){
         // Utilisation de ObservableList pour contenir des objets Salle
         ObservableList<Salle> listeSalle = FXCollections.observableArrayList(salles);
