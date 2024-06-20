@@ -99,7 +99,7 @@ public class ModificationEvenementController {
     @FXML
     private TextArea taTags;
     @FXML
-    private Button btnModifierSalle, btnSuprSalle;
+    private Button btnModifierSalle, btnSuprSalle, btnPlanningSalle;
 
     @FXML
     private ListView<Evenement> lvEvenementSalle;
@@ -1022,10 +1022,35 @@ public class ModificationEvenementController {
 
         ObservableList<Evenement> listeEvenements = FXCollections.observableArrayList(salle.getHistoriqueEvenements());
         lvEvenementSalle.setItems(listeEvenements);
+
+        lvEvenementSalle.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Evenement selectedEvenement = lvEvenementSalle.getSelectionModel().getSelectedItem();
+                if (selectedEvenement != null) {
+                    try {
+                        mainControleur.ouvrirOptionEvenement(selectedEvenement);
+                        Stage stage = (Stage) lvEvenementSalle.getScene().getWindow();
+                        stage.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+        Stage stageSalle = mainControleur.getStageLvSalle();
+        stageSalle.close();
+
         Stage stage = new Stage();
         stage.setTitle("Planning de la salle");
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+
+        Stage popupprecedent = (Stage) btnPlanningSalle.getScene().getWindow();
+        popupprecedent.close();
     }
+
+
 }
