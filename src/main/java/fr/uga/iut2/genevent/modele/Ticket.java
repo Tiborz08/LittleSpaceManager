@@ -1,11 +1,13 @@
 package fr.uga.iut2.genevent.modele;
 
+import java.io.Serializable;
+
 import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.newId;
 
 /**
  * Un ticket relie un spectateur avec un événement, les tickets possèdent une référence unique et sont achetable pour un tarif spécifique à l'événement
  */
-public class Ticket {
+public class Ticket implements Serializable {
     private int reference;
     private Evenement evenement;
     private Spectateur spectateur;

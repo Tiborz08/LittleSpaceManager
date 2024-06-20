@@ -26,7 +26,7 @@ public class OldControleur {
         this.ihm.saisirUtilisateur();
     }
 
-    public void creerUtilisateur(IHM.InfosUtilisateur infos) {
+   /* public void creerUtilisateur(IHM.InfosUtilisateur infos) {
         boolean nouvelUtilisateur = this.genevent.ajouteUtilisateur(
                 infos.email,
                 infos.nom,
@@ -43,9 +43,9 @@ public class OldControleur {
                     false
             );
         }
-    }
+    }*/
 
-    public void saisirEvenement() {
+/*    public void saisirEvenement() {
         this.ihm.saisirNouvelEvenement(this.genevent.getEvenements().keySet());
     }
 
@@ -72,5 +72,5 @@ public class OldControleur {
                 "Nouvel évènement : " + infos.nom + ", administré par " + infos.admin.email,
                 true
         );
-    }
+    }*/
 }

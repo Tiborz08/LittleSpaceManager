@@ -2,11 +2,13 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
+import java.io.Serializable;
+
 /**
  * Cette class permet de créer des objets de type Accessoire qui nous servirons dans la Class PieceDeTheatre
  */
 
-public class Accessoire {
+public class Accessoire implements Serializable {
 
     //ATTRIBUTION
     private String nom;

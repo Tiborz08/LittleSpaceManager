@@ -65,6 +65,10 @@ public class CreationControleur {
 
     @FXML
     private TextArea taTags;
+    private final GenEvent genevent;
+    public CreationControleur(GenEvent genevent) {
+        this.genevent = genevent;
+    }
 
     //méthodes
 
@@ -76,7 +80,7 @@ public class CreationControleur {
      */
     public void initialize() {
         if (typeCreation.equalsIgnoreCase("événement")) {
-            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théàtre", "Autre");
+            ObservableList<String> types = FXCollections.observableArrayList("Concert", "OneManShow", "Théâtre", "Autre");
 
             dpDebut.setValue(LocalDate.now());
             dpFin.setValue(LocalDate.now());
@@ -221,8 +225,9 @@ public class CreationControleur {
         if (!(adresse.isEmpty()) && !(nom.isEmpty()) && !(tfCapaciteMax.getText().isEmpty())) {
             try {
                 capaciteMax = Integer.parseInt(tfCapaciteMax.getText());
-                Salle salle = new Salle(nom, adresse, capaciteMax, tagsLong);
+                Salle salle = new Salle(genevent,nom, adresse, capaciteMax, tagsLong);
                 mainControleur.ajouterSalle(salle);
+                genevent.ajoutSalle(genevent, salle);
                 Stage stage = (Stage) tfCapaciteMax.getScene().getWindow();
                 stage.close();
                 log.info("Salle créée : " + salle.getNom() + ", " + salle.getAdresse() + ", " + salle.getCapacite_max() + " personnes maximum");
@@ -277,8 +282,9 @@ public class CreationControleur {
 
             throw new CreateException("Vous devez remplir tous les champs");
         } else {
-            Spectateur spectateur = new Spectateur(nom, prenom);
+            Spectateur spectateur = new Spectateur(genevent,nom, prenom);
             mainControleur.ajouterSpectateur(spectateur);
+            genevent.ajoutSpectateur(genevent, spectateur);
 
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
 
@@ -323,8 +329,9 @@ public class CreationControleur {
 
             throw new CreateException("Vous devez remplir tous les champs");
         } else {
-            Personnel personnel = new Personnel(nom, prenom, salaire);
+            Personnel personnel = new Personnel(genevent,nom, prenom, salaire);
             mainControleur.ajouterPersonnel(personnel);
+            genevent.ajoutPersonnel(genevent, personnel);
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
             stage.close();
 
@@ -375,8 +382,9 @@ public class CreationControleur {
 
             throw new CreateException("Vous devez remplir tous les champs");
         } else {
-            Artiste artiste = new Artiste(nom, prenom, salaire, popularite);
+            Artiste artiste = new Artiste(genevent,nom, prenom, salaire, popularite);
             mainControleur.ajouterArtiste(artiste);
+            genevent.ajoutArtiste(genevent,nom, prenom, salaire, popularite);
             Stage stage = (Stage) tfPrenomPersonne.getScene().getWindow();
             stage.close();
             log.info("Artiste créé : " + artiste.getNom() + " " + artiste.getPrenom());
@@ -456,13 +464,17 @@ public class CreationControleur {
         Evenement evenement;
 
         if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Concert")) {
-            evenement = new Concert(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            evenement = new Concert(genevent,nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            genevent.ajoutConcert(genevent, (Concert) evenement);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("Théâtre")) {
-            evenement = new PieceDeTheatre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            evenement = new PieceDeTheatre(genevent,nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            genevent.ajoutTheatre(genevent, (PieceDeTheatre) evenement);
         } else if (cbType.getValue() != null && cbType.getValue().equalsIgnoreCase("OneManShow")) {
-            evenement = new OneManShow(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            evenement = new OneManShow(genevent,nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            genevent.ajoutOneManShow(genevent, (OneManShow) evenement);
         } else {
-            evenement = new Autre(nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            evenement = new Autre(genevent,nom, capaciteParticipant, coutInitial, prixTicket, debut, fin, description, salle);
+            genevent.ajoutAutre(genevent, (Autre) evenement);
         }
 
         mainControleur.ajouterEvenement(evenement);

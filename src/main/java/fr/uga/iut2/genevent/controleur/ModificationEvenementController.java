@@ -31,6 +31,7 @@ import java.util.function.Consumer;
  */
 public class ModificationEvenementController {
 
+    private final GenEvent genevent;
     private static final Log log = LogFactory.getLog(ModificationEvenementController.class);
     //Bilan comptable
     @FXML
@@ -96,6 +97,10 @@ public class ModificationEvenementController {
     private MainControleur mainControleur;
     private Evenement evenement;
     private Personne personne;
+
+    public ModificationEvenementController(GenEvent genevent) {
+        this.genevent = genevent;
+    }
 
     /**
      * Initialise la vue de modification d'un événement.
@@ -275,6 +280,7 @@ public class ModificationEvenementController {
     @FXML
     public void onValiderSupre(Event event) {
         try {
+            genevent.getEvenements().remove(evenement);
             mainControleur.getEvenements().remove(evenement);
             evenement.setSalle(null);
             Stage stage = (Stage) btnValiderSupre.getScene().getWindow();

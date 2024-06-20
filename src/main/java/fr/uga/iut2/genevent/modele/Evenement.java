@@ -5,6 +5,7 @@ import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -12,11 +13,12 @@ import java.util.Iterator;
 /**
  * Les événements qui sont dans l'application
  */
-public abstract class Evenement implements Comparable<Evenement> {
+public abstract class Evenement implements Comparable<Evenement> , Serializable {
     private static final Log log = LogFactory.getLog(Evenement.class);
 
     //ATTRIBUTIONS
-
+    private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
+    private final GenEvent genevent;
     private int idEvent;
     private String nom;
     public int capaciteParticipants;
@@ -46,7 +48,8 @@ public abstract class Evenement implements Comparable<Evenement> {
      * @param salle La salle dans laquelle a lieu l'événement
      * @throws CreateException Averti des problèmes lors de la création d'une salle (Exemple : Le début qui a lieu après la fin)
      */
-    public Evenement(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+    public Evenement(GenEvent genevent, String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+        this.genevent=genevent;
         setNom(nom);
         definirDates(salle, debut, fin);
         setSalleAdaptee(salle, capaciteParticipants);

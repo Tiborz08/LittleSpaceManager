@@ -3,13 +3,14 @@ package fr.uga.iut2.genevent.modele;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Cette Class permet de créer des objets de type Participant. Cette Class est une classe fille de la class Pesonne.
  */
 
-public abstract class Participant extends Personne {
+public abstract class Participant extends Personne implements Serializable {
 
     private static final Log log = LogFactory.getLog(Participant.class);
     private ArrayList<Evenement> evenements = new ArrayList<>();
@@ -23,8 +24,8 @@ public abstract class Participant extends Personne {
      * @param prenom
      * @param salaire
      */
-    public Participant(String nom, String prenom, float salaire) {
-        super(nom, prenom);
+    public Participant(GenEvent genevent,String nom, String prenom, float salaire) {
+        super(genevent,nom, prenom);
         setSalaire(salaire);
     }
     //SETTER

@@ -36,6 +36,35 @@ public class MainControleur {
     private ArrayList<Spectateur> spectateurs = new ArrayList<>();
     private ArrayList<Personnel> personnels = new ArrayList<>();
     private ArrayList<Salle> salles = new ArrayList<>();
+    private final GenEvent genevent;
+    public MainControleur(GenEvent genevent) {
+        this.genevent = genevent;
+        for(Evenement e:genevent.getEvenements()){
+            if (!(evenements.contains(e))){
+                evenements.add(e);
+            }
+        }
+        for (Artiste a:genevent.getArtistes()){
+            if (!(artistes.contains(a))){
+                artistes.add(a);
+            }
+        }
+        for (Spectateur s:genevent.getSpectateurs()){
+            if (!(spectateurs.contains(s))){
+                spectateurs.add(s);
+            }
+        }
+        for (Personnel p:genevent.getPersonnels()){
+            if (!(personnels.contains(p))){
+                personnels.add(p);
+            }
+        }
+        for (Salle sa:genevent.getSalles()){
+            if (!(salles.contains(sa))){
+                salles.add(sa);
+            }
+        }
+    }
 
     @FXML
     private Button btnAnnuler;
@@ -122,10 +151,10 @@ public class MainControleur {
      * @param typeCreation le type d'élément à créer.
      * @throws Exception si une erreur se produit lors du chargement du fichier FXML associé.
      */
-    public void ouvrirFenetreCreation(String typeCreation, ActionEvent event) throws Exception {
+    public void ouvrirFenetreCreation(GenEvent genevent,String typeCreation, ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/Creation" + LittleSpaceManager_Utilitaire.removeAccents(typeCreation) + "View.fxml"));
 
-        CreationControleur creationController = new CreationControleur();
+        CreationControleur creationController = new CreationControleur(genevent);
         creationController.setMainController(this);
         creationController.setTypeCreation(typeCreation);
 
@@ -184,7 +213,7 @@ public class MainControleur {
     public void ouvrirOptionEvenement(Evenement evenement) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionEvenementView.fxml"));
 
-        ModificationEvenementController modificationControleur = new ModificationEvenementController();
+        ModificationEvenementController modificationControleur = new ModificationEvenementController(genevent);
         modificationControleur.setMainControleur(this);
         modificationControleur.setEvenement(evenement);
 
@@ -203,7 +232,7 @@ public class MainControleur {
      */
     @FXML
     public void onButtonCreerSalle(ActionEvent event) throws Exception {
-        ouvrirFenetreCreation("Salle", event);
+        ouvrirFenetreCreation(genevent,"Salle", event);
     }
 
     /**
@@ -215,7 +244,7 @@ public class MainControleur {
         if (salles.isEmpty()) {
             afficherFenetreErreur("Vous devez paramétrer au moins une salle avant de pouvoir créer un événement.");
         } else {
-            ouvrirFenetreCreation("Événement", event);
+            ouvrirFenetreCreation(genevent,"Événement", event);
         }
     }
 
@@ -224,7 +253,7 @@ public class MainControleur {
      */
     @FXML
     public void onButtonCreerPersonnel(ActionEvent event) throws Exception {
-        ouvrirFenetreCreation("Personnel", event);
+        ouvrirFenetreCreation(genevent,"Personnel", event);
     }
 
     /**
@@ -232,7 +261,7 @@ public class MainControleur {
      */
     @FXML
     public void onButtonCreerArtiste(ActionEvent event) throws Exception {
-        ouvrirFenetreCreation("Artiste", event);
+        ouvrirFenetreCreation(genevent,"Artiste", event);
     }
 
     /**
@@ -240,7 +269,7 @@ public class MainControleur {
      */
     @FXML
     public void onButtonCreerSpectateur(ActionEvent event) throws Exception {
-        ouvrirFenetreCreation("Spectateur", event);
+        ouvrirFenetreCreation(genevent,"Spectateur", event);
     }
 
     //getter

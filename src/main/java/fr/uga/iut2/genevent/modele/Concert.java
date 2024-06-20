@@ -2,12 +2,13 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Evénement possèdant un genre musical. Et peut avoir plusieurs artistes.
  */
-public class Concert extends Evenement {
+public class Concert extends Evenement implements Serializable {
 
     //ATTRIBUTION
     private String genre;
@@ -26,8 +27,8 @@ public class Concert extends Evenement {
      */
 
     //CONSTRUCTEUR
-    public Concert(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
-        super(nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
+    public Concert(GenEvent genevent,String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+        super(genevent,nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
 
         setGenre("Inconnu");
     }
