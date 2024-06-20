@@ -414,7 +414,7 @@ public class MainControleur {
     private void ouvrirOptionSalle(Salle salle) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionSalleView.fxml"));
 
-        ModificationEvenementController modificationControleur = new ModificationEvenementController();
+        ModificationEvenementController modificationControleur = new ModificationEvenementController(genevent);
         modificationControleur.setMainControleur(this);
         modificationControleur.setSalle(salle);
 

@@ -872,6 +872,7 @@ public class ModificationEvenementController {
     @FXML
     private void onButtonValiderSuprSalle(ActionEvent event){
         mainControleur.removeSalle(salle);
+        genevent.getSalles().remove(salle);
 
         Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
         stage.close();
