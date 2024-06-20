@@ -6,18 +6,23 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EvenementTest {
 
     private Evenement evenement;
     private Salle salle;
+    private GenEvent geneventTest;
 
+    Date debut = new Date();
+    Date fin = new Date(System.currentTimeMillis() + 24*60*60*1000);
     @BeforeEach
     void setUp() throws CreateException {
+        geneventTest = new GenEvent();
         // Initialisation des objets nécessaires pour les tests
-        salle = new Salle("Salle de Test", "123 Rue Test", 100, ""); // Remplacez avec le constructeur approprié
-        evenement = new Evenement("Test Event", 50, 1000, 20, new Date(), new Date(), "Description Test", salle) {
+        salle = new Salle(geneventTest, "Nom salle", "123 Rue Test", 100, ""); // Création d'une salle
+        evenement = new Evenement(geneventTest, "Nom évènement", 50, 1000, 20, debut, fin, "Description Test", salle) {
             // Implémentation anonyme de Evenement car c'est une classe abstraite
         };
     }
