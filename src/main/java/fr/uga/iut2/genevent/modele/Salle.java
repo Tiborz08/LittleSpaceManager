@@ -186,7 +186,7 @@ public class Salle implements Serializable {
      */
     public void setTags(String tagsLong) {
         if(tagsLong.isEmpty() || tagsLong == null){
-            log.warn("Aucun tag de spécifié, , affectation d'un tag par défaut");
+            log.warn("Aucun tag de spécifié, affectation d'un tag par défaut");
             tagsLong = "Aucune caractéristique spécifiée";
         }
         String[] tagsSplit = tagsLong.split(",");
