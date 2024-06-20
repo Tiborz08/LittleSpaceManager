@@ -1,7 +1,5 @@
 package fr.uga.iut2.genevent.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,11 +88,4 @@ public class LittleSpaceManager_Utilitaire {
 
         return jour + "/" + mois + "/" + annee;
     }
-
-    public static String afficherDateLettres(Date date) {
-        ArrayList<String> listeMois = new ArrayList<>(Arrays.asList("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"));
-        String mois = listeMois.get(date.getMonth());
-        return date.getDate() + " " + mois + " " + (date.getYear() + 1900);
-    }
-
 }
