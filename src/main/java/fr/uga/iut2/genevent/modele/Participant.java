@@ -20,9 +20,9 @@ public abstract class Participant extends Personne implements Serializable {
 
     /**
      * Pour créer un objet type Participant, il faut fournir le nom, prenom et salaire du Participant.
-     * @param nom
-     * @param prenom
-     * @param salaire
+     * @param nom le nom de la personne
+     * @param prenom le prénom de la personne
+     * @param salaire le salaire attribué à l'employé pour sont travail sur tout l'événement
      */
     public Participant(GenEvent genevent,String nom, String prenom, float salaire) {
         super(genevent,nom, prenom);

@@ -6,14 +6,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * La classe utilitaire du logiciel, elle apporte quelques fonctionnalités réutilisable ailleurs dans le code
+ */
 public class LittleSpaceManager_Utilitaire {
 
     private static AtomicInteger id = new AtomicInteger(0);
 
+    /**
+     * Génère un identifiant unique, incrémenté automatiquement
+     * @return le nouvel identifiant à attribuer
+     */
     public static int newId() {
         return id.incrementAndGet();
     }
 
+    /**
+     * Transforme une chaine de caractère et la mets en capital
+     * @param str la chaine de caractère à modifier
+     * @return la chaine de caractère modifiée (Exemple : oui --> Oui)
+     */
     public static String capitalize(String str) {
         if (str == null || str.isEmpty()) {
             return str;
@@ -38,6 +50,11 @@ public class LittleSpaceManager_Utilitaire {
     }
 
 
+    /**
+     * Supprime les accents d'une chaine de caractères
+     * @param str la chaine de caractères
+     * @return la chaine de caractères sans les accents (Exemple : été --> ete)
+     */
     public static String removeAccents(String str) {
         if (str == null || str.isEmpty()) {
             return str;
@@ -56,6 +73,11 @@ public class LittleSpaceManager_Utilitaire {
                 .replaceAll("[Ç]", "C");
     }
 
+    /**
+     * Affiche une date sous forme numérique
+     * @param date La date a afficher
+     * @return La date sous forme numérique (Exemple : 16/04/2006)
+     */
     public static String afficherDateChiffre(Date date) {
         String jour = String.valueOf(date.getDate());
         String mois = String.valueOf(date.getMonth() + 1);

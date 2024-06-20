@@ -68,6 +68,10 @@ public class Accessoire implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Méthode d'affichage d'un accessoire
+     * @return id - nom
+     */
     @Override
     public String toString() {
         return id+" - "+nom;

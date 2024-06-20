@@ -19,8 +19,8 @@ public abstract class Personne implements Serializable {
 
     /**
      * Pour créer une personne, il faut renseigner son nom et son prenom. L'id de la personne est initialisé automatiquement.
-     * @param nom
-     * @param prenom
+     * @param nom le nom de la personne
+     * @param prenom le prénom de la personne
      */
     public Personne(GenEvent genevent,String nom, String prenom) {
         this.genevent=genevent;
@@ -60,14 +60,14 @@ public abstract class Personne implements Serializable {
 
     /**
      * Cette fonction renvoie l'identifiant de la Personne.
-     * @return
+     * @return l'identifiant unique
      */
     public int getIdentifiant() {
         return identifiant;
     }
     /**
      * Cette fonction renvoie le nom de la Personne.
-     * @return
+     * @return le nom de famille
      */
 
     public String getNom() {
@@ -86,6 +86,10 @@ public abstract class Personne implements Serializable {
      * @return
      */
 
+    /**
+     * Fonction d'affichage d'une peersonne
+     * @return nom - prenom
+     */
     @Override
     public String toString() {
         return nom + " " + prenom;
