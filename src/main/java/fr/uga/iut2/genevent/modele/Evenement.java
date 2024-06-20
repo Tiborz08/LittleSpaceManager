@@ -226,6 +226,7 @@ public abstract class Evenement implements Comparable<Evenement> , Serializable 
         }
         else if (capaciteParticipants <= salle.getCapacite_max()) {
             salle.addEvenement(this);
+            this.salle.enleverDeLHistorique(this);
             this.salle = salle;
             setCapaciteParticipants(capaciteParticipants);
         } else {
