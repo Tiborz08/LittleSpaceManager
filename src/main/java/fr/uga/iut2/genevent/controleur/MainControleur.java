@@ -23,7 +23,10 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeSet;
+
+import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.trim;
 
 /**
  * Contrôleur principal de l'application Little Space Manager.
@@ -343,7 +346,15 @@ public class MainControleur {
      */
     @FXML
     private void actualisationEvenement() {
-        ObservableList<Evenement> listeEvenement = FXCollections.observableArrayList(new ArrayList<>(evenements));
+            TreeSet<Evenement> evenementsFuturs = new TreeSet<>();
+            Date aujourdhui = new Date();
+            aujourdhui = trim(aujourdhui);
+            for (Evenement evenement : evenements) {
+                if (evenement.getFin().after(aujourdhui) || evenement.getFin().equals(aujourdhui)) {
+                    evenementsFuturs.add(evenement);
+                }
+            }
+        ObservableList<Evenement> listeEvenement = FXCollections.observableArrayList(evenementsFuturs);
         lvEvenement.setItems(listeEvenement);
     }
 
