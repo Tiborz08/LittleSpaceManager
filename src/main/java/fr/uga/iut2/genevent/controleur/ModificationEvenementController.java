@@ -831,7 +831,7 @@ public class ModificationEvenementController {
 
             tfNomPersonne.setText(artiste.getNom());
             tfPrenomPersonne.setText(artiste.getPrenom());
-            tfSalaire.setText(String.valueOf(artiste.getSalaire()));
+            tfSalaire.setText(String.valueOf(artiste.getSalaire()/ artiste.getPopularite()));
             ObservableList<Integer> options = FXCollections.observableArrayList(1, 2, 3, 4, 5);
             cbPopularite.setItems(options);
             cbPopularite.setValue((int) artiste.getPopularite());
