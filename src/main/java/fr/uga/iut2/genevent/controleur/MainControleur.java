@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.controleur;
 
 import fr.uga.iut2.genevent.modele.*;
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,7 +74,7 @@ public class MainControleur {
 
 
     @FXML
-    private Button btnAnnuler;
+    private Button btnAnnuler, btnQuitter, btnRetour;
 
     //attribut accueil
     @FXML
@@ -372,6 +373,18 @@ public class MainControleur {
 
     //Voir Salle
 
+    /**
+     * Ferme la fenêtre d'affichage des salles lorsque le bouton Retour est cliqué.
+     *
+     * @param event
+     */
+    @FXML
+    public void onRetourClick(ActionEvent event) {
+        Stage stage = (Stage) btnRetour.getScene().getWindow();
+        stage.close();
+    }
+
+
     @FXML
     private Button btnVoirSalles;
     @FXML
@@ -462,5 +475,10 @@ public class MainControleur {
         // Utilisation de ObservableList pour contenir des objets Salle
         ObservableList<Salle> listeSalle = FXCollections.observableArrayList(salles);
         lvSalles.setItems(listeSalle);
+    }
+
+    @FXML
+    public void onQuitterClick(){
+        Platform.exit();
     }
 }

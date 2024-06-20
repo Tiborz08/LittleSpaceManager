@@ -932,6 +932,8 @@ public class ModificationEvenementController {
      */
     @FXML
     private void onButtonValiderModifierSalle(ActionEvent event){
+        log.info("Modification réussi. \n Nom :" + salle.getNom() + " -> " + tfNomSalle.getText() + "\n Adresse : " + salle.getAdresse() + " -> " + tfAdresse.getText() + "\n Capacité maximale : " + salle.getCapacite_max() + " -> " + tfCapaciteMax.getText());
+
         salle.setAdresse(tfAdresse.getText());
         salle.setNom(tfNomSalle.getText());
         salle.setCapacite_max(Integer.parseInt(tfCapaciteMax.getText()));
@@ -955,6 +957,7 @@ public class ModificationEvenementController {
         else {
             mainControleur.removeSalle(salle);
             genevent.getSalles().remove(salle);
+        log.info(salle.toString()+ "supprimé.");
 
             Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
             stage.close();

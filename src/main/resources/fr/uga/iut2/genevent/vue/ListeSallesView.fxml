@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="737.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@style/main.css" />
+   </stylesheets>
    <children>
       <HBox alignment="CENTER" prefHeight="384.0" prefWidth="696.0">
          <children>
@@ -13,6 +17,14 @@
          <VBox.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="btnRetour" mnemonicParsing="false" onAction="#onRetourClick" styleClass="btn" text="Retour à l'accueil">
+               <HBox.margin>
+                  <Insets bottom="20.0" />
+               </HBox.margin></Button>
+         </children>
       </HBox>
    </children>
 </VBox>

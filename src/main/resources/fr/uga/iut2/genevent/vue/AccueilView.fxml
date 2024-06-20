@@ -1,78 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="737.0" style="-fx-background-color: #dfe6ed;" stylesheets="@style/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox alignment="CENTER" prefHeight="384.0" prefWidth="696.0">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="737.0" style="-fx-background-color: #dfe6ed;" stylesheets="@style/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@style/main.css" />
+    </stylesheets>
+    <children>
+            <VBox alignment="TOP_CENTER" prefHeight="567.0" prefWidth="431.0" spacing="20.0">
+               <children>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="195.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo/logo-lsm.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="LittleSpaceManager" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </VBox.margin>
+            </HBox>
+                      <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerPersonnel" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+                      <Button fx:id="btAjoutSpectateur" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSpectateur" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spectateur" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+                      <Button fx:id="btAjoutArtiste" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerArtiste" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+                      <Button fx:id="btCreerSalle" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSalle" prefHeight="30.0" prefWidth="173.0" style="-fx-background-color: #4b5c6b;" text="Créer une salle" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+                      <Button fx:id="btnVoirSalles" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonVoirSalle" prefHeight="30.0" prefWidth="173.0" style="-fx-background-color: #4b5c6b;" text="Voir salles" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+                      <Button fx:id="btCreerEvenement" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerEvenement" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer un événement" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                      </Button>
+            <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="216.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btnQuitter" alignment="CENTER" mnemonicParsing="false" onAction="#onQuitterClick" prefHeight="32.0" prefWidth="181.0" styleClass="btn,btn-danger" text="Quitter">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@logo/image-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+               </children>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+            </VBox>
+      <VBox alignment="CENTER" prefHeight="567.0" prefWidth="697.0" style="-fx-background-color: white;">
          <children>
-            <ListView fx:id="lvEvenement" prefHeight="395.0" prefWidth="696.0" style="-fx-border-color: #9eadba;" />
+            <Label prefHeight="75.0" prefWidth="180.0" text="Mes évènements récents">
+               <font>
+                  <Font size="47.0" />
+               </font>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </Label>
+                      <ListView fx:id="lvEvenement" prefHeight="578.0" prefWidth="502.0" style="-fx-border-color: #9eadba;" />
          </children>
-         <VBox.margin>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox alignment="TOP_CENTER" prefHeight="95.0" prefWidth="696.0" spacing="40.0">
-         <children>
-            <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerPersonnel" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btAjoutSpectateur" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSpectateur" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un spectateur" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btAjoutArtiste" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerArtiste" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter un artiste" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-      <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="78.0" prefWidth="732.0" spacing="3.0">
-         <children>
-            <Button fx:id="btCreerSalle" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSalle" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #4b5c6b;" text="Créer une salle" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnVoirSalles" alignment="CENTER" layoutX="54.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonVoirSalle" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #4b5c6b;" text="Voir salles" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="300.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btCreerEvenement" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerEvenement" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer un événement" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-   </children>
-</VBox>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </VBox.margin>
+        </HBox>
