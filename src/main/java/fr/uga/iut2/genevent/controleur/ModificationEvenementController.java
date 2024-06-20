@@ -844,7 +844,13 @@ public class ModificationEvenementController {
         tfNomSalle.setText(salle.getNom());
         tfAdresse.setText(salle.getAdresse());
         tfCapaciteMax.setText(String.valueOf(salle.getCapacite_max()));
-        taTags.setText(salle.getTags().toString());
+        taTags.setText("");
+        for(String string : salle.getTags()){
+            if(string != salle.getTags().first()){
+                taTags.appendText(",");
+            }
+            taTags.appendText(string);
+        }
 
         btCreer.setText("Valider");
         btCreer.setOnAction(this::onButtonValiderModifierSalle);
