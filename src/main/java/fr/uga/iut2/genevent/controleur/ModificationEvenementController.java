@@ -301,7 +301,7 @@ public class ModificationEvenementController {
             Stage stage1 = (Stage) btnRetour.getScene().getWindow();
             stage1.close();
             mainControleur.initialize();
-            System.out.println(mainControleur.getEvenements().toString());
+            log.info("Evenement " + evenement.getNom() + " supprimé");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -810,7 +810,7 @@ public class ModificationEvenementController {
             stage.close();
             initialize();
 
-            System.out.println("Modification de l'artiste réussie : " + artiste);
+            log.info("Modification de " + artiste + " réussie");
         } else if (type.equals("Personnel") && personne instanceof Personnel) {
             Personnel personnel = (Personnel) personne;
             personnel.setNom(tfNomPersonne.getText());
@@ -819,16 +819,17 @@ public class ModificationEvenementController {
             Stage stage = (Stage) btCreer.getScene().getWindow();
             stage.close();
             initialize();
-            System.out.println("Modification du personnel réussie : " + personnel);
+
+            log.info("Modification de " + personnel + " réussie");
         } else if (type.equals("Spectateur") && personne != null) {
-            // Votre logique de modification pour le spectateur ici
-            System.out.println("Modification du spectateur réussie");
             Spectateur spectateur = (Spectateur) personne;
             spectateur.setNom(tfNomPersonne.getText());
             spectateur.setPrenom(tfPrenomPersonne.getText());
             Stage stage = (Stage) btCreer.getScene().getWindow();
             stage.close();
             initialize();
+
+            log.info("Modification de " + personne + " réussie");
         } else {
             System.err.println("Type non reconnu ou personne invalide.");
         }
