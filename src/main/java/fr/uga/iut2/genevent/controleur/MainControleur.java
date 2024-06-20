@@ -243,12 +243,6 @@ public class MainControleur {
         ouvrirFenetreCreation("Spectateur", event);
     }
 
-    @FXML
-    public void onButtonQuitterAccueil(ActionEvent event){
-        log.info("Application fermée");
-        getStage().close();
-    }
-
     //getter
 
     /**
