@@ -28,6 +28,9 @@ public class Main extends Application {
             stage.setTitle("LittleSpaceManager");
             stage.getIcons().add( new Image(String.valueOf(getClass().getResource("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png"))));
             stage.setScene(scene);
+            stage.setOnCloseRequest(event -> {
+                log.info("Application fermée");
+            });
             stage.show();
             log.info("Application démarrée");
         }
