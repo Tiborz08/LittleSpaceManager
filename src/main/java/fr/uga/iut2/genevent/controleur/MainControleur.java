@@ -395,7 +395,7 @@ public class MainControleur {
                     } else {
                         String tags = String.join(", ", salle.getTags());
                         setText(
-                                "\t" + salle.getNom() + "\n" +
+                                salle.getNom() + "\n" +
                                         "Adresse : " + salle.getAdresse() + "\n" +
                                         "Capacité max : " + salle.getCapacite_max() + "\n" +
                                         "Tags : " + tags
