@@ -24,7 +24,7 @@
                   <Label text="LittleSpaceManager" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" right="20.0" />
+                  <Insets bottom="10.0" right="20.0" />
                </VBox.margin>
             </HBox>
                       <Button fx:id="btAjoutPersonnel" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerPersonnel" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Ajouter du personnel" textFill="WHITE">
@@ -48,7 +48,7 @@
                               <Font name="System Bold" size="13.0" />
                           </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="20.0" />
                </VBox.margin>
                       </Button>
                       <Button fx:id="btCreerSalle" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerSalle" prefHeight="30.0" prefWidth="173.0" style="-fx-background-color: #4b5c6b;" text="Créer une salle" textFill="WHITE">
@@ -64,7 +64,7 @@
                               <Font name="System Bold" size="13.0" />
                           </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="20.0" />
                </VBox.margin>
                       </Button>
                       <Button fx:id="btCreerEvenement" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCreerEvenement" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #4b5c6b;" text="Créer un événement" textFill="WHITE">
@@ -75,7 +75,7 @@
                   <Insets />
                </VBox.margin>
                       </Button>
-            <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="216.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="216.0">
                <children>
                   <Button fx:id="btnQuitter" alignment="CENTER" mnemonicParsing="false" onAction="#onQuitterClick" prefHeight="32.0" prefWidth="181.0" styleClass="btn,btn-danger" text="Quitter">
                      <graphic>
@@ -84,10 +84,13 @@
                               <Image url="@logo/image-removebg-preview.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin></Button>
                </children>
                <padding>
-                  <Insets left="20.0" />
+                  <Insets left="15.0" />
                </padding>
                <VBox.margin>
                   <Insets top="50.0" />

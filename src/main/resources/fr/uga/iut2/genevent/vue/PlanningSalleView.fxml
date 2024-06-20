@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@style/main.css" />
     </stylesheets>
    <children>
+      <Label text="Planning de ma salle">
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+      </Label>
       <ListView fx:id="lvEvenementSalle" prefHeight="322.0" prefWidth="600.0" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button styleClass="btn" fx:id="btnRetour" onAction="#onRetourClick" mnemonicParsing="false" text="Retour" />
+            <Button fx:id="btnRetour" mnemonicParsing="false" onAction="#onRetourClick" styleClass="btn" text="Retour" />
          </children>
       </HBox>
    </children>

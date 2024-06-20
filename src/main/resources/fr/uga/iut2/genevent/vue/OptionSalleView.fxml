@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -11,6 +12,14 @@
     </stylesheets>
 
     <children>
+      <Label prefHeight="20.0" prefWidth="148.0" text="Options de ma salle">
+         <font>
+            <Font size="28.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="578.0" spacing="20.0">
             <children>
                 <Button fx:id="btnPlanningSalle" layoutX="54.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlanningSalle" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Planning" textFill="WHITE">
@@ -29,7 +38,7 @@
                     </font>
                 </Button>
 
-            <Button fx:id="btnSuprSalle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSuprSalle" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" styleClass="btn-danger" text="Supprimer" textFill="WHITE">
+            <Button fx:id="btnSuprSalle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSuprSalle" prefHeight="32.0" prefWidth="150.0" styleClass="btn-danger" text="Supprimer" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="13.0" />
                 </font>

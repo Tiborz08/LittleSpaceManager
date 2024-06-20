@@ -163,6 +163,9 @@ public class ModificationEvenementController {
      * @param personne
      * @param <T>
      */
+
+    @FXML
+    private Label lbOptionPersonne;
     @FXML
     private <T> void ouvrirOptionView(T personne){
         try{
@@ -172,6 +175,9 @@ public class ModificationEvenementController {
             Parent root = loader.load();
 
             this.personne = (Personne) personne;
+
+            lbOptionPersonne.setText(lbOptionPersonne.getText() + this.personne.toString());
+
 
 
             Stage stage = new Stage();
