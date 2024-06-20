@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -9,7 +10,9 @@ import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.capitalize
 import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.newId;
 
 
-public class Salle {
+public class Salle implements Serializable {
+    private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
+    private final GenEvent genevent;
     private String nom;
     private String adresse;
     private int capacite_max;
@@ -24,7 +27,8 @@ public class Salle {
      * @param capacite_max le nombre maximum de personnes qui peuvent être dans la salle
      * @param tagsLong les caractéristiques propres à la salle (Exemple : si il y a des prises électrique ou une buvette)
      */
-    public Salle(String nom, String adresse, int capacite_max, String tagsLong) {
+    public Salle(GenEvent genevent,String nom, String adresse, int capacite_max, String tagsLong) {
+        this.genevent=genevent;
         setNom(nom);
         setAdresse(adresse);
         setCapacite_max(capacite_max);
@@ -176,6 +180,9 @@ public class Salle {
      * @param tagsLong La liste des spécificités
      */
     public void setTags(String tagsLong) {
+        if(tagsLong.isEmpty() || tagsLong == null){
+            tagsLong = "Aucune caractéristique spécifiée";
+        }
         String[] tagsSplit = tagsLong.split(",");
         tags.clear();
         for (String tag : tagsSplit) {

@@ -2,11 +2,15 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire;
 
+import java.io.Serializable;
+
 /**
  * Cette Class permet de créer des objets de type Personne. Cette class est abstraite car nous l'utilisons pour créer des Spectateurs et des Participants.
  */
-public abstract class Personne {
+public abstract class Personne implements Serializable {
 
+    private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
+    private final GenEvent genevent;
     private int identifiant;
     private String nom;
     private String prenom;
@@ -18,7 +22,8 @@ public abstract class Personne {
      * @param nom
      * @param prenom
      */
-    public Personne(String nom, String prenom) {
+    public Personne(GenEvent genevent,String nom, String prenom) {
+        this.genevent=genevent;
         setIdentifiant();
         setNom(nom);
         setPrenom(prenom);

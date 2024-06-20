@@ -1,8 +1,9 @@
 package fr.uga.iut2.genevent.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Spectateur extends Personne {
+public class Spectateur extends Personne implements Serializable {
     private ArrayList<Ticket> tickets = new ArrayList<>();
 
     //CONSTRUCTEUR
@@ -12,8 +13,8 @@ public class Spectateur extends Personne {
      * @param nom le nom du spectateur
      * @param prenom le prénom du spectateur
      */
-    public Spectateur(String nom, String prenom) {
-        super(nom, prenom);
+    public Spectateur(GenEvent genevent,String nom, String prenom) {
+        super(genevent,nom, prenom);
     }
 
     //GETTER

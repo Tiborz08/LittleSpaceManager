@@ -96,7 +96,7 @@ public class JavaFXGUI extends IHM {
 
     // vue nouvel·le utilisa·teur/trice  -----
 
-    @FXML
+    /*@FXML
     private void createNewUserAction() {
         IHM.InfosUtilisateur data = new IHM.InfosUtilisateur(
                 this.newUserEmailTextField.getText().strip().toLowerCase(),
@@ -105,7 +105,7 @@ public class JavaFXGUI extends IHM {
         );
         this.oldControleur.creerUtilisateur(data);
         this.newUserOkButton.getScene().getWindow().hide();
-    }
+    }*/
 
     @FXML
     private void cancelNewUserAction() {

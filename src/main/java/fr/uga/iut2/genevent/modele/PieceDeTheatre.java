@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.modele;
 
 import fr.uga.iut2.genevent.exception.CreateException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * Cette class permet de créer des objets de type PieceDeTheatre. Cette class hérite de la class Evenement.
  */
 
-public class PieceDeTheatre extends Evenement {
+public class PieceDeTheatre extends Evenement implements Serializable {
 
     //ATTRIBUTIONS
     private ArrayList<Accessoire> accessoires;
@@ -28,8 +29,8 @@ public class PieceDeTheatre extends Evenement {
      * @param salle
      * @throws CreateException
      */
-    public PieceDeTheatre(String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
-        super(nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
+    public PieceDeTheatre(GenEvent genevent,String nom, int capaciteParticipants, float coutInitial, float prixTickets, Date debut, Date fin, String description, Salle salle) throws CreateException {
+        super(genevent,nom, capaciteParticipants, coutInitial, prixTickets, debut, fin, description, salle);
         this.accessoires = new ArrayList<>();
     }
 

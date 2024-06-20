@@ -1,9 +1,11 @@
 package fr.uga.iut2.genevent.modele;
 
+import java.io.Serializable;
+
 /**
  * Cette Class nous permet de créer des objest de type Artiste en héritant de la class Participant. Les objets de type Artiste possèdent en plus l'attribut Popularité.
  */
-public class Artiste extends Participant {
+public class Artiste extends Participant implements Serializable {
     private int popularite;
 
     /**
@@ -15,8 +17,8 @@ public class Artiste extends Participant {
      */
 
     //CONSTRUCTEUR
-    public Artiste(String nom, String prenom, float salaire, int popularite) {
-        super(nom, prenom, salaire);
+    public Artiste(GenEvent genevent,String nom, String prenom, float salaire, int popularite) {
+        super(genevent,nom, prenom, salaire);
         setPopularite(popularite);
         setSalaire(salaire);
     }

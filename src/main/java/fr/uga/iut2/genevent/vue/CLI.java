@@ -24,6 +24,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  * c'est pourquoi les paramètres des méthodes sont tous marqués comme `final`.
  *
  */
+
 public class CLI extends IHM {
 
     /**
@@ -156,7 +157,7 @@ public class CLI extends IHM {
                     this.oldControleur.saisirUtilisateur();
                     break;
                 case CREER_EVENEMENT:
-                    this.oldControleur.saisirEvenement();
+                    /*this.oldControleur.saisirEvenement();*/
                     break;
                 default:
                     assert false : "Commande inconnue.";
@@ -172,13 +173,13 @@ public class CLI extends IHM {
     @Override
     public void saisirUtilisateur() {
         InfosUtilisateur infos = dialogueSaisirUtilisateur();
-        oldControleur.creerUtilisateur(infos);
+        /*oldControleur.creerUtilisateur(infos);*/
     }
 
     @Override
     public void saisirNouvelEvenement(final Set<String> nomsExistants) {
         InfosNouvelEvenement infos = dialogueSaisirNouvelEvenement(nomsExistants);
-        oldControleur.creerEvenement(infos);
+        /*oldControleur.creerEvenement(infos);*/
     }
 
 //-----  Primitives d'affichage  -----------------------------------------------

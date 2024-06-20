@@ -1,6 +1,8 @@
 package fr.uga.iut2.genevent.util;
 
 import fr.uga.iut2.genevent.modele.GenEvent;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,6 +22,7 @@ import java.io.ObjectOutputStream;
 public final class Persisteur {
 
     private static final String NOM_BDD = "persistence/genevent.bdd";
+    private static final Log log = LogFactory.getLog(Persisteur.class);
 
     private Persisteur() {
         // interdit l'instanciation de la classe utilitaire via un constructeur privé
@@ -48,16 +51,16 @@ public final class Persisteur {
             // Les classes `FileOutputStream` et `ObjectOutputStream`
             // implémentent l'interface `AutoCloseable` : pas besoin de faire
             // un appel explicite à `.close()`.
-            System.out.println("Sauvegarde de l'état réussie.");
+            log.info("Sauvegarde de l'état réussie.");
             System.out.flush();
         }
         catch (FileNotFoundException fnfe) {
-            System.err.println("Erreur à la création/ouverture du fichier de persistance.");
+            log.error("Erreur à la création/ouverture du fichier de persistance.");
             System.err.flush();
             throw fnfe;
         }
         catch (IOException ioe) {
-            System.err.println("Erreur lors de l'écriture du fichier de persistance.");
+            log.error("Erreur lors de l'écriture du fichier de persistance.");
             System.err.flush();
             throw ioe;
         }
@@ -93,17 +96,17 @@ public final class Persisteur {
             // un appel explicite à `.close()`.
         }
         catch (FileNotFoundException ignored) {
-            System.out.println("Fichier de persistance inexistant : création d'une nouvelle instance.");
+            log.warn("Fichier de persistance inexistant : création d'une nouvelle instance.");
             System.out.flush();
             genevent = new GenEvent();
         }
         catch (IOException ioe) {
-            System.err.println("Erreur de lecture du fichier de persistance.");
+            log.error("Erreur de lecture du fichier de persistance.");
             System.err.flush();
             throw ioe;
         }
         catch (ClassNotFoundException cnfe) {
-            System.err.println("Fichier de persistance corrompu.");
+            log.error("Fichier de persistance corrompu.");
             System.err.flush();
             throw cnfe;
         }
