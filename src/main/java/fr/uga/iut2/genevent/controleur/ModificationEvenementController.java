@@ -877,17 +877,22 @@ public class ModificationEvenementController {
     }
 
     @FXML
-    private void onButtonValiderSuprSalle(ActionEvent event){
-        mainControleur.removeSalle(salle);
-        genevent.getSalles().remove(salle);
+    private void onButtonValiderSuprSalle(ActionEvent event) throws CreateException {
+        if(salle.getEvenementsFuturs().size() != 0){
+            throw new CreateException("Impossible de supprimer la salle, des événements vont avoir lieu dedans");
+        }
+        else {
+            mainControleur.removeSalle(salle);
+            genevent.getSalles().remove(salle);
 
-        Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
-        stage.close();
+            Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
+            stage.close();
 
-        Stage popupprecedent = (Stage) btnSuprSalle.getScene().getWindow();
-        popupprecedent.close();
+            Stage popupprecedent = (Stage) btnSuprSalle.getScene().getWindow();
+            popupprecedent.close();
 
-        mainControleur.initialize();
+            mainControleur.initialize();
+        }
     }
 
     @FXML
@@ -904,7 +909,17 @@ public class ModificationEvenementController {
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
 
             Scene scene = new Scene(root, 498, 245);
-            btnValiderSupre.setOnAction(this::onButtonValiderSuprSalle);
+            btnValiderSupre.setOnAction(event1 -> {
+                try {
+                    onButtonValiderSuprSalle(event1);
+                } catch (CreateException e) {
+                    try {
+                        mainControleur.afficherFenetreErreur(e.getMessage());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
 
             popupStage.setScene(scene);
             popupStage.setTitle("Supprimer " + salle.getNom() + " ?");
