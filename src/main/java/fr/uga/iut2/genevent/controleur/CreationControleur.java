@@ -271,7 +271,6 @@ public class CreationControleur {
 
 
         if (nom.isEmpty() || prenom.isEmpty()) {
-            System.out.println("Vous devez entrer le nom et le prénom du spectateur.");
 
             if (nom.isEmpty()) {
                 tfNomPersonne.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 3;");

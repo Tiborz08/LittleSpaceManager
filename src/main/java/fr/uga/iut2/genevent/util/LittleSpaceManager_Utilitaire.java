@@ -2,6 +2,7 @@ package fr.uga.iut2.genevent.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,6 +20,23 @@ public class LittleSpaceManager_Utilitaire {
         }
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
+
+    /**
+     * Remet tout les horaires à 0 sauf la date en elle meme
+     * @param date la date à reset
+     * @return la date à l'identique avec les horaires à 0
+     */
+    public static Date trim(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 0);
+
+        return calendar.getTime();
+    }
+
 
     public static String removeAccents(String str) {
         if (str == null || str.isEmpty()) {

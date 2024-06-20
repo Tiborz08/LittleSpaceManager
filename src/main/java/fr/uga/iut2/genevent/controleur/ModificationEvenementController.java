@@ -311,7 +311,7 @@ public class ModificationEvenementController {
             Stage stage1 = (Stage) btnRetour.getScene().getWindow();
             stage1.close();
             mainControleur.initialize();
-            System.out.println(mainControleur.getEvenements().toString());
+            log.info("Evenement " + evenement.getNom() + " supprimé");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -866,7 +866,7 @@ public class ModificationEvenementController {
             stage.close();
             initialize();
 
-            System.out.println("Modification de l'artiste réussie : " + artiste);
+            log.info("Modification de " + artiste + " réussie");
         } else if (type.equals("Personnel") && personne instanceof Personnel) {
             Personnel personnel = (Personnel) personne;
             personnel.setNom(tfNomPersonne.getText());
@@ -875,16 +875,17 @@ public class ModificationEvenementController {
             Stage stage = (Stage) btCreer.getScene().getWindow();
             stage.close();
             initialize();
-            System.out.println("Modification du personnel réussie : " + personnel);
+
+            log.info("Modification de " + personnel + " réussie");
         } else if (type.equals("Spectateur") && personne != null) {
-            // Votre logique de modification pour le spectateur ici
-            System.out.println("Modification du spectateur réussie");
             Spectateur spectateur = (Spectateur) personne;
             spectateur.setNom(tfNomPersonne.getText());
             spectateur.setPrenom(tfPrenomPersonne.getText());
             Stage stage = (Stage) btCreer.getScene().getWindow();
             stage.close();
             initialize();
+
+            log.info("Modification de " + personne + " réussie");
         } else {
             System.err.println("Type non reconnu ou personne invalide.");
         }
@@ -903,7 +904,13 @@ public class ModificationEvenementController {
         tfNomSalle.setText(salle.getNom());
         tfAdresse.setText(salle.getAdresse());
         tfCapaciteMax.setText(String.valueOf(salle.getCapacite_max()));
-        taTags.setText(salle.getTags().toString());
+        taTags.setText("");
+        for(String string : salle.getTags()){
+            if(string != salle.getTags().first()){
+                taTags.appendText(",");
+            }
+            taTags.appendText(string);
+        }
 
         btCreer.setText("Valider");
         btCreer.setOnAction(this::onButtonValiderModifierSalle);
@@ -938,17 +945,22 @@ public class ModificationEvenementController {
      * @param event
      */
     @FXML
-    private void onButtonValiderSuprSalle(ActionEvent event){
-        mainControleur.removeSalle(salle);
-        genevent.getSalles().remove(salle);
+    private void onButtonValiderSuprSalle(ActionEvent event) throws CreateException {
+        if(salle.getEvenementsFuturs().size() != 0){
+            throw new CreateException("Impossible de supprimer la salle, des événements vont avoir lieu dedans");
+        }
+        else {
+            mainControleur.removeSalle(salle);
+            genevent.getSalles().remove(salle);
 
-        Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
-        stage.close();
+            Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
+            stage.close();
 
-        Stage popupprecedent = (Stage) btnSuprSalle.getScene().getWindow();
-        popupprecedent.close();
+            Stage popupprecedent = (Stage) btnSuprSalle.getScene().getWindow();
+            popupprecedent.close();
 
-        mainControleur.initialize();
+            mainControleur.initialize();
+        }
     }
 
     /**
@@ -969,7 +981,17 @@ public class ModificationEvenementController {
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
 
             Scene scene = new Scene(root, 498, 245);
-            btnValiderSupre.setOnAction(this::onButtonValiderSuprSalle);
+            btnValiderSupre.setOnAction(event1 -> {
+                try {
+                    onButtonValiderSuprSalle(event1);
+                } catch (CreateException e) {
+                    try {
+                        mainControleur.afficherFenetreErreur(e.getMessage());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
 
             popupStage.setScene(scene);
             popupStage.setTitle("Supprimer " + salle.getNom() + " ?");
