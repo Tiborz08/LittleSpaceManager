@@ -1,6 +1,9 @@
 package fr.uga.iut2.genevent.modele;
 
+import fr.uga.iut2.genevent.controleur.MainControleur;
 import fr.uga.iut2.genevent.exception.CreateException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +22,8 @@ public class Salle implements Serializable {
     private int idSalle;
     private TreeSet<String> tags;
     private TreeSet<Evenement> evenements;
+
+    private static final Log log = LogFactory.getLog(Salle.class);
 
     /**
      * Crée une nouvelle salle
@@ -181,6 +186,7 @@ public class Salle implements Serializable {
      */
     public void setTags(String tagsLong) {
         if(tagsLong.isEmpty() || tagsLong == null){
+            log.warn("Aucun tag de spécifié, affectation d'un tag par défaut");
             tagsLong = "Aucune caractéristique spécifiée";
         }
         String[] tagsSplit = tagsLong.split(",");
