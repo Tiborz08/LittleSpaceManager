@@ -504,15 +504,27 @@ public class ModificationEvenementController {
         if (typepersonne.compareToIgnoreCase("spectateur")==0){
             mainControleur.onButtonCreerSpectateur(event);
             ouvertureAssociationPage("Spectateur");
-            cbAssocier.setValue(mainControleur.getSpectateurs().get(mainControleur.getSpectateurs().size()-1));
+            try {
+                cbAssocier.setValue(mainControleur.getSpectateurs().get(mainControleur.getSpectateurs().size()-1));
+            } catch (Exception e){
+                log.error("Aucun spectateurs n'est présent dans la liste");
+            }
         } else if (typepersonne.compareToIgnoreCase("personnel")==0) {
             mainControleur.onButtonCreerPersonnel(event);
             ouvertureAssociationPage("Personnel");
-            cbAssocier.setValue(mainControleur.getPersonnels().get(mainControleur.getPersonnels().size()-1));
+            try {
+                cbAssocier.setValue(mainControleur.getPersonnels().get(mainControleur.getPersonnels().size()-1));
+            } catch (Exception e){
+                log.error("Aucun salarié n'est présent dans la liste");
+            }
         }else {
             mainControleur.onButtonCreerArtiste(event);
             ouvertureAssociationPage("Artiste");
-            cbAssocier.setValue(mainControleur.getArtistes().get(mainControleur.getArtistes().size()-1));
+            try {
+                cbAssocier.setValue(mainControleur.getArtistes().get(mainControleur.getArtistes().size()-1));
+            } catch (Exception e){
+                log.error("Aucun artiste n'est présent dans la liste");
+            }
         }
     }
 
