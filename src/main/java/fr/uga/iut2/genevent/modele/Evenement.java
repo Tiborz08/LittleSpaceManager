@@ -297,6 +297,10 @@ public abstract class Evenement implements Comparable<Evenement> {
         spectateur.addTicket(ticket);
     }
 
+    /**
+     * Cette fonction prends en paramètre un spectateur et supprime le ticket relié
+     * @param spectateur le spectateur qui predra son ticket
+     */
     public void removeTicket(Spectateur spectateur){
         Iterator<Ticket> iterator = tickets.iterator();
         while (iterator.hasNext()) {
