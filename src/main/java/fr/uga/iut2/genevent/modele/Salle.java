@@ -180,6 +180,9 @@ public class Salle implements Serializable {
      * @param tagsLong La liste des spécificités
      */
     public void setTags(String tagsLong) {
+        if(tagsLong.isEmpty() || tagsLong == null){
+            tagsLong = "Aucune caractéristique spécifiée";
+        }
         String[] tagsSplit = tagsLong.split(",");
         for (String tag : tagsSplit) {
             tags.add(tag.toLowerCase());

@@ -371,7 +371,10 @@ public class MainControleur {
                 for (String t : s.getTags()) {
                     tags += " " + t;
                 }
-                lvSallesTemp.add("\t" + s + "\nAdresse : " + s.getAdresse() + "\nCapacité max : " + s.getCapacite_max() + "\n" + tags);
+                lvSallesTemp.add(s +
+                        "\nAdresse : " + s.getAdresse() +
+                        "\nCapacité max : " + s.getCapacite_max() +
+                        "\nCaractéristiques : " + tags);
             }
 
             ObservableList<String> listeSalle = FXCollections.observableArrayList(new ArrayList<>(lvSallesTemp));
