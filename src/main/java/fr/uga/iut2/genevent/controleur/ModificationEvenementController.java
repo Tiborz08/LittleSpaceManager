@@ -92,9 +92,18 @@ public class ModificationEvenementController {
     @FXML
     private  Button btnCreerAssocier;
 
+    //modification salle
+    @FXML
+    private TextField tfNomSalle, tfCapaciteMax, tfAdresse;
+    @FXML
+    private TextArea taTags;
+    @FXML
+    private Button btnModifierSalle, btnSuprSalle;
+
 
     private MainControleur mainControleur;
     private Evenement evenement;
+    private Salle salle;
     private Personne personne;
 
     /**
@@ -164,6 +173,10 @@ public class ModificationEvenementController {
      */
     public void setMainControleur(MainControleur mainControleur) {
         this.mainControleur = mainControleur;
+    }
+
+    public void setSalle(Salle salle){
+        this.salle = salle;
     }
 
     /**
@@ -812,6 +825,78 @@ public class ModificationEvenementController {
             initialize();
         } else {
             System.err.println("Type non reconnu ou personne invalide.");
+        }
+    }
+
+    @FXML
+    private void onButtonModifierSalle() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/CreationSalleView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+
+        tfNomSalle.setText(salle.getNom());
+        tfAdresse.setText(salle.getAdresse());
+        tfCapaciteMax.setText(String.valueOf(salle.getCapacite_max()));
+        taTags.setText(salle.getTags().toString());
+
+        btCreer.setText("Valider");
+        btCreer.setOnAction(this::onButtonValiderModifierSalle);
+
+        Stage stage = new Stage();
+        Stage popupPrecedent = (Stage) btnModifierSalle.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+        popupPrecedent.close();
+        stage.show();
+    }
+
+    @FXML
+    private void onButtonValiderModifierSalle(ActionEvent event){
+        salle.setAdresse(tfAdresse.getText());
+        salle.setNom(tfNomSalle.getText());
+        salle.setCapacite_max(Integer.parseInt(tfCapaciteMax.getText()));
+        salle.setTags(taTags.getText());
+
+        Stage stage= (Stage) btCreer.getScene().getWindow();
+        stage.close();
+
+        mainControleur.initialize();
+    }
+
+    @FXML
+    private void onButtonValiderSuprSalle(ActionEvent event){
+        mainControleur.removeSalle(salle);
+
+        Stage stage =(Stage) btnValiderSupre.getScene().getWindow();
+        stage.close();
+
+        Stage popupprecedent = (Stage) btnSuprSalle.getScene().getWindow();
+        popupprecedent.close();
+
+        mainControleur.initialize();
+    }
+
+    @FXML
+    private void onSuprSalle(Event event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+
+            Stage popupStage = new Stage();
+
+            popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+
+            Scene scene = new Scene(root, 498, 245);
+            btnValiderSupre.setOnAction(this::onButtonValiderSuprSalle);
+
+            popupStage.setScene(scene);
+            popupStage.setTitle("Supprimer " + salle.getNom() + " ?");
+            popupStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

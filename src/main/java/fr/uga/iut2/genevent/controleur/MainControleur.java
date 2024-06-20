@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -52,19 +53,37 @@ public class MainControleur {
      * Cette méthode est appelée automatiquement après que le fichier FXML associé a été chargé.
      */
     public void initialize() {
-        actualisationEvenement();
-        lvEvenement.setOnMouseClicked(event -> {
+        if (lvEvenement != null){
+            actualisationEvenement();
+            lvEvenement.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) {
+                    Evenement selectedEvenement = lvEvenement.getSelectionModel().getSelectedItem();
+                    if (selectedEvenement != null) {
+                        try {
+                            ouvrirOptionEvenement(selectedEvenement);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
+
+        if (lvSalles != null){
+            actualisationSalle();
+            lvSalles.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                Evenement selectedEvenement = lvEvenement.getSelectionModel().getSelectedItem();
-                if (selectedEvenement != null) {
+                Salle selectedSalle = lvSalles.getSelectionModel().getSelectedItem();
+                if (selectedSalle != null) {
                     try {
-                        ouvrirOptionEvenement(selectedEvenement);
+                        ouvrirOptionSalle(selectedSalle);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
         });
+        }
     }
 
     /**
@@ -315,11 +334,10 @@ public class MainControleur {
     @FXML
     private Button btnVoirSalles;
     @FXML
-    private ListView<String> lvSalles;
-
+    private ListView<Salle> lvSalles;
 
     /**
-     * Cette fonction permet d'ouvrir la fenetre avec la liste des salles.
+     * Cette fonction permet d'ouvrir la fenêtre avec la liste des salles.
      * @param event
      */
     @FXML
@@ -336,21 +354,60 @@ public class MainControleur {
             popupStage.setScene(scene);
             popupStage.setTitle("Liste des salles");
 
-            ArrayList<String> lvSallesTemp = new ArrayList<>();
-            for (Salle s : salles) {
-                String tags = "";
-                for (String t : s.getTags()) {
-                    tags += " " + t;
-                }
-                lvSallesTemp.add("\t" + s + "\nAdresse : " + s.getAdresse() + "\nCapacité max : " + s.getCapacite_max() + "\n" + tags);
-            }
+            actualisationSalle();
 
-            ObservableList<String> listeSalle = FXCollections.observableArrayList(new ArrayList<>(lvSallesTemp));
-            lvSalles.setItems(listeSalle);
+            // Utilisation d'une cellule personnalisée pour afficher les détails de chaque Salle
+            lvSalles.setCellFactory(param -> new ListCell<Salle>() {
+                @Override
+                protected void updateItem(Salle salle, boolean empty) {
+                    super.updateItem(salle, empty);
+                    if (empty || salle == null) {
+                        setText(null);
+                    } else {
+                        String tags = String.join(", ", salle.getTags());
+                        setText(
+                                "\t" + salle.getNom() + "\n" +
+                                        "Adresse : " + salle.getAdresse() + "\n" +
+                                        "Capacité max : " + salle.getCapacite_max() + "\n" +
+                                        "Tags : " + tags
+                        );
+                    }
+                }
+            });
 
             popupStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void ouvrirOptionSalle(Salle salle) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/OptionSalleView.fxml"));
+
+        ModificationEvenementController modificationControleur = new ModificationEvenementController();
+        modificationControleur.setMainControleur(this);
+        modificationControleur.setSalle(salle);
+
+        loader.setController(modificationControleur);
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Option salle");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+
+    }
+
+    @FXML
+    public void removeSalle(Salle salle){
+        salles.remove(salle);
+    }
+
+    private void actualisationSalle(){
+        // Utilisation de ObservableList pour contenir des objets Salle
+        ObservableList<Salle> listeSalle = FXCollections.observableArrayList(salles);
+        lvSalles.setItems(listeSalle);
     }
 }

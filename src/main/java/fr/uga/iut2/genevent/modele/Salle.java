@@ -177,6 +177,7 @@ public class Salle {
      */
     public void setTags(String tagsLong) {
         String[] tagsSplit = tagsLong.split(",");
+        tags.clear();
         for (String tag : tagsSplit) {
             tags.add(tag.toLowerCase());
         }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="577.0" style="-fx-background-color: #dfe6ed;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="578.0" spacing="20.0">
+            <children>
+                <Button fx:id="btnSuprSalle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSuprSalle" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Supprimer" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnModifierSalle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonModifierSalle" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Modifier" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnRetour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onRetourClick" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #4b5c6b;" text="Retour" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>
