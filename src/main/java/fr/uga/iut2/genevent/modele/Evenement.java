@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Les événements qui sont dans l'application
@@ -297,10 +298,28 @@ public abstract class Evenement implements Comparable<Evenement> {
     }
 
     /**
-     * Cette fonction renvoie la capacité max que la salle peut accueillir. Ici, la capacité maximale de Participants et de Spectateur sont additionnées.
-     *
-     * @return le nombre maximum de personne, tous genres confondus
+     * Cette fonction prends en paramètre un spectateur et supprime le ticket relié
+     * @param spectateur le spectateur qui predra son ticket
      */
+    public void removeTicket(Spectateur spectateur){
+        Iterator<Ticket> iterator = tickets.iterator();
+        while (iterator.hasNext()) {
+            Ticket ticket = iterator.next();
+            if (ticket.getSpectateur().equals(spectateur)) {
+                ticket.setEvenement(null);
+                ticket.setSpectateur(null);
+                iterator.remove();
+                spectateur.getTickets().remove(ticket);
+            }
+        }
+        }
+
+
+        /**
+         * Cette fonction renvoie la capacité max que la salle peut accueillir. Ici, la capacité maximale de Participants et de Spectateur sont additionnées.
+         *
+         * @return le nombre maximum de personne, tous genres confondus
+         */
 
     public int getCapaciteTotal() {
         return capaciteParticipants + capaciteSpectateur;

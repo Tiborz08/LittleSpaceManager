@@ -670,7 +670,28 @@ public class ModificationEvenementController {
 
     //=====================================
 
+    @FXML
+    private void onValiderSuprPersonne(ActionEvent event) {
 
+        if (personne instanceof Spectateur) {
+            Spectateur spectateur = (Spectateur) personne;
+            evenement.removeTicket(spectateur);
+        } else {
+            Participant participant = (Participant) personne;
+            evenement.removeParticipant(participant);
+        }
+
+        btnValiderSupre.setOnAction(this::onValiderSupre);
+        log.info("Suppression de " + personne);
+
+        Stage stage = (Stage) btnValiderSupre.getScene().getWindow();
+        stage.close();
+
+        Stage popprecedent = (Stage) btnSuprPersonne.getScene().getWindow();
+        popprecedent.close();
+
+        initialize();
+    }
 
     @FXML
     private void onSuprPersonne(Event event){
@@ -678,18 +699,22 @@ public class ModificationEvenementController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PageValidationSuppressionView.fxml"));
             loader.setController(this);
             Parent root = loader.load();
+
             Stage popupStage = new Stage();
+
             popupStage.getIcons().add(new Image(getClass().getResourceAsStream("/fr/uga/iut2/genevent/vue/logo/logo-lsm.png")));
             popupStage.initModality(Modality.APPLICATION_MODAL); // Bloc l'interaction avec la fenêtre parent jusqu'à ce que le popup soit fermé
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Définit la fenêtre parent
+
             Scene scene = new Scene(root, 498, 245);
+            btnValiderSupre.setOnAction(this::onValiderSuprPersonne);
+
             popupStage.setScene(scene);
             popupStage.setTitle("Supprimer " + evenement.getNom() + " ?");
             popupStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 
