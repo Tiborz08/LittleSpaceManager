@@ -101,6 +101,9 @@ public class ModificationEvenementController {
     @FXML
     private Button btnModifierSalle, btnSuprSalle;
 
+    @FXML
+    private ListView<Evenement> lvEvenementSalle;
+
 
     private MainControleur mainControleur;
     private Evenement evenement;
@@ -999,5 +1002,21 @@ public class ModificationEvenementController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void onPlanningSalle() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/uga/iut2/genevent/vue/PlanningSalleView.fxml"));
+
+        loader.setController(this);
+        Parent root = loader.load();
+
+        ObservableList<Evenement> listeEvenements = FXCollections.observableArrayList(salle.getHistoriqueEvenements());
+        lvEvenementSalle.setItems(listeEvenements);
+        Stage stage = new Stage();
+        stage.setTitle("Planning de la salle");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 }

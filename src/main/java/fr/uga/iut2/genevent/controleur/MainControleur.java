@@ -70,12 +70,14 @@ public class MainControleur {
         }
     }
 
+
+
     @FXML
     private Button btnAnnuler;
 
     //attribut accueil
     @FXML
-    private ListView<Evenement> lvEvenement;
+    private ListView<Evenement> lvEvenement, lvEvenementSalle;
 
     @FXML
     private Label erreurLabel;
