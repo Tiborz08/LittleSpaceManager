@@ -368,7 +368,7 @@ public abstract class Evenement implements Comparable<Evenement> , Serializable 
         } else if (!salle.verifierDisponibilite(debut, fin)) {
             throw new CreateException("La salle n'est pas disponible à ces dates");
         } else if(fin.before(LittleSpaceManager_Utilitaire.trim(aujourdhui))){
-        throw new CreateException("Il faut que l'événement commence aujourd'hui au plus tôt");}
+        throw new CreateException("Il faut que l'événement commence demain au plus tôt");}
 
         else {
             this.debut = debut;
