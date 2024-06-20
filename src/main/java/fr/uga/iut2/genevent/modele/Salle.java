@@ -1,6 +1,5 @@
 package fr.uga.iut2.genevent.modele;
 
-import fr.uga.iut2.genevent.controleur.MainControleur;
 import fr.uga.iut2.genevent.exception.CreateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,8 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.TreeSet;
 
-import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.capitalize;
-import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.newId;
+import static fr.uga.iut2.genevent.util.LittleSpaceManager_Utilitaire.*;
 
 
 public class Salle implements Serializable {
@@ -148,13 +146,14 @@ public class Salle implements Serializable {
     /**
      * Retourne la liste des évenements qui n'ont pas encore débutés
      *
-     * @return La liste des évenements n'ayant pas encore débuté, trié par ordre chronologique
+     * @return La liste des évenements n'étant pas encore terminés, trié par ordre chronologique
      */
     public TreeSet<Evenement> getEvenementsFuturs() {
         TreeSet<Evenement> evenementsFuturs = new TreeSet<>();
         Date aujourdhui = new Date();
+        aujourdhui = trim(aujourdhui);
         for (Evenement evenement : evenements) {
-            if (evenement.getDebut().after(aujourdhui)) {
+            if (evenement.getFin().after(aujourdhui) || evenement.getFin().equals(aujourdhui)) {
                 evenementsFuturs.add(evenement);
             }
         }
